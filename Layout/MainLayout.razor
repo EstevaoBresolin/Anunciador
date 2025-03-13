@@ -1,0 +1,135 @@
+﻿
+@using System.Text
+@using System.Text.Json
+@using System.Globalization
+@inherits LayoutComponentBase
+
+@* Required *@
+<MudThemeProvider />
+<MudPopoverProvider />
+
+@* Needed for dialogs *@
+<MudDialogProvider />
+
+@* Needed for snackbars *@
+<MudSnackbarProvider />
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+
+<div class="page">
+    <div style=" background: black">
+        <div style="display: flex; justify-content: space-between; height: 45px; align-items: center">
+            @* <div class="container-fluid"> *@
+            <MudButton OnClick="@ToggleNavMenu" Variant="Variant.Filled" >
+                <MudIcon Icon="@Icons.Material.Filled.Menu" Title="Menu" Style="color:white;" />
+            </MudButton>
+             @*    <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button> *@
+                <a href="" style="font-size: 1rem; color: white;">Anunciador</a>
+
+                <MudButton OnClick="@ToggleTheme" Variant="Variant.Filled" >
+                    <MudIcon Icon="@currentIcon" Title="darkMode" Style="color:white;" />
+                </MudButton>
+            @* </div> *@
+        </div>
+
+        <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+            <nav class="nav flex-column">
+                <div class="nav-item px-3">
+                    <NavLink  href="" Match="NavLinkMatch.All">
+                        <span class="bi bi-house-door-fill-nav-menu" style="color:white;" aria-hidden="true">Home</span>
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink style="color: white;display: flex;align-items: center;gap: 0.5rem; padding: 1rem;" href="saudeEbelesa">
+                        <MudIcon Style="margin-top: 5px;" Icon="@Icons.Material.Filled.AccessibilityNew" Title="Favorite" /> Saúde e Beleza
+                    </NavLink>
+                </div>
+                <div  class="nav-item px-3">
+                    <NavLink style="color: white;display: flex;align-items: center;gap: 0.5rem;padding: 0 1rem 1rem 1rem;" href="financeiro">
+                        <MudIcon Style="margin-top: 5px;" Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Financeiro
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink style="color: white;display: flex;align-items: center;gap: 0.5rem;padding: 0 1rem 1rem 1rem;" href="construcao">
+                        <MudIcon Style="margin-top: 5px;" Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção
+                    </NavLink>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+
+@code {
+
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private bool _isDarkMode;
+    private bool expand = false;
+    private bool _drawerOpen = true;
+
+    private string searchString1 = "";
+    private string currentIcon = Icons.Material.Filled.DarkMode;
+
+    private MudTheme _theme;
+
+    private MudTheme LightTheme = new MudTheme()
+    {
+        PaletteLight = new PaletteLight()
+        {
+            Primary = "#424242",
+            Secondary = "#FFFFFF",
+        }
+    };
+
+    private MudTheme DarkTheme = new MudTheme()
+    {
+        PaletteDark = new PaletteDark()
+        {
+            Primary = "#FFFFFF7F",
+            Secondary = "#000000"
+        }
+    };
+
+    private void ToggleTheme()
+    {
+        _theme = _theme == LightTheme ? DarkTheme : LightTheme;
+        
+        currentIcon = _theme == LightTheme ? Icons.Material.Filled.DarkMode : Icons.Material.Filled.LightMode;
+    }
+
+    public void DarkMode()
+    {
+        _isDarkMode = !_isDarkMode;
+
+        if (_isDarkMode)
+        {
+            currentIcon = Icons.Material.Filled.LightMode;
+        }
+        else
+        {
+            currentIcon = Icons.Material.Filled.DarkMode;
+        }
+    }
+
+}
+
+
+<style>
+</style>
+
+

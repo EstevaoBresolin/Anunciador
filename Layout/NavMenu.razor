@@ -1,0 +1,45 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="">AnunciadorV1</a>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="nav flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="saudeEbelesa">
+                <MudIcon Style="margin-top: 5px;" Icon="@Icons.Material.Filled.AccessibilityNew" Title="Favorite" /> Saúde e Beleza
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="financeiro">
+                <MudIcon Style="margin-top: 5px;" Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Financeiro
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="construcao">
+                <MudIcon Style="margin-top: 5px;" Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
