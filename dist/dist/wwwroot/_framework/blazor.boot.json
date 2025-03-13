@@ -1,9 +1,9 @@
 {
   "mainAssemblyName": "AnunciadorV1",
   "resources": {
-    "hash": "sha256-aoIbRo/vy2Y2YLOgsX2wrVh6pkkSgRuQ3Ki8PKG5mPY=",
+    "hash": "sha256-3VWLdgnhsRwqiVe+8OT0OT3AZaNx9UqbhvfPhpa7yUM=",
     "fingerprinting": {
-      "AnunciadorV1.oev4948fu5.wasm": "AnunciadorV1.wasm",
+      "AnunciadorV1.4aq7p1cwmr.wasm": "AnunciadorV1.wasm",
       "Microsoft.AspNetCore.Components.tz9elz4vqg.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.dzlqjd09a5.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
       "Microsoft.AspNetCore.Components.WebAssembly.ojjbeuchn6.wasm": "Microsoft.AspNetCore.Components.WebAssembly.wasm",
@@ -66,7 +66,7 @@
       "System.Runtime.InteropServices.JavaScript.h0o384gvzn.wasm": "sha256-rwtckCDh2hrAqX7g10ShSPlmBHiMU4i3ALHrPCgasio="
     },
     "assembly": {
-      "AnunciadorV1.oev4948fu5.wasm": "sha256-APFEKVe371RiuR7HbHVcXmB6x/xyTuxOH2/D1FIqfHA=",
+      "AnunciadorV1.4aq7p1cwmr.wasm": "sha256-zJ1vHe3HaH0aqc1ys5W5T6sM/cpkg8wf3rgkqNV1gqI=",
       "Microsoft.AspNetCore.Components.tz9elz4vqg.wasm": "sha256-5zRXk7FXjvb5qOu2VhD+uqKQZYgTi1DkrbwhbvG5SDI=",
       "Microsoft.AspNetCore.Components.Web.dzlqjd09a5.wasm": "sha256-N4f9FxLZ0MmQ+wOqFpIBsCTGFNE2DGqc5Xa9yEqinAs=",
       "Microsoft.AspNetCore.Components.WebAssembly.ojjbeuchn6.wasm": "sha256-TMJrwxmh7raq50FXlf8OFb9/PXWC0dJ48IVhshQE3jE=",
