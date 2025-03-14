@@ -1,107 +1,131 @@
 ﻿@page "/construcao"
+@using AnunciadorV1.Services
+@inject FirestoreService FirestoreService
 
 <PageTitle>Construção</PageTitle>
 
 <h1>Construção</h1>
 
-<div class="container">
+@if (Anunciantes is null)
+{
+    <p>Carregando...</p>
+}
+else{
 
-    <div class="card">
-        <MudCarousel Class="mud-width-full" Style="height:250px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
-            </MudCarouselItem>
+    <div class="container">
 
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto2.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
+        @foreach (var anunciante in Anunciantes)
+        {
+            <div class="card">
+                <MudCarousel Class="mud-width-full" Style="height:250px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
+                    <MudCarouselItem Transition="@Transition.Fade">
+                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
+                    </MudCarouselItem>
 
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
+                    <MudCarouselItem Transition="@Transition.Fade">
+                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto2.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    </MudCarouselItem>
 
-        </MudCarousel>
+                    <MudCarouselItem Transition="@Transition.Fade">
+                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    </MudCarouselItem>
 
-        <div class="card-body">
-            <h5 class="card-title">Dr. João Silva</h5>
-            <p class="card-text">Especialista em odontologia estética e preventiva.</p>
-            <p><strong>Localização:</strong> Rua das Flores, 123 - Centro</p>
-            <div style="display: flex; gap: 10px;">
-                <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://wa.me/5554991253704">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
-                </a>
-                <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://www.instagram.com/estevao_br/">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
-                </a>
+                </MudCarousel>
+
+                <div class="card-body">
+                    <h5 class="card-title">@anunciante["nome"]</h5>
+                    <p class="card-text">@anunciante["titulo"]</p>
+                    <p><strong>Localização:</strong>@anunciante["endereco"]</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href='$https://wa.me/5554991253704"{@anunciante["numero"]}'>
+                            <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
+                        </a>
+                        <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href='$https://www.instagram.com/{@anunciante["instagram"]}'>
+                            <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
+                        </a>
+                    </div>
+                </div>
+
             </div>
+
+        }
+
+       @*  <div class="card">
+            <MudCarousel Class="mud-width-full" Style="height:200px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
+                <MudCarouselItem Transition="@Transition.Fade">
+                    <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto4.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
+                </MudCarouselItem>
+
+                <MudCarouselItem Transition="@Transition.Fade">
+                    <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto5.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                </MudCarouselItem>
+
+                <MudCarouselItem Transition="@Transition.Fade">
+                    <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto4.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                </MudCarouselItem>
+
+            </MudCarousel>
+
+            <div class="card-body">
+                <h5 class="card-title">Dr. Erica Alves</h5>
+                <p class="card-text">Especialista em odontologia estética.</p>
+                <p><strong>Localização:</strong> Rua do parque, 4568 - Centro</p>
+                <div style="display: flex; gap: 10px;">
+                    <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://wa.me/5554991253704">
+                        <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
+                    </a>
+                    <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://www.instagram.com/estevao_br/">
+                        <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
+                    </a>
+                </div>
+            </div>
+
         </div>
 
-    </div>
+        <div class="card">
+            <MudCarousel Class="mud-width-full" Style="height:200px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
+                <MudCarouselItem Transition="@Transition.Fade">
+                    <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto3.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
+                </MudCarouselItem>
 
-    <div class="card">
-        <MudCarousel Class="mud-width-full" Style="height:200px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto4.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
-            </MudCarouselItem>
+                <MudCarouselItem Transition="@Transition.Fade">
+                    <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto3.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                </MudCarouselItem>
 
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto5.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
+                <MudCarouselItem Transition="@Transition.Fade">
+                    <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto3.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                </MudCarouselItem>
 
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto4.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
+            </MudCarousel>
 
-        </MudCarousel>
-
-        <div class="card-body">
-            <h5 class="card-title">Dr. Erica Alves</h5>
-            <p class="card-text">Especialista em odontologia estética.</p>
-            <p><strong>Localização:</strong> Rua do parque, 4568 - Centro</p>
-            <div style="display: flex; gap: 10px;">
-                <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://wa.me/5554991253704">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
-                </a>
-                <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://www.instagram.com/estevao_br/">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
-                </a>
+            <div class="card-body">
+                <h5 class="card-title">Pedro Alvares</h5>
+                <p class="card-text">Advogado especialista</p>
+                <p><strong>Localização:</strong> Rua Joao Carlos Hass, 6916 - Centro</p>
+                <div style="display: flex; gap: 10px;">
+                    <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://wa.me/5554991253704">
+                        <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
+                    </a>
+                    <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://www.instagram.com/estevao_br/">
+                        <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
+                    </a>
+                </div>
             </div>
-        </div>
 
+        </div> *@
     </div>
 
-    <div class="card">
-        <MudCarousel Class="mud-width-full" Style="height:200px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto3.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
-            </MudCarouselItem>
+}
 
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto3.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
+@code{
+    private List<Dictionary<string, object>>? Anunciantes;
 
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto3.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
+    protected override async Task OnInitializedAsync()
+    {
+        Anunciantes = await FirestoreService.GetAnunciantes();
+    }
 
-        </MudCarousel>
-
-        <div class="card-body">
-            <h5 class="card-title">Pedro Alvares</h5>
-            <p class="card-text">Advogado especialista</p>
-            <p><strong>Localização:</strong> Rua Joao Carlos Hass, 6916 - Centro</p>
-            <div style="display: flex; gap: 10px;">
-                <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://wa.me/5554991253704">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
-                </a>
-                <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://www.instagram.com/estevao_br/">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
-                </a>
-            </div>
-        </div>
-
-    </div>
-</div>
+}
 
 <style>
     .card {

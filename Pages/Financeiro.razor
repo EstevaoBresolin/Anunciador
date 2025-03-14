@@ -1,140 +1,89 @@
 ﻿@page "/financeiro"
 
-<PageTitle>Financeiro</PageTitle>
+@using AnunciadorV1.Services
+@inject IJSRuntime JS
+@inject FirestoreService FirestoreService
 
-<h1>Financeiro</h1>
+<h3>Cadastro de Anunciante</h3>
 
-<div class="container">
+<EditForm Model="@novoAnunciante" OnValidSubmit="@Cadastrar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-    <div class="card">
-        <MudCarousel Class="mud-width-full" Style="height:250px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
-            </MudCarouselItem>
-
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto2.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
-
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
-
-        </MudCarousel>
-
-        <div class="card-body">
-            <h5 class="card-title">Dr. João Silva</h5>
-            <p class="card-text">Especialista em odontologia estética e preventiva.</p>
-            <p><strong>Localização:</strong> Rua das Flores, 123 - Centro</p>
-            <div style="display: flex; gap: 10px;">
-                <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://wa.me/5554991253704">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
-                </a>
-                <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://www.instagram.com/estevao_br/">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
-                </a>
-            </div>
-        </div>
-
+    <div>
+        <label>Nome:</label>
+        <InputText @bind-Value="novoAnunciante.nome" class="form-control" />
     </div>
 
-    <div class="card">
-        <MudCarousel Class="mud-width-full" Style="height:200px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto4.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
-            </MudCarouselItem>
-
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto5.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
-
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto4.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
-
-        </MudCarousel>
-
-        <div class="card-body">
-            <h5 class="card-title">Dr. Erica Alves</h5>
-            <p class="card-text">Especialista em odontologia estética.</p>
-            <p><strong>Localização:</strong> Rua do parque, 4568 - Centro</p>
-            <div style="display: flex; gap: 10px;">
-                <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://wa.me/5554991253704">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
-                </a>
-                <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://www.instagram.com/estevao_br/">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
-                </a>
-            </div>
-        </div>
-
+    <div>
+        <label>Título:</label>
+        <InputText @bind-Value="novoAnunciante.titulo" class="form-control" />
     </div>
 
-    <div class="card">
-        <MudCarousel Class="mud-width-full" Style="height:200px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto3.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
-            </MudCarouselItem>
-
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto3.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
-
-            <MudCarouselItem Transition="@Transition.Fade">
-                <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto3.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            </MudCarouselItem>
-
-        </MudCarousel>
-
-        <div class="card-body">
-            <h5 class="card-title">Pedro Alvares</h5>
-            <p class="card-text">Advogado especialista</p>
-            <p><strong>Localização:</strong> Rua Joao Carlos Hass, 6916 - Centro</p>
-            <div style="display: flex; gap: 10px;">
-                <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://wa.me/5554991253704">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
-                </a>
-                <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="https://www.instagram.com/estevao_br/">
-                    <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
-                </a>
-            </div>
-        </div>
-
+    <div>
+        <label>Endereco da Foto:</label>
+        <InputText @bind-Value="novoAnunciante.descricao" class="form-control" />
     </div>
-</div>
 
-<style>
-    .card {
-        font-family: Arial, sans-serif;
-        background-color: #fff;
-        width: 18rem;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin: 10px;
+    <div>
+        <label>Endereço:</label>
+        <InputText @bind-Value="novoAnunciante.endereco" class="form-control" />
+    </div>
 
-        @@media(max-width: 700px) {
-            width: fit-content;
-        }
+    <div>
+        <label>Número de contato:</label>
+        <InputNumber @bind-Value="novoAnunciante.numero" class="form-control" />
+    </div>
+
+    <div>
+        <label>Instagram:</label>
+        <InputText @bind-Value="novoAnunciante.instagram" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</EditForm>
+
+@if (mensagem != null)
+{
+    <p>@mensagem</p>
+}
+
+@code {
+    private AnuncianteModel novoAnunciante = new AnuncianteModel();
+    private string? mensagem;
+
+    protected override async Task OnInitializedAsync()
+    {
     }
 
-    .card-title {
-        font-size: 1.25rem;
-        color: #333;
+
+    // private async Task Cadastrar(){
+    //     var novoAnunciante = new
+    //     {
+    //         nome = "Dr.fdsfdsfds",
+    //         titulo = "url-da-foto.jpg",
+    //         descricao = "Dentista especializado em ortodontia.",
+    //         endereco = "Rua A, 123, Bairro X",
+    //         numero = "(11) 1234-5678",
+    //         instagram = "jaodasilva",
+    //     };
+    //     await FirestoreService.AddAnunciante(novoAnunciante);
+    // }
+
+    private async Task Cadastrar()
+    {
+        await FirestoreService.AddAnunciante(novoAnunciante);
+        mensagem = "Anunciante cadastrado com sucesso!";
+        novoAnunciante = new AnuncianteModel(); // Limpa o formulário
     }
 
-    .card-text {
-        font-size: 1rem;
-        color: #666;
+    public class AnuncianteModel
+    {
+        public string nome { get; set; } = "";
+        public string titulo { get; set; } = "";
+        public string descricao { get; set; } = "";
+        public string endereco { get; set; } = "";
+        public int numero { get; set; } = 0;
+        public string instagram { get; set; } = "";
     }
-
-    .container {
-        display: flex;
-        gap: 1rem;
-
-        @@media(max-width: 700px) {
-            width: fit-content;
-            flex-direction: column;
-        }
-    }
-</style>
+}
