@@ -1,8 +1,9 @@
-﻿
+﻿@inherits LayoutComponentBase
+
 @using System.Text
 @using System.Text.Json
 @using System.Globalization
-@inherits LayoutComponentBase
+@inject NavigationManager navigation
 
 <MudThemeProvider />
 <MudPopoverProvider />
@@ -15,9 +16,9 @@
     <!-- Menu de Navegação -->
    <MudPaper Class="mud-background-secondary menu-bar">
         <div style="display: flex;justify-content: space-between;align-items: center;background: royalblue;position: absolute;width: 99vw;">
-            <MudIconButton OnClick="OpenMenu" Icon="@Icons.Material.Filled.Menu" Color="Color.Default" />
-            <a href="Anunciador/" style="font-size: 1rem; color: white;">Conecte Membros</a>
-            <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Default" />
+            <MudIconButton OnClick="OpenMenu" Icon="@Icons.Material.Filled.Menu" Color="Color.Default" style="color: white !important;" />
+            <MudLink Href="@navigation.BaseUri" style="font-size: 1rem; color: white !important;">Conecte Membros</MudLink>
+            <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Default" />
 
         </div>
         <MudContainer Style="padding-left: 0 !important; padding-right: 0 !important;" Class="menu d-flex justify-space-between align-center px-4">
@@ -27,7 +28,7 @@
             @if (collapseNavMenu){
 
                 <MudContainer Class="d-flex justify-center align-center menu-itens">
-                    <MudLink Href="Anunciador/" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AutoAwesomeMosaic" Title="Favorite" /> Todos os Departamentos</MudLink>
+                    <MudLink Href="@navigation.BaseUri" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AutoAwesomeMosaic" Title="Favorite" /> Todos os Departamentos</MudLink>
                     <MudLink Href="saudeEBeleza" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AccessibilityNew" Title="Favorite" /> Saúde e Beleza</MudLink>
                     <MudLink Href="construcao" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção</MudLink>
                     <MudLink Href="financeiro" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Financeiro</MudLink>
