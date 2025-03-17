@@ -1,89 +1,72 @@
 ﻿@page "/financeiro"
-
+@using AnunciadorV1.Models
 @using AnunciadorV1.Services
-@inject IJSRuntime JS
 @inject FirestoreService FirestoreService
 
-<h3>Cadastro de Anunciante</h3>
+<PageTitle>Financeiro</PageTitle>
 
-<EditForm Model="@novoAnunciante" OnValidSubmit="@Cadastrar">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<h1>Financeiro</h1>
 
-    <div>
-        <label>Nome:</label>
-        <InputText @bind-Value="novoAnunciante.nome" class="form-control" />
-    </div>
-
-    <div>
-        <label>Título:</label>
-        <InputText @bind-Value="novoAnunciante.titulo" class="form-control" />
-    </div>
-
-    <div>
-        <label>Endereco da Foto:</label>
-        <InputText @bind-Value="novoAnunciante.descricao" class="form-control" />
-    </div>
-
-    <div>
-        <label>Endereço:</label>
-        <InputText @bind-Value="novoAnunciante.endereco" class="form-control" />
-    </div>
-
-    <div>
-        <label>Número de contato:</label>
-        <InputNumber @bind-Value="novoAnunciante.numero" class="form-control" />
-    </div>
-
-    <div>
-        <label>Instagram:</label>
-        <InputText @bind-Value="novoAnunciante.instagram" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
-</EditForm>
-
-@if (mensagem != null)
+@if (Anunciantes is null)
 {
-    <p>@mensagem</p>
+    <p>Carregando...</p>
+}
+else{
+
+    <div class="container">
+
+        @foreach (var anunciante in Anunciantes)
+        {
+            <div class="card">
+                <MudCarousel Class="mud-width-full" Style="height:250px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
+                    <MudCarouselItem Transition="@Transition.Fade">
+                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
+                    </MudCarouselItem>
+
+                    <MudCarouselItem Transition="@Transition.Fade">
+                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto2.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    </MudCarouselItem>
+
+                    <MudCarouselItem Transition="@Transition.Fade">
+                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    </MudCarouselItem>
+
+                </MudCarousel>
+
+                <div class="card-body">
+                    <h5 class="card-title">@anunciante.Nome</h5>
+                    <p class="card-text">@anunciante.Titulo</p>
+                    <p><strong>Localização:</strong>@anunciante.Endereco</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href='$https://wa.me/5554991253704"{@anunciante.Numero}'>
+                            <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
+                        </a>
+                        <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href='$https://www.instagram.com/{@anunciante.Instagram}'>
+                            <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+
 }
 
-@code {
-    private AnuncianteModel novoAnunciante = new AnuncianteModel();
-    private string? mensagem;
+@code{
+    private List<Anunciante>? Anunciantes;
 
     protected override async Task OnInitializedAsync()
     {
+        Anunciantes = await FirestoreService.GetAnunciantes();
+
+        Anunciantes = Anunciantes.Where(x => x.Categoria == 2).ToList();
     }
 
-
-    // private async Task Cadastrar(){
-    //     var novoAnunciante = new
-    //     {
-    //         nome = "Dr.fdsfdsfds",
-    //         titulo = "url-da-foto.jpg",
-    //         descricao = "Dentista especializado em ortodontia.",
-    //         endereco = "Rua A, 123, Bairro X",
-    //         numero = "(11) 1234-5678",
-    //         instagram = "jaodasilva",
-    //     };
-    //     await FirestoreService.AddAnunciante(novoAnunciante);
-    // }
-
-    private async Task Cadastrar()
-    {
-        await FirestoreService.AddAnunciante(novoAnunciante);
-        mensagem = "Anunciante cadastrado com sucesso!";
-        novoAnunciante = new AnuncianteModel(); // Limpa o formulário
-    }
-
-    public class AnuncianteModel
-    {
-        public string nome { get; set; } = "";
-        public string titulo { get; set; } = "";
-        public string descricao { get; set; } = "";
-        public string endereco { get; set; } = "";
-        public int numero { get; set; } = 0;
-        public string instagram { get; set; } = "";
-    }
 }
+
+<style>
+    
+</style>

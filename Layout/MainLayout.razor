@@ -4,78 +4,76 @@
 @using System.Globalization
 @inherits LayoutComponentBase
 
-@* Required *@
 <MudThemeProvider />
 <MudPopoverProvider />
-
-@* Needed for dialogs *@
 <MudDialogProvider />
-
-@* Needed for snackbars *@
 <MudSnackbarProvider />
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
 
-<div class="page">
-    <div style=" background: black">
-        <div style="display: flex; justify-content: space-between; height: 45px; align-items: center">
-            @* <div class="container-fluid"> *@
-            <MudButton OnClick="@ToggleNavMenu" Variant="Variant.Filled" >
-                <MudIcon Icon="@Icons.Material.Filled.Menu" Title="Menu" Style="color:white;" />
-            </MudButton>
-             @*    <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-                    <span class="navbar-toggler-icon"></span>
-                </button> *@
-                <a href="" style="font-size: 1rem; color: white;">Anunciador</a>
+<div class="main">
+  
+    <!-- Menu de Navegação -->
+   <MudPaper Class="mud-background-secondary menu-bar">
+        <div style="display: flex;justify-content: space-between;align-items: center;background: royalblue;position: absolute;width: 99vw;">
+            <MudIconButton OnClick="OpenMenu" Icon="@Icons.Material.Filled.Menu" Color="Color.Default" />
+            <a href="/" style="font-size: 1rem; color: white;">Conecte Membros</a>
+            <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Default" />
 
-                <MudButton OnClick="@ToggleTheme" Variant="Variant.Filled" >
-                    <MudIcon Icon="@currentIcon" Title="darkMode" Style="color:white;" />
-                </MudButton>
-            @* </div> *@
         </div>
+        <MudContainer Style="padding-left: 0 !important; padding-right: 0 !important;" Class="menu d-flex justify-space-between align-center px-4">
+        <!-- Ícone de Menu -->
 
-        <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-            <nav class="nav flex-column">
-                <div class="nav-item px-3">
-                    <NavLink  href="" Match="NavLinkMatch.All">
-                        <span class="bi bi-house-door-fill-nav-menu" style="color:white;" aria-hidden="true">Home</span>
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink style="color: white;display: flex;align-items: center;gap: 0.5rem; padding: 1rem;" href="saudeEbelesa">
-                        <MudIcon Style="margin-top: 5px;" Icon="@Icons.Material.Filled.AccessibilityNew" Title="Favorite" /> Saúde e Beleza
-                    </NavLink>
-                </div>
-                <div  class="nav-item px-3">
-                    <NavLink style="color: white;display: flex;align-items: center;gap: 0.5rem;padding: 0 1rem 1rem 1rem;" href="financeiro">
-                        <MudIcon Style="margin-top: 5px;" Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Financeiro
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink style="color: white;display: flex;align-items: center;gap: 0.5rem;padding: 0 1rem 1rem 1rem;" href="construcao">
-                        <MudIcon Style="margin-top: 5px;" Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção
-                    </NavLink>
-                </div>
-            </nav>
-        </div>
-    </div>
+        <!-- Links de Navegação -->
+            @if (collapseNavMenu){
 
-    <main>
+                <MudContainer Class="d-flex justify-center align-center menu-itens">
+                    <MudLink Href="/" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AutoAwesomeMosaic" Title="Favorite" /> Todos os Departamentos</MudLink>
+                    <MudLink Href="saudeEBeleza" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AccessibilityNew" Title="Favorite" /> Saúde e Beleza</MudLink>
+                    <MudLink Href="construcao" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção</MudLink>
+                    <MudLink Href="financeiro" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Financeiro</MudLink>
+                    <MudLink Href="consultoria" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.Assessment" Title="Favorite" />Consultoria</MudLink>
+                    <MudLink Href="alimentacao" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.Fastfood" Title="Favorite" />Alimentação</MudLink>
+                    <MudLink Href="informatica" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.Computer" Title="Favorite" />Informática</MudLink>
+                    <MudLink Href="cadastrarAnunciante" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Cadastrar Anunciante</MudLink>
+
+                    <div class="infos">
+                        <p>Conecte Membros</p>
+                        <p>Versão 1.0.0</p>
+                    </div>
+
+                </MudContainer>
+
+
+            }
+     
+
+        <!-- Barra de Pesquisa -->
+       
+    </MudContainer>
+</MudPaper>
+
+    <main style="padding-top: 3rem;">
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
 
-
 @code {
-
-    private bool collapseNavMenu = true;
+   
+    private bool collapseNavMenu = false;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    private void ToggleNavMenu()
+    private void OpenMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void CloseMenu()
+    {
+        collapseNavMenu = false;
+        StateHasChanged(); // Garante a atualização do estado da UI
     }
 
     private bool _isDarkMode;
@@ -130,6 +128,123 @@
 
 
 <style>
+
+    .menu{
+        width: 100% !important;
+        @@media(max-width: 700px) {
+            flex-direction: column;
+        }
+    }
+
+    .menu-itens {
+        margin-top: 3rem;
+
+        @@media(max-width: 700px) {
+            flex-direction: column;
+            padding-bottom: 2rem;
+            height: 100vh;
+            z-index: 3;
+            justify-content: start !important;
+            align-items: flex-start !important;
+        }
+    }
+
+    .infos{
+        width: 85%;
+        text-align: center;
+        bottom: 108px;
+        margin-bottom: 1rem;
+        position: fixed;
+        margin-left: -16px;
+
+        @@media(min-width: 700px) {
+            display: none;   
+        }
+    }
+
+    /* //// MENU ////// */
+    .menu-bar {
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid #ddd;
+
+        @@media(max-width: 700px) {
+            width: 85%;
+            position: fixed;
+        }
+
+        @@media (min-width: 1280px)
+        {
+            .mud-container-maxwidth-lg
+            {
+                max-width: 100% !important;
+            }
+        }
+    }
+
+    .menu-item {
+        color: #494949 !important;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 1rem;
+        width: fit-content;
+        display: flex;
+        gap: 5px;
+
+        @@media(max-width: 700px) {
+            border-bottom: 0.5px solid #d7d7d7;
+            width: 100%;
+        }
+    }
+
+        .menu-item:hover {
+            cursor: pointer;
+            background: aliceblue;
+        }
+    /* //// MENU ////// */
+
+    .card {
+        font-family: Arial, sans-serif;
+        background-color: #fff;
+        width: 18rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        @@media(max-width: 700px) {
+            width: 100%;
+        }
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+
+    .card-title {
+        font-size: 1.25rem;
+        color: #333;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #666;
+    }
+
+    .container {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+        @@media(max-width: 700px) {
+            width: 100%;
+            flex-direction: column;
+        }
+    }
 </style>
 
 

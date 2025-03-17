@@ -1,5 +1,7 @@
-﻿using Microsoft.JSInterop;
+﻿using AnunciadorV1.Models;
+using Microsoft.JSInterop;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace AnunciadorV1.Services
@@ -30,7 +32,7 @@ namespace AnunciadorV1.Services
 
         }
 
-        public async Task<List<Dictionary<string, object>>> GetAnunciantes()
+        public async Task<List<Anunciante>> GetAnunciantes()
         {
             var firebaseConfig = new
             {
@@ -42,11 +44,28 @@ namespace AnunciadorV1.Services
                 appId = "1:882219848815:web:f04520e555863ccf2d699a"
             };
 
-
             var db = await _jsRuntime.InvokeAsync<IJSObjectReference>("firebaseService.initializeApp", firebaseConfig);
 
             // Passar a instância do Firestore (db) para a função getAnunciantes
-            return await _jsRuntime.InvokeAsync<List<Dictionary<string, object>>>("firebaseService.getAnunciantes", db);
+             var result = await _jsRuntime.InvokeAsync<List<Dictionary<string, object>>>("firebaseService.getAnunciantes", db);
+
+            return result.Select(d => ConverterParaAnunciante(d)).ToList();
+        }
+
+        private Anunciante ConverterParaAnunciante(Dictionary<string, object> dados)
+        {
+            var anunciante =  new Anunciante
+            {
+                Nome = dados.TryGetValue("nome", out var nome) ? nome.ToString() : "Nome não informado",
+                Descricao = dados.TryGetValue("descricao", out var descricao) ? descricao.ToString() : "",
+                Titulo = dados.TryGetValue("titulo", out var titulo) ? titulo.ToString() : "Titulo não informado",
+                Endereco = dados.TryGetValue("endereco", out var localizacao) ? localizacao.ToString() : "Localização não informada",
+                Numero = dados.TryGetValue("numero", out var numero) && int.TryParse(numero?.ToString(), out var numeroConvertido) ? numeroConvertido : 0,
+                Categoria = dados.TryGetValue("categoria", out var categoria) && int.TryParse(categoria?.ToString(), out var categoriaConvertida) ? categoriaConvertida : 0,
+                Instagram = dados.TryGetValue("instagram", out var instagram) ? instagram.ToString() : "instagram não disponível"
+            };
+
+            return anunciante;
         }
     }
 }

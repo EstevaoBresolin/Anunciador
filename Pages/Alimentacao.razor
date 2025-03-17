@@ -1,11 +1,11 @@
-﻿@page "/saudeEBeleza"
+﻿@page "/alimentacao"
 @using AnunciadorV1.Models
 @using AnunciadorV1.Services
 @inject FirestoreService FirestoreService
 
-<PageTitle>Saúde E Beleza</PageTitle>
+<PageTitle>Alimentacao</PageTitle>
 
-<h1>Saúde E Beleza</h1>
+<h1>Alimentacao</h1>
 
 @if (Anunciantes is null)
 {
@@ -62,7 +62,7 @@ else{
     {
         Anunciantes = await FirestoreService.GetAnunciantes();
 
-        Anunciantes = Anunciantes.Where(x => x.Categoria == 6).ToList();
+        Anunciantes = Anunciantes.Where(x => x.Categoria == 4).ToList();
     }
 
 }

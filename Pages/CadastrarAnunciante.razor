@@ -1,0 +1,117 @@
+﻿@page "/cadastrarAnunciante"
+
+@inject IJSRuntime JS
+@inject ISnackbar Snackbar
+@inject FirestoreService FirestoreService
+
+@using AnunciadorV1.Models
+@using AnunciadorV1.Services
+
+<MudContainer>
+    <MudCard Class="p-4">
+        <MudCardHeader>
+            <MudText Typo="Typo.h5">Cadastro de Anunciante</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudForm Model="@novoAnunciante" >
+                <MudGrid Spacing="3">
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Nome" @bind-Value="novoAnunciante.Nome" Required="true" RequiredError="O nome é obrigatório." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Título" @bind-Value="novoAnunciante.Titulo" Required="true" RequiredError="O título é obrigatório." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Descrição" @bind-Value="novoAnunciante.Descricao" Required="true" RequiredError="A descrição é obrigatória." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Endereço" @bind-Value="novoAnunciante.Endereco" Required="true" RequiredError="O endereço é obrigatório." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudNumericField Label="Número de Contato" @bind-Value="novoAnunciante.Numero" Required="true" RequiredError="O número de contato é obrigatório." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Instagram" @bind-Value="novoAnunciante.Instagram" />
+                    </MudItem>
+                    <MudItem xs="6" md="3">
+                        <MudSelect  @bind-Value="Categoria" Label="Categoria" AdornmentColor="Color.Inherit" Variant="Variant.Outlined">
+                            @foreach (EnumCategorias item in Enum.GetValues(typeof(EnumCategorias)))
+                            {
+                                <MudSelectItem Value="@item">@item.GetDescription()</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudButton OnClick="Cadastrar" Color="Color.Primary">Cadastrar</MudButton>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+
+            @if (!string.IsNullOrEmpty(mensagem))
+            {
+                <MudAlert Severity="Severity.Success" Dense="true" Class="mt-2">@mensagem</MudAlert>
+            }
+        </MudCardContent>
+    </MudCard>
+</MudContainer>
+
+@code {
+    private Anunciante novoAnunciante = new Anunciante();
+    private EnumCategorias Categoria { get; set; } = EnumCategorias.Selecionar;
+
+    private string? mensagem;
+    private MudForm? form;
+
+    private async Task Cadastrar()
+    {
+
+        if (String.IsNullOrEmpty(novoAnunciante.Nome)){
+            Snackbar.Add("Por Favor, preencha o Nome", Severity.Error, c => c.HideIcon = true);
+            return;
+        }
+        else if (String.IsNullOrEmpty(novoAnunciante.Titulo))
+        {
+            Snackbar.Add("Por Favor, preencha o Título", Severity.Error, c => c.HideIcon = true);
+            return;
+        }
+        else if (String.IsNullOrEmpty(novoAnunciante.Descricao))
+        {
+            Snackbar.Add("Por Favor, preencha a Descrição", Severity.Error, c => c.HideIcon = true);
+            return;
+        }
+        else if (String.IsNullOrEmpty(novoAnunciante.Endereco))
+        {
+            Snackbar.Add("Por Favor, preencha o Endereço", Severity.Error, c => c.HideIcon = true);
+            return;
+        }
+        else if (novoAnunciante.Numero == 0)
+        {
+            Snackbar.Add("Por Favor, preencha o Número de Contato", Severity.Error, c => c.HideIcon = true);
+            return;
+        }
+        else if (Categoria == EnumCategorias.Selecionar){
+            Snackbar.Add("Por Favor, Selecione uma categoria", Severity.Error, c => c.HideIcon = true);
+            return;
+        }
+        novoAnunciante.Categoria = (int)Categoria;
+        await FirestoreService.AddAnunciante(novoAnunciante);
+        mensagem = "Anunciante cadastrado com sucesso!";
+        novoAnunciante = new Anunciante(); // Limpa o formulário
+    }
+
+    public class AnuncianteModel
+    {
+        public string Nome { get; set; } = "";
+        public string Titulo { get; set; } = "";
+        public string Descricao { get; set; } = "";
+        public string Endereco { get; set; } = "";
+        public int Numero { get; set; } = 0;
+        public string Instagram { get; set; } = "";
+        public int Categoria { get; set; }
+    }
+}
+
+<style>
+    #selectfs3sr1xm{
+       width: 270px;
+    }</style>
