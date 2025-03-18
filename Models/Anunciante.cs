@@ -7,7 +7,7 @@
         public string Descricao { get; set; }
         public string EnderecoFoto { get; set; }
         public string Endereco { get; set; }
-        public int Numero { get; set; }
+        public long Numero { get; set; }
         public string Instagram { get; set; }
         public int Categoria { get; set; }
 
