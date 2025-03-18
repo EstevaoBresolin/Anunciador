@@ -59,7 +59,8 @@ namespace AnunciadorV1.Services
                 Nome = dados.TryGetValue("nome", out var nome) ? nome.ToString() : "Nome não informado",
                 Descricao = dados.TryGetValue("descricao", out var descricao) ? descricao.ToString() : "",
                 Titulo = dados.TryGetValue("titulo", out var titulo) ? titulo.ToString() : "Titulo não informado",
-                Endereco = dados.TryGetValue("endereco", out var localizacao) ? localizacao.ToString() : "Localização não informada",
+                EnderecoFoto = dados.TryGetValue("enderecoFoto", out var enderecoFoto) ? enderecoFoto.ToString() : "Endereço da foto não informado",
+                Endereco = dados.TryGetValue("endereco", out var endereco) ? endereco.ToString() : "Localização não informada",
                 Numero = dados.TryGetValue("numero", out var numero) && int.TryParse(numero?.ToString(), out var numeroConvertido) ? numeroConvertido : 0,
                 Categoria = dados.TryGetValue("categoria", out var categoria) && int.TryParse(categoria?.ToString(), out var categoriaConvertida) ? categoriaConvertida : 0,
                 Instagram = dados.TryGetValue("instagram", out var instagram) ? instagram.ToString() : "instagram não disponível"

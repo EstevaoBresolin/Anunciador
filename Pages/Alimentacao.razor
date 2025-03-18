@@ -18,20 +18,7 @@ else{
         @foreach (var anunciante in Anunciantes)
         {
             <div class="card">
-                <MudCarousel Class="mud-width-full" Style="height:250px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
-                    <MudCarouselItem Transition="@Transition.Fade">
-                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none;">
-                    </MudCarouselItem>
-
-                    <MudCarouselItem Transition="@Transition.Fade">
-                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto2.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    </MudCarouselItem>
-
-                    <MudCarouselItem Transition="@Transition.Fade">
-                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    </MudCarouselItem>
-
-                </MudCarousel>
+                <img src="@anunciante.EnderecoFoto" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none; height: 285px;">
 
                 <div class="card-body">
                     <h5 class="card-title">@anunciante.Nome</h5>
