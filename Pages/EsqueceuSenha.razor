@@ -1,0 +1,68 @@
+﻿@page "/esqueceuSenha"
+@using AnunciadorV1.Services
+
+@inject IJSRuntime JS
+@inject ISnackbar Snackbar
+@inject FirestoreService FirestoreService
+@inject NavigationManager navigation
+
+<MudContainer Class="d-flex justify-center align-center" Style="height: 95vh; background: royalblue;margin-top: -1px;">
+    <MudPaper Class="p-6 rounded-lg shadow-lg" Style="width: 400px; background-color: white;">
+        <MudCard Class="p-4" Style="border-radius: 12px;">
+            <MudCardHeader Class="texts-login">
+                <MudText Typo="Typo.h4" Class="text-center" Style="color: #4169E1;">Recuperar Senha</MudText>
+                <MudText Typo="Typo.body2" Class="text-center" Style="color: gray;">Informe seu e-mail para redefinir a senha</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudForm>
+                    <MudTextField Placeholder="E-mail" Label="E-mail" @bind-Value="email" Required="true" RequiredError="Informe seu e-mail" Type="email" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Email" Variant="Variant.Outlined" />
+                    <MudButton OnClick="EnviarRecuperacao" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #4169E1; color: white; font-weight: bold;">Recuperar Senha</MudButton>
+                </MudForm>
+                @if (!string.IsNullOrEmpty(mensagem))
+                {
+                    <MudAlert Severity="Severity.Success" Dense="true" Class="mt-3">@mensagem</MudAlert>
+                }
+                <MudText Class="mt-3 text-center">
+                    <MudLink OnClick="VoltarAoLogin" Class="cursor-pointer" Style="color: #4169E1;">Voltar ao login</MudLink>
+                </MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private string email = string.Empty;
+    private string? mensagem;
+
+    private async Task EnviarRecuperacao()
+    {
+        if (string.IsNullOrEmpty(email))
+        {
+            Snackbar.Add("Por favor, insira um e-mail válido.", Severity.Error);
+            return;
+        }
+
+        bool sucesso = await FirestoreService.RecuperarSenha(email);
+        if (sucesso)
+        {
+            mensagem = "Se o e-mail estiver cadastrado, você receberá um link de recuperação.";
+        }
+        else
+        {
+            Snackbar.Add("Erro ao enviar e-mail de recuperação.", Severity.Error);
+        }
+    }
+
+    private void VoltarAoLogin()
+    {
+        navigation.NavigateTo("/login");
+    }
+}
+
+<style>
+    .texts-login {
+        @@media(max-width: 700px) {
+            flex-direction: column;
+        }
+    }
+</style>

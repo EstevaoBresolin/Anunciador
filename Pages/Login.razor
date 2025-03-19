@@ -1,0 +1,75 @@
+﻿@page "/login"
+@using AnunciadorV1.Services
+
+@inject IJSRuntime JS
+@inject ISnackbar Snackbar
+@inject FirestoreService FirestoreService
+@inject NavigationManager navigation
+
+<MudContainer Class="d-flex justify-center align-center" Style="height: 95vh; background: royalblue;margin-top: -1px;">
+    <MudPaper Class="p-6 rounded-lg shadow-lg" Style="width: 400px; background-color: white;">
+        <MudCard Class="p-4" Style="border-radius: 12px;">
+            <MudCardHeader Class="texts-login">
+                <MudText Typo="Typo.h4" Class="text-center" Style="color: #4169E1;">Bem-vindo!</MudText>
+                <MudText Typo="Typo.body2" Class="text-center" Style="color: gray;">Entre com suas credenciais</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudForm Model="@loginModel">
+                    <MudTextField Placeholder="E-mail" Label="E-mail" @bind-Value="loginModel.Email" Required="true" RequiredError="O e-mail é obrigatório." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Email" Variant="Variant.Outlined" />
+                    <MudTextField Placeholder="Senha" Label="Senha" @bind-Value="loginModel.Senha" InputType="InputType.Password" Required="true" RequiredError="A senha é obrigatória." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Lock" Variant="Variant.Outlined" />
+                    <MudButton OnClick="Logar" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #4169E1; color: white; font-weight: bold;">Entrar</MudButton>
+                </MudForm>
+                <MudText Class="mt-3 text-center">
+                    <MudLink OnClick="EsqueceuSenha" Class="cursor-pointer" Style="color: #4169E1;">Esqueceu a senha?</MudLink>
+                </MudText>
+                <MudText Class="mt-3 text-center">
+                    <MudLink OnClick="Registrar" Class="cursor-pointer" Style="color: #4169E1;">Ainda não tem uma conta? Registre-se</MudLink>
+                </MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+
+    private async Task Logar()
+    {
+        var user = await FirestoreService.Login(loginModel.Email, loginModel.Senha);
+        if (user != null && user != false)
+        {
+            Snackbar.Add("Login realizado com sucesso!", Severity.Success);
+            FirestoreService.SetAuthenticated(true);
+            navigation.NavigateTo(navigation.BaseUri);
+        }
+        else
+        {
+            Snackbar.Add("E-mail ou senha incorretos.", Severity.Error);
+        }
+    }
+
+    private void EsqueceuSenha()
+    {
+        navigation.NavigateTo("esqueceuSenha");
+    }
+
+    private void Registrar()
+    {
+        navigation.NavigateTo("registrar");
+    }
+
+    public class LoginModel
+    {
+        public string Email { get; set; } = "";
+        public string Senha { get; set; } = "";
+    }
+}
+
+
+<style>
+    .texts-login{
+        @@media(max-width: 700px) {
+            flex-direction: column;
+        }
+    }
+</style>

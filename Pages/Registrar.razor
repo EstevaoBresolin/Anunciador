@@ -1,0 +1,74 @@
+﻿@page "/registrar"
+@using AnunciadorV1.Services
+
+@inject IJSRuntime JS
+@inject ISnackbar Snackbar
+@inject FirestoreService firestoreService
+@inject NavigationManager navigation
+
+<MudContainer Class="d-flex justify-center align-center" Style="height: 95vh; background: royalblue;margin-top: -1px;">
+    <MudPaper Class="p-6 rounded-lg shadow-lg" Style="width: 400px; background-color: white;">
+        <MudCard Class="p-4" Style="border-radius: 12px;">
+            <MudCardHeader Class="texts-login">
+                <MudText Typo="Typo.h4" Class="text-center" Style="color: #4169E1;">Criar Conta</MudText>
+                <MudText Typo="Typo.body2" Class="text-center" Style="color: gray;">Preencha os campos abaixo</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudForm Model="@novoUsuario">
+                    <MudTextField Placeholder="Nome" Label="Nome" @bind-Value="novoUsuario.Nome" Required="true" RequiredError="O nome é obrigatório." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Person" Variant="Variant.Outlined" />
+                    <MudTextField Placeholder="E-mail" Label="E-mail" @bind-Value="novoUsuario.Email" Required="true" RequiredError="O e-mail é obrigatório." Type="email" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Email" Variant="Variant.Outlined" />
+                    <MudTextField Placeholder="Senha" Label="Senha" @bind-Value="novoUsuario.Senha" InputType="InputType.Password" Required="true" RequiredError="A senha é obrigatória." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Lock" Variant="Variant.Outlined" />
+                    <MudTextField Placeholder="Confirme a Senha" Label="Confirme a Senha" @bind-Value="confirmarSenha" InputType="InputType.Password" Required="true" RequiredError="Confirme a senha." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Lock" Variant="Variant.Outlined" />
+                    <MudButton OnClick="Cadastrar" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #4169E1; color: white; font-weight: bold;">Cadastrar</MudButton>
+                </MudForm>
+                <MudText Class="mt-3 text-center">
+                    <MudLink OnClick="VoltarParaLogin" Class="cursor-pointer" Style="color: #4169E1;">Já tem uma conta? Faça login</MudLink>
+                </MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private UsuarioModel novoUsuario = new UsuarioModel();
+    private string? confirmarSenha;
+
+    private async Task Cadastrar()
+    {
+        if (string.IsNullOrEmpty(novoUsuario.Nome) || string.IsNullOrEmpty(novoUsuario.Email) || string.IsNullOrEmpty(novoUsuario.Senha) || string.IsNullOrEmpty(confirmarSenha))
+        {
+            Snackbar.Add("Preencha todos os campos", Severity.Error);
+            return;
+        }
+
+        if (novoUsuario.Senha != confirmarSenha)
+        {
+            Snackbar.Add("As senhas não coincidem", Severity.Error);
+            return;
+        }
+
+        await firestoreService.Registrar(novoUsuario.Email, novoUsuario.Senha);
+        Snackbar.Add("Usuário cadastrado com sucesso!", Severity.Success);
+        navigation.NavigateTo("login");
+    }
+
+    private void VoltarParaLogin()
+    {
+        navigation.NavigateTo("login");
+    }
+
+    public class UsuarioModel
+    {
+        public string Nome { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string Senha { get; set; } = "";
+    }
+}
+
+<style>
+    .texts-login {
+        @@media(max-width: 700px) {
+            flex-direction: column;
+        }
+    }
+</style>

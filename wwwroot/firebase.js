@@ -1,13 +1,18 @@
 ﻿// Importar os módulos necessários do Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
-
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail , signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 // Inicializar o Firebase com a configuração fornecida
 window.firebaseService = {
+    app: null,
+    db: null,
+    auth: null,
+
     initializeApp: function (config) {
-        const app = initializeApp(config);  // Inicializa o Firebase com a configuração
-        const db = getFirestore(app);  // Obtém a instância do Firestore
-        return db;  // Retorna a instância do Firestore
+        this.app = initializeApp(config);  // Inicializa o Firebase com a configuração
+        this.db = getFirestore(this.app);  // Obtém a instância do Firestore
+        this.auth = getAuth(this.app); // Obtém a instância de autenticação
+        return this.db;  // Retorna a instância do Firestore
     },
 
     getAnunciantes: async function (db) {
@@ -40,6 +45,46 @@ window.firebaseService = {
         } catch (e) {
             console.error("Erro ao adicionar documento: ", e);
             throw e;
+        }
+    },
+
+    registerUser: async function (email, password) {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+            console.log("Usuário cadastrado:", userCredential.user);
+            return userCredential.user;
+        } catch (error) {
+            console.error("Erro ao cadastrar usuário:", error.message);
+            return null;
+        }
+    },
+
+    login: async function (email, password) {
+        if (!this.auth) {
+            throw new Error('Auth não foi inicializado corretamente');
+        }
+        try {
+            const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+            return userCredential.user;
+        } catch (error) {
+            console.error("Erro ao fazer login: ", error);
+            return null;
+        }
+    },
+
+    logout: async function () {
+        if (!this.auth) {
+            throw new Error('Auth não foi inicializado corretamente');
+        }
+        await signOut(this.auth);
+    },
+
+    recuperarSenha: async function (email) {
+        try {
+            await this.auth.sendPasswordResetEmail(email);
+            console.log("E-mail de redefinição enviado.");
+        } catch (error) {
+            console.error("Erro ao enviar e-mail de redefinição:", error);
         }
     }
 };

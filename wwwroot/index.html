@@ -45,6 +45,8 @@
         // https://firebase.google.com/docs/web/setup#available-libraries
         import { getFirestore } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
         // Your web app's Firebase configuration
+
+        import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
         const firebaseConfig = {
             apiKey: "AIzaSyC4yQ7qg9u8y7h9wh7y0GZygKdMgaoGDE8",
             authDomain: "conectemembros.firebaseapp.com",
@@ -57,8 +59,8 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
-
+        const auth = getAuth(app); 
+      
     </script>
 </body>
 

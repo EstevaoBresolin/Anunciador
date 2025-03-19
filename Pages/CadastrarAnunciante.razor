@@ -6,59 +6,67 @@
 
 @using AnunciadorV1.Models
 @using AnunciadorV1.Services
+@if(usuarioAutenticado)
+{
+    <MudContainer>
+        <MudCard Class="p-4">
+            <MudCardHeader>
+                <MudText Typo="Typo.h5">Cadastro de Anunciante</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudForm Model="@novoAnunciante" >
+                    <MudGrid Spacing="3">
+                        <MudItem xs="12" md="6">
+                            <MudTextField Label="Nome" @bind-Value="novoAnunciante.Nome" Required="true" RequiredError="O nome é obrigatório." />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField Label="Título" @bind-Value="novoAnunciante.Titulo" Required="true" RequiredError="O título é obrigatório." />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField Label="Descrição" @bind-Value="novoAnunciante.Descricao" Required="true" RequiredError="A descrição é obrigatória." />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField Label="Endereço da Foto" @bind-Value="novoAnunciante.EnderecoFoto"/>
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField Label="Endereço" @bind-Value="novoAnunciante.Endereco" Required="true" RequiredError="O endereço é obrigatório." />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudNumericField Label="Número de Contato" @bind-Value="novoAnunciante.Numero" Required="true" RequiredError="O número de contato é obrigatório." />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField Label="Instagram" @bind-Value="novoAnunciante.Instagram" />
+                        </MudItem>
+                        <MudItem xs="6" md="3">
+                            <MudSelect  @bind-Value="Categoria" Label="Categoria" AdornmentColor="Color.Inherit" Variant="Variant.Outlined">
+                                @foreach (EnumCategorias item in Enum.GetValues(typeof(EnumCategorias)))
+                                {
+                                    <MudSelectItem Value="@item">@item.GetDescription()</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudButton OnClick="Cadastrar" Color="Color.Primary">Cadastrar</MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </MudForm>
 
-<MudContainer>
-    <MudCard Class="p-4">
-        <MudCardHeader>
-            <MudText Typo="Typo.h5">Cadastro de Anunciante</MudText>
-        </MudCardHeader>
-        <MudCardContent>
-            <MudForm Model="@novoAnunciante" >
-                <MudGrid Spacing="3">
-                    <MudItem xs="12" md="6">
-                        <MudTextField Label="Nome" @bind-Value="novoAnunciante.Nome" Required="true" RequiredError="O nome é obrigatório." />
-                    </MudItem>
-                    <MudItem xs="12" md="6">
-                        <MudTextField Label="Título" @bind-Value="novoAnunciante.Titulo" Required="true" RequiredError="O título é obrigatório." />
-                    </MudItem>
-                    <MudItem xs="12" md="6">
-                        <MudTextField Label="Descrição" @bind-Value="novoAnunciante.Descricao" Required="true" RequiredError="A descrição é obrigatória." />
-                    </MudItem>
-                    <MudItem xs="12" md="6">
-                        <MudTextField Label="Endereço da Foto" @bind-Value="novoAnunciante.EnderecoFoto"/>
-                    </MudItem>
-                    <MudItem xs="12" md="6">
-                        <MudTextField Label="Endereço" @bind-Value="novoAnunciante.Endereco" Required="true" RequiredError="O endereço é obrigatório." />
-                    </MudItem>
-                    <MudItem xs="12" md="6">
-                        <MudNumericField Label="Número de Contato" @bind-Value="novoAnunciante.Numero" Required="true" RequiredError="O número de contato é obrigatório." />
-                    </MudItem>
-                    <MudItem xs="12" md="6">
-                        <MudTextField Label="Instagram" @bind-Value="novoAnunciante.Instagram" />
-                    </MudItem>
-                    <MudItem xs="6" md="3">
-                        <MudSelect  @bind-Value="Categoria" Label="Categoria" AdornmentColor="Color.Inherit" Variant="Variant.Outlined">
-                            @foreach (EnumCategorias item in Enum.GetValues(typeof(EnumCategorias)))
-                            {
-                                <MudSelectItem Value="@item">@item.GetDescription()</MudSelectItem>
-                            }
-                        </MudSelect>
-                    </MudItem>
-                    <MudItem xs="12">
-                        <MudButton OnClick="Cadastrar" Color="Color.Primary">Cadastrar</MudButton>
-                    </MudItem>
-                </MudGrid>
-            </MudForm>
-
-            @if (!string.IsNullOrEmpty(mensagem))
-            {
-                <MudAlert Severity="Severity.Success" Dense="true" Class="mt-2">@mensagem</MudAlert>
-            }
-        </MudCardContent>
-    </MudCard>
-</MudContainer>
+                @if (!string.IsNullOrEmpty(mensagem))
+                {
+                    <MudAlert Severity="Severity.Success" Dense="true" Class="mt-2">@mensagem</MudAlert>
+                }
+            </MudCardContent>
+        </MudCard>
+    </MudContainer>
+}
+else
+{
+    <MudAlert Severity="Severity.Warning">Faça login para acessar esta página.</MudAlert>
+}
 
 @code {
+    private bool usuarioAutenticado = false;
+
     private Anunciante novoAnunciante = new Anunciante();
     private EnumCategorias Categoria { get; set; } = EnumCategorias.Selecionar;
 
@@ -101,7 +109,18 @@
         mensagem = "Anunciante cadastrado com sucesso!";
         novoAnunciante = new Anunciante(); // Limpa o formulário
     }
+   
+    protected override async Task OnInitializedAsync()
+    {
+        usuarioAutenticado = await FirestoreService.Login("teste@email.com", "senha");
+    }
 
+    private async Task Logout()
+    {
+        await FirestoreService.Logout();
+        usuarioAutenticado = false;
+    }
+   
     public class AnuncianteModel
     {
         public string Nome { get; set; } = "";

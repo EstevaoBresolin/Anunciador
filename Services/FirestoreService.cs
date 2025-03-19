@@ -9,12 +9,21 @@ namespace AnunciadorV1.Services
     public class FirestoreService
     {
         private readonly IJSRuntime _jsRuntime;
+        private bool _isAuthenticated = false;
+        public string NomeUsuario = "";
+        public bool IsAuthenticated => _isAuthenticated;
+
+        public event Action? OnAuthStateChanged;
 
         public FirestoreService(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
         }
-
+        public void SetAuthenticated(bool isAuthenticated)
+        {
+            _isAuthenticated = isAuthenticated;
+            OnAuthStateChanged?.Invoke();
+        }
         public async Task AddAnunciante(object anunciante)
         {
             var firebaseConfig = new
@@ -67,6 +76,40 @@ namespace AnunciadorV1.Services
             };
 
             return anunciante;
+        }
+
+        public async Task<bool> Login(string email, string senha)
+        {
+            var user = await _jsRuntime.InvokeAsync<object>("firebaseService.login", email, senha);
+            if(user != null)
+            {
+                NomeUsuario = email.Split('@')[0];
+            }
+            return user != null;
+        }
+
+        public async Task Logout()
+        {
+            await _jsRuntime.InvokeVoidAsync("firebaseService.logout");
+        }
+
+        public async Task Registrar(string email, string senha)
+        {
+            await _jsRuntime.InvokeVoidAsync("firebaseService.registerUser", email, senha);
+        }
+
+        public async Task<bool> RecuperarSenha(string email)
+        {
+            try
+            {
+                await _jsRuntime.InvokeVoidAsync("firebaseService.recuperarSenha", email);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao enviar e-mail de redefinição: {ex.Message}");
+                return false;
+            }
         }
     }
 }
