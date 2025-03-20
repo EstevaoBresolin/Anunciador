@@ -17,7 +17,7 @@
 
     <!-- Menu de Navegação -->
     <MudPaper Class="mud-background-secondary menu-bar">
-        <div style="display: flex;justify-content: space-between;align-items: center;background: royalblue;position: absolute;width: 100vw;">
+        <div style="display: flex;justify-content: space-between;align-items: center;background: royalblue;position: absolute;width: 100%; z-index: 2;">
             <MudIconButton OnClick="OpenMenu" Icon="@Icons.Material.Filled.Menu" Color="Color.Default" style="color: white !important;" />
             <MudLink Href="@navigation.BaseUri" style="font-size: 1rem; color: white !important;">Conecte Membros</MudLink>
             @if (!String.IsNullOrEmpty(FirestoreService.NomeUsuario)){
@@ -61,7 +61,7 @@
     </MudPaper>
 
     <main style="padding-top: 3rem;">
-        <article class="@(navigation.Uri.Contains("login") ? "" : navigation.Uri.Contains("registrar") ? "" : navigation.Uri.Contains("esqueceuSenha") ? "" : "content px-4")">
+        <article class="@(navigation.Uri.Contains("login") ? "login" : navigation.Uri.Contains("registrar") ? "login" : navigation.Uri.Contains("esqueceuSenha") ? "login" : "content px-4")">
             @Body
         </article>
     </main>
@@ -146,15 +146,20 @@
 <style>
 
     .menu{
-        width: 100% !important;
+        position: absolute;
+        background: white;
+        z-index: 1;
+
         @@media(max-width: 700px) {
             flex-direction: column;
+            width: 85% !important;
         }
     }
 
     .menu-itens {
         margin-top: 3rem;
-
+        background: #7698ff;
+        
         @@media(max-width: 700px) {
             flex-direction: column;
             padding-bottom: 2rem;
@@ -172,7 +177,7 @@
         margin-bottom: 1rem;
         position: fixed;
         margin-left: -16px;
-
+        color: #fff;
         @@media(min-width: 700px) {
             display: none;   
         }
@@ -187,7 +192,7 @@
         border-bottom: 1px solid #ddd;
 
         @@media(max-width: 700px) {
-            width: 85%;
+            /* width: 85%; */
             position: fixed;
         }
 
@@ -201,7 +206,7 @@
     }
 
     .menu-item {
-        color: #494949 !important;
+        color: #ffffff !important;
         text-decoration: none;
         font-weight: bold;
         padding: 1rem;
@@ -210,14 +215,14 @@
         gap: 5px;
 
         @@media(max-width: 700px) {
-            border-bottom: 0.5px solid #d7d7d7;
+            border-bottom: 0.5px solid #fff;
             width: 100%;
         }
     }
 
         .menu-item:hover {
             cursor: pointer;
-            background: aliceblue;
+            background: #6f90f1;
         }
     /* //// MENU ////// */
 
@@ -260,6 +265,12 @@
             width: 100%;
             flex-direction: column;
         }
+    }
+
+    main .login {
+        margin-top: -2px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 </style>
 

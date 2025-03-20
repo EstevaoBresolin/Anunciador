@@ -11,7 +11,7 @@
 }
 else
 {
-    <MudContainer Class="d-flex align-center">
+    <MudContainer Class="d-flex align-center barra-pesquisa">
         <MudTextField @bind-Value="@searchText" Placeholder="Buscar..." Style="padding: 7px 0;"
         Adornment="Adornment.Start"
         Class="mud-elevation-2 mud-rounded" />
@@ -94,3 +94,11 @@ else
     }
 
 }
+
+<style>
+    .barra-pesquisa{
+        @@media(min-width: 700px) {
+            margin-top: 3rem;
+        }
+    }
+</style>
