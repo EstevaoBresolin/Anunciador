@@ -12,7 +12,7 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
-
+<NavigationLock OnBeforeInternalNavigation="TrocarUrl" />
 <div class="main">
 
     <!-- Menu de Navegação -->
@@ -29,35 +29,38 @@
 
 
         </div>
-        <MudContainer Style="padding-left: 0 !important; padding-right: 0 !important;" Class="menu d-flex justify-space-between align-center px-4">
-            <!-- Ícone de Menu -->
+                <!-- Ícone de Menu -->
+                <!-- Links de Navegação -->
+                @if (collapseNavMenu)
+                {
+                <div class="menu-container" @onclick="() => CloseMenu()">
+                    <MudContainer Style="padding-left: 0 !important; padding-right: 0 !important;" Class="menu d-flex justify-space-between align-center px-4">
 
-            <!-- Links de Navegação -->
-            @if (collapseNavMenu){
+                    <MudContainer Class="d-flex justify-center align-center menu-itens">
+                        <MudLink Href="@navigation.BaseUri" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AutoAwesomeMosaic" Title="Favorite" /> Todos os Departamentos</MudLink>
+                        <MudLink Href="saudeEBeleza" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AccessibilityNew" Title="Favorite" /> Saúde e Beleza</MudLink>
+                        <MudLink Href="construcao" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção</MudLink>
+                        <MudLink Href="financeiro" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Financeiro</MudLink>
+                        <MudLink Href="consultoria" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Assessment" Title="Favorite" />Consultoria</MudLink>
+                        <MudLink Href="alimentacao" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Fastfood" Title="Favorite" />Alimentação</MudLink>
+                        <MudLink Href="informatica" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Computer" Title="Favorite" />Informática</MudLink>
+                        @if (FirestoreService.IsAuthenticated)
+                        {
+                            <MudLink Href="cadastrarAnunciante" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Cadastrar Anunciante</MudLink>
+                        }
 
-                <MudContainer Class="d-flex justify-center align-center menu-itens">
-                    <MudLink Href="@navigation.BaseUri" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AutoAwesomeMosaic" Title="Favorite" /> Todos os Departamentos</MudLink>
-                    <MudLink Href="saudeEBeleza" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AccessibilityNew" Title="Favorite" /> Saúde e Beleza</MudLink>
-                    <MudLink Href="construcao" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção</MudLink>
-                    <MudLink Href="financeiro" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Financeiro</MudLink>
-                    <MudLink Href="consultoria" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.Assessment" Title="Favorite" />Consultoria</MudLink>
-                    <MudLink Href="alimentacao" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.Fastfood" Title="Favorite" />Alimentação</MudLink>
-                    <MudLink Href="informatica" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.Computer" Title="Favorite" />Informática</MudLink>
-                    @if (FirestoreService.IsAuthenticated)
-                    {
-                        <MudLink Href="cadastrarAnunciante" Class="menu-item" OnClick="CloseMenu"><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Cadastrar Anunciante</MudLink>
-                    }
+                        <div class="infos">
+                            <p>Conecte Membros</p>
+                            <p>Versão 1.0.0</p>
+                        </div>
 
-                    <div class="infos">
-                        <p>Conecte Membros</p>
-                        <p>Versão 1.0.0</p>
-                    </div>
+                    </MudContainer>
 
-                </MudContainer>
+            </MudContainer>
+        </div>
+                }
 
-            }
-
-        </MudContainer>
+       
     </MudPaper>
 
     <main style="padding-top: 3rem;">
@@ -106,6 +109,12 @@
         FirestoreService.SetAuthenticated(false);
         FirestoreService.NomeUsuario = "";
         navigation.NavigateTo("/", forceLoad: true);
+    }
+
+    private async Task TrocarUrl(LocationChangingContext context)
+    {
+        collapseNavMenu = false;
+        StateHasChanged();
     }
 
     private void OpenMenu()
@@ -167,23 +176,41 @@
             z-index: 3;
             justify-content: start !important;
             align-items: flex-start !important;
+            margin-top: 0;
+        }
+
+        @@media(max-width: 1200px){
+            padding-left: 0 !important;
+            padding-right: 0 !important;
         }
     }
 
-    .infos{
-        width: 85%;
-        text-align: center;
-        bottom: 50px;
-        margin-bottom: 1rem;
-        position: fixed;
-        margin-left: -16px;
-        color: #fff;
-        @@media(min-width: 700px) {
-            display: none;   
+    .menu-item {
+        color: #ffffff !important;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 1rem;
+        width: fit-content;
+        display: flex;
+        gap: 5px;
+
+        @@media(max-width: 700px) {
+            border-bottom: 0.5px solid #fff;
+            width: 100%;
+        }
+
+        @@media(max-width: 1200px) {
+            gap: 2px;
+            padding: 0.8rem;
         }
     }
 
+    .menu-item:hover {
+        cursor: pointer;
+        background: #6f90f1;
+    }
     /* //// MENU ////// */
+
     .menu-bar {
         width: 100%;
         position: sticky;
@@ -205,26 +232,31 @@
         }
     }
 
-    .menu-item {
-        color: #ffffff !important;
-        text-decoration: none;
-        font-weight: bold;
-        padding: 1rem;
-        width: fit-content;
-        display: flex;
-        gap: 5px;
-
+    .menu-container{
         @@media(max-width: 700px) {
-            border-bottom: 0.5px solid #fff;
+            height: 100vh;
             width: 100%;
+            position: absolute;
+            margin-top: 3rem;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.3); /* Leve escurecimento */
         }
+            
     }
 
-        .menu-item:hover {
-            cursor: pointer;
-            background: #6f90f1;
+    .infos {
+        width: 85%;
+        text-align: center;
+        bottom: 50px;
+        margin-bottom: 1rem;
+        position: fixed;
+        margin-left: -16px;
+        color: #fff;
+
+        @@media(min-width: 700px) {
+            display: none;
         }
-    /* //// MENU ////// */
+    }
 
     .card {
         font-family: Arial, sans-serif;
@@ -272,6 +304,7 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
+
 </style>
 
 
