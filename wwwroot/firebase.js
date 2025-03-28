@@ -81,7 +81,7 @@ window.firebaseService = {
 
     recuperarSenha: async function (email) {
         try {
-            await this.auth.sendPasswordResetEmail(email);
+            await sendPasswordResetEmail(this.auth, email);
             console.log("E-mail de redefinição enviado.");
         } catch (error) {
             console.error("Erro ao enviar e-mail de redefinição:", error);
