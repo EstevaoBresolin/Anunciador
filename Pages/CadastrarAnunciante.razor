@@ -6,8 +6,8 @@
 
 @using AnunciadorV1.Models
 @using AnunciadorV1.Services
-@if(usuarioAutenticado)
-{
+@* @if (!FirestoreService.IsAuthenticated)
+{ *@
     <MudContainer>
         <MudCard Class="p-4">
             <MudCardHeader>
@@ -58,11 +58,12 @@
             </MudCardContent>
         </MudCard>
     </MudContainer>
-}
+@* }
 else
 {
+
     <MudAlert Severity="Severity.Warning">Faça login para acessar esta página.</MudAlert>
-}
+} *@
 
 @code {
     private bool usuarioAutenticado = false;
