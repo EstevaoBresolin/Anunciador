@@ -1,23 +1,34 @@
 ﻿using AnunciadorV1.Models;
 using Microsoft.JSInterop;
-using System.Collections.Generic;
-using System.Reflection.Metadata;
-using System.Threading.Tasks;
 
 namespace AnunciadorV1.Services
 {
     public class FirestoreService
     {
         private readonly IJSRuntime _jsRuntime;
+        private DotNetObjectReference<FirestoreService>? _dotNetRef;
         private bool _isAuthenticated = false;
         public string NomeUsuario = "";
-        public bool IsAuthenticated => _isAuthenticated;
+        public bool IsAuthenticated
+        {
+            get => _isAuthenticated;
+            set
+            {
+                if (_isAuthenticated != value)
+                {
+                    _isAuthenticated = value;
+                    OnAuthStateChanged?.Invoke();
+                }
+            }
+        }
 
         public event Action? OnAuthStateChanged;
 
         public FirestoreService(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
+            _dotNetRef = DotNetObjectReference.Create(this);
+            _jsRuntime.InvokeVoidAsync("firebaseService.setDotnetHelper", _dotNetRef);
         }
         public void SetAuthenticated(bool isAuthenticated)
         {
@@ -84,6 +95,8 @@ namespace AnunciadorV1.Services
             if(user != null)
             {
                 NomeUsuario = email.Split('@')[0];
+                _isAuthenticated = true;
+                OnAuthStateChanged?.Invoke();
             }
             return user != null;
         }
@@ -91,6 +104,8 @@ namespace AnunciadorV1.Services
         public async Task Logout()
         {
             await _jsRuntime.InvokeVoidAsync("firebaseService.logout");
+            _isAuthenticated = false;
+            OnAuthStateChanged?.Invoke();
         }
 
         public async Task Registrar(string email, string senha)
@@ -111,5 +126,34 @@ namespace AnunciadorV1.Services
                 return false;
             }
         }
+
+        [JSInvokable]
+        public void SetUserLogged(string email)
+        {
+            _isAuthenticated = true;
+            NomeUsuario = email.Split('@')[0];
+            OnAuthStateChanged?.Invoke();
+        }
+
+
+        public async Task InicializarAsync()
+        {
+            _dotNetRef ??= DotNetObjectReference.Create(this);
+
+            // Firebase config aqui dentro
+            var firebaseConfig = new
+            {
+                apiKey = "AIzaSyC4yQ7qg9u8y7h9wh7y0GZygKdMgaoGDE8",
+                authDomain = "conectemembros.firebaseapp.com",
+                projectId = "conectemembros",
+                storageBucket = "conectemembros.firebasestorage.app",
+                messagingSenderId = "882219848815",
+                appId = "1:882219848815:web:f04520e555863ccf2d699a"
+            };
+
+            await _jsRuntime.InvokeVoidAsync("firebaseService.setDotnetHelper", _dotNetRef);
+            await _jsRuntime.InvokeVoidAsync("firebaseService.initializeApp", firebaseConfig);
+        }
+
     }
 }

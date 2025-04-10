@@ -35,6 +35,10 @@
 
     private async Task Cadastrar()
     {
+        if(novoUsuario.Senha.Count() < 8){
+            Snackbar.Add("A senha deve conter no mínimo 8 caracteres", Severity.Error);
+            return;
+        }
         if (string.IsNullOrEmpty(novoUsuario.Nome) || string.IsNullOrEmpty(novoUsuario.Email) || string.IsNullOrEmpty(novoUsuario.Senha) || string.IsNullOrEmpty(confirmarSenha))
         {
             Snackbar.Add("Preencha todos os campos", Severity.Error);

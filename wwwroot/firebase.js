@@ -1,18 +1,31 @@
 ﻿// Importar os módulos necessários do Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail , signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { getAuth, setPersistence, browserLocalPersistence, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 // Inicializar o Firebase com a configuração fornecida
 window.firebaseService = {
     app: null,
     db: null,
     auth: null,
+    dotnetHelper: null,
 
     initializeApp: function (config) {
         this.app = initializeApp(config);  // Inicializa o Firebase com a configuração
         this.db = getFirestore(this.app);  // Obtém a instância do Firestore
         this.auth = getAuth(this.app); // Obtém a instância de autenticação
+
+        // Verifica se há usuário logado ao carregar o app
+        onAuthStateChanged(this.auth, (user) => {
+            if (user && this.dotnetHelper) {
+                this.dotnetHelper.invokeMethodAsync("SetUserLogged", user.email);
+            }
+        });
+
         return this.db;  // Retorna a instância do Firestore
+    },
+
+    setDotnetHelper: function (helper) {
+        this.dotnetHelper = helper;
     },
 
     getAnunciantes: async function (db) {
@@ -50,8 +63,8 @@ window.firebaseService = {
 
     registerUser: async function (email, password) {
         try {
+            await setPersistence(this.auth, browserLocalPersistence);
             const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
-            console.log("Usuário cadastrado:", userCredential.user);
             return userCredential.user;
         } catch (error) {
             console.error("Erro ao cadastrar usuário:", error.message);
@@ -60,10 +73,8 @@ window.firebaseService = {
     },
 
     login: async function (email, password) {
-        if (!this.auth) {
-            throw new Error('Auth não foi inicializado corretamente');
-        }
         try {
+            await setPersistence(this.auth, browserLocalPersistence);
             const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
             return userCredential.user;
         } catch (error) {

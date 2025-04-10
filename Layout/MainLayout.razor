@@ -4,6 +4,7 @@
 @using System.Text.Json
 @using System.Globalization
 @using AnunciadorV1.Services
+@implements IDisposable
 @inject NavigationManager navigation
 @inject FirestoreService FirestoreService
 
@@ -20,8 +21,9 @@
         <div style="display: flex;justify-content: space-between;align-items: center;background: royalblue;position: absolute;width: 100%; z-index: 2;">
             <MudIconButton OnClick="OpenMenu" Icon="@Icons.Material.Filled.Menu" Color="Color.Default" style="color: white !important;" />
             <MudLink Href="@navigation.BaseUri" style="font-size: 1rem; color: white !important;">Conecte Membros</MudLink>
-            @if (!String.IsNullOrEmpty(FirestoreService.NomeUsuario)){
-                <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Default" OnClick="Logout" />
+            @if (FirestoreService.IsAuthenticated)
+            {
+                <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.Logout" Color="Color.Default" OnClick="Logout" />
             }
             else{
                 <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Default" OnClick="Logar" />
@@ -29,12 +31,12 @@
 
 
         </div>
-                <!-- Ícone de Menu -->
-                <!-- Links de Navegação -->
-                @if (collapseNavMenu)
-                {
-                <div class="menu-container" @onclick="() => CloseMenu()">
-                    <MudContainer Style="padding-left: 0 !important; padding-right: 0 !important;" Class="menu d-flex justify-space-between align-center px-4">
+        <!-- Ícone de Menu -->
+        <!-- Links de Navegação -->
+        @if (collapseNavMenu)
+        {
+            <div class="menu-container" @onclick="() => CloseMenu()">
+                <MudContainer Style="padding-left: 0 !important; padding-right: 0 !important;" Class="menu d-flex justify-space-between align-center px-4">
 
                     <MudContainer Class="d-flex justify-center align-center menu-itens">
                         <MudLink Href="@navigation.BaseUri" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AutoAwesomeMosaic" Title="Favorite" /> Todos os Departamentos</MudLink>
@@ -50,17 +52,24 @@
                         }
 
                         <div class="infos">
+                          @*   @if (!String.IsNullOrEmpty(FirestoreService.NomeUsuario))
+                            {
+                                <MudText Style="color: white; margin-right: 0.5rem;">Olá @FirestoreService.NomeUsuario</MudText>
+
+                                <p>Sair <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.Logout" Color="Color.Default" OnClick="Logout" /> </p>
+
+                            } *@
                             <p>Conecte Membros</p>
                             <p>Versão 1.0.0</p>
                         </div>
 
                     </MudContainer>
+                  
+                </MudContainer>
+            </div>
+        }
 
-            </MudContainer>
-        </div>
-                }
 
-       
     </MudPaper>
 
     <main style="padding-top: 3rem;">
@@ -108,6 +117,7 @@
     {
         FirestoreService.SetAuthenticated(false);
         FirestoreService.NomeUsuario = "";
+        FirestoreService.Logout();
         navigation.NavigateTo("/", forceLoad: true);
     }
 
@@ -149,6 +159,20 @@
         }
     }
 
+    protected override async Task OnInitializedAsync()
+    {
+        await FirestoreService.InicializarAsync();
+    }
+
+    protected override void OnInitialized()
+    {
+        FirestoreService.OnAuthStateChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        FirestoreService.OnAuthStateChanged -= StateHasChanged;
+    }
 }
 
 
