@@ -1,9 +1,9 @@
 {
   "mainAssemblyName": "AnunciadorV1",
   "resources": {
-    "hash": "sha256-3kDF3STGn53kow+bzV+x5fVn53Fia8apWJEG5RTcK7o=",
+    "hash": "sha256-21MT6ipL/z7h4EKQtMvfBAEj3wZmWCNnVuV3f4TI4IQ=",
     "fingerprinting": {
-      "AnunciadorV1.kvfj7f9i21.wasm": "AnunciadorV1.wasm",
+      "AnunciadorV1.13qburk69k.wasm": "AnunciadorV1.wasm",
       "Microsoft.AspNetCore.Components.Forms.p4cmqynr10.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
       "Microsoft.AspNetCore.Components.wgzzvdufst.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.t9gvcwb1a5.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
@@ -73,7 +73,7 @@
       "System.Runtime.InteropServices.JavaScript.h0o384gvzn.wasm": "sha256-rwtckCDh2hrAqX7g10ShSPlmBHiMU4i3ALHrPCgasio="
     },
     "assembly": {
-      "AnunciadorV1.kvfj7f9i21.wasm": "sha256-IOquIL2WA1QQ5ChYUBmueJNfMUeHkV3MqlfNDjw7NtA=",
+      "AnunciadorV1.13qburk69k.wasm": "sha256-M70LrwbgtZqnMmCjhlgWrzP5vffK9F1TcfrlICJiG5o=",
       "Microsoft.AspNetCore.Components.Forms.p4cmqynr10.wasm": "sha256-6TjAnwK83qx2u7jJRERCUpe4alFqntX4/M0Mk/AXYRA=",
       "Microsoft.AspNetCore.Components.wgzzvdufst.wasm": "sha256-UBFYLOk/2kkdAdC+SoEZNlGkzOjvDSoX1EU3EBlEFLk=",
       "Microsoft.AspNetCore.Components.Web.t9gvcwb1a5.wasm": "sha256-359/0cPUCseKVWbwcSRtdwuuJ4bCYL8gP35yCzeSWHc=",
