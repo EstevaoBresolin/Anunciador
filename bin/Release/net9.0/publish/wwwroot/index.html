@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnunciadorV1</title>
+    <!--<base href="https://conecte-3l3kqjooh-estevaobresolins-projects.vercel.app/" />-->
+    <!--<base href="https://conecte-3l3kqjooh-estevaobresolins-projects.vercel.app/Anunciador" />-->
+    <!--<base href="https://conecte-fe-git-main-estevaobresolins-projects.vercel.app/" />-->
+    <base href="https://conecte-fe-git-main-estevaobresolins-projects.vercel.app/Anunciador" />
+    <!--<base href="/Anunciador/" />-->
+    <!--<base href="https://EstevaoBresolin.github.io/Anunciador/" />-->
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="AnunciadorV1.styles.css" rel="stylesheet" />
+    <link href="manifest.webmanifest" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        Ocorreu um erro, por favor atualize a página.
+        <a href="." class="reload">Recarregar</a>
+        <span class="dismiss">🗙</span>
+    </div>
+    <script type="module" src="firebase.js"></script>
+
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    <script src="_framework/blazor.webassembly.js?v=@DateTime.UtcNow.Ticks"></script>
+
+    <script>navigator.serviceWorker.register('service-worker.js')</script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+        // Your web app's Firebase configuration
+
+        import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+        const firebaseConfig = {
+        apiKey: "AIzaSyC4yQ7qg9u8y7h9wh7y0GZygKdMgaoGDE8",
+        authDomain: "conectemembros.firebaseapp.com",
+        projectId: "conectemembros",
+        storageBucket: "conectemembros.firebasestorage.app",
+        messagingSenderId: "882219848815",
+        appId: "1:882219848815:web:f04520e555863ccf2d699a"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+    </script>
+</body>
+
+</html>

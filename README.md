@@ -34,8 +34,12 @@ Anunciantes como **dentistas, barbeiros e consultores financeiros** podem divulg
 <base href="/" />
 <base href="https://EstevaoBresolin.github.io/Anunciador/" />
 
--------- Publicar manualmente na pasta docs --------
+-------- Publicar manualmente na vercel --------
 
+dotnet publish -c Release
+
+
+-------- Publicar manualmente na pasta docs --------
 
 
 dotnet publish -c:Release -o docs --nologo
