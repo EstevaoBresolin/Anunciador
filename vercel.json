@@ -4,7 +4,9 @@
     {
       "src": "vercel-build.sh",
       "use": "@vercel/static-build",
-      "config": { "distDir": "wwwroot" }
+      "config": {
+        "distDir": "wwwroot"
+      }
     }
   ],
   "routes": [

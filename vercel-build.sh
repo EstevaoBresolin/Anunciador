@@ -1,10 +1,11 @@
 ﻿#!/bin/bash
 
-echo "⚙️ Iniciando build Blazor WASM..."
-
+# Instala ferramentas se necessário
 dotnet workload install wasm-tools
+
+# Restaura pacotes e publica o app Blazor
 dotnet restore
 dotnet publish -c Release -o output
 
-# Copia o wwwroot para a pasta raiz do deploy
-cp -r output/wwwroot/ wwwroot
+# Copia os arquivos publicados para a pasta esperada pela Vercel
+cp -r output/wwwroot ./wwwroot
