@@ -1,5 +1,7 @@
 ﻿using AnunciadorV1.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Text.Json;
 
 namespace AnunciadorV1.Services
 {
@@ -135,7 +137,6 @@ namespace AnunciadorV1.Services
             OnAuthStateChanged?.Invoke();
         }
 
-
         public async Task InicializarAsync()
         {
             _dotNetRef ??= DotNetObjectReference.Create(this);
@@ -155,5 +156,13 @@ namespace AnunciadorV1.Services
             await _jsRuntime.InvokeVoidAsync("firebaseService.initializeApp", firebaseConfig);
         }
 
+        public async Task<string> UploadImagemFromInput(ElementReference inputRef, string path)
+        {
+            return await _jsRuntime.InvokeAsync<string>("firebaseService.uploadImageFromInput", inputRef, path);
+        }
+        public async Task<string> GetCurrentUserId()
+        {
+            return await _jsRuntime.InvokeAsync<string>("firebaseService.getCurrentUserId");
+        }
     }
 }

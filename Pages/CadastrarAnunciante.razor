@@ -6,58 +6,87 @@
 
 @using AnunciadorV1.Models
 @using AnunciadorV1.Services
-@* @if (!FirestoreService.IsAuthenticated)
-{ *@
-    <MudContainer>
-        <MudCard Class="p-4">
-            <MudCardHeader>
-                <MudText Typo="Typo.h5">Cadastro de Anunciante</MudText>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudForm Model="@novoAnunciante" >
-                    <MudGrid Spacing="3">
-                        <MudItem xs="12" md="6">
-                            <MudTextField Label="Nome" @bind-Value="novoAnunciante.Nome" Required="true" RequiredError="O nome é obrigatório." />
-                        </MudItem>
-                        <MudItem xs="12" md="6">
-                            <MudTextField Label="Título" @bind-Value="novoAnunciante.Titulo" Required="true" RequiredError="O título é obrigatório." />
-                        </MudItem>
-                        <MudItem xs="12" md="6">
-                            <MudTextField Label="Descrição" @bind-Value="novoAnunciante.Descricao" Required="true" RequiredError="A descrição é obrigatória." />
-                        </MudItem>
-                        <MudItem xs="12" md="6">
-                            <MudTextField Label="Endereço da Foto" @bind-Value="novoAnunciante.EnderecoFoto"/>
-                        </MudItem>
-                        <MudItem xs="12" md="6">
-                            <MudTextField Label="Endereço" @bind-Value="novoAnunciante.Endereco" Required="true" RequiredError="O endereço é obrigatório." />
-                        </MudItem>
-                        <MudItem xs="12" md="6">
-                            <MudNumericField Label="Número de Contato" @bind-Value="novoAnunciante.Numero" Required="true" RequiredError="O número de contato é obrigatório." />
-                        </MudItem>
-                        <MudItem xs="12" md="6">
-                            <MudTextField Label="Instagram" @bind-Value="novoAnunciante.Instagram" />
-                        </MudItem>
-                        <MudItem xs="6" md="3">
-                            <MudSelect  @bind-Value="Categoria" Label="Categoria" AdornmentColor="Color.Inherit" Variant="Variant.Outlined">
-                                @foreach (EnumCategorias item in Enum.GetValues(typeof(EnumCategorias)))
-                                {
-                                    <MudSelectItem Value="@item">@item.GetDescription()</MudSelectItem>
-                                }
-                            </MudSelect>
-                        </MudItem>
-                        <MudItem xs="12">
-                            <MudButton OnClick="Cadastrar" Color="Color.Primary">Cadastrar</MudButton>
-                        </MudItem>
-                    </MudGrid>
-                </MudForm>
 
-                @if (!string.IsNullOrEmpty(mensagem))
-                {
-                    <MudAlert Severity="Severity.Success" Dense="true" Class="mt-2">@mensagem</MudAlert>
-                }
-            </MudCardContent>
-        </MudCard>
-    </MudContainer>
+<MudContainer>
+    <MudCard Class="p-4">
+        <MudCardHeader>
+            <MudText Typo="Typo.h5">Cadastro de Anunciante</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudForm Model="@novoAnunciante" >
+                <MudGrid Spacing="3">
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Nome" @bind-Value="novoAnunciante.Nome" MaxLength="50" Required="true" RequiredError="O nome é obrigatório." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Título" @bind-Value="novoAnunciante.Titulo" MaxLength="50" Required="true" RequiredError="O título é obrigatório." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Descrição" @bind-Value="novoAnunciante.Descricao" MaxLength="100" Required="true" RequiredError="A descrição é obrigatória." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Endereço" @bind-Value="novoAnunciante.Endereco" MaxLength="200" Required="true" RequiredError="O endereço é obrigatório." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudNumericField Label="Número de Contato" @bind-Value="novoAnunciante.Numero" Required="true" RequiredError="O número de contato é obrigatório." />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Label="Instagram" @bind-Value="novoAnunciante.Instagram" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect  @bind-Value="Categoria" Label="Categoria" AdornmentColor="Color.Inherit" Variant="Variant.Outlined">
+                            @foreach (EnumCategorias item in Enum.GetValues(typeof(EnumCategorias)))
+                            {
+                                <MudSelectItem Value="@item">@item.GetDescription()</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    @if (!String.IsNullOrEmpty(novoAnunciante.Nome)){
+                        <input style=" margin-top: 30px; margin-left: 10px;" type="file" @ref="inputFileRef" @onchange="HandleFileSelected" />
+                    }
+
+                    @if (!String.IsNullOrEmpty(novoAnunciante.EnderecoFoto))
+                    {
+                        <MudItem xs="12">
+                            <img src="@novoAnunciante.EnderecoFoto" alt="Pré-visualização da imagem" style="max-width: 100%; height: auto;" />
+                        </MudItem>
+                    }
+                    <MudItem xs="12">
+                        <MudButton OnClick="Cadastrar" Color="Color.Primary">Cadastrar</MudButton>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+
+            @if (!string.IsNullOrEmpty(mensagem))
+            {
+                <MudAlert Severity="Severity.Success" Dense="true" Class="mt-2">@mensagem</MudAlert>
+            }
+        </MudCardContent>
+    </MudCard>
+</MudContainer>
+
+<MudContainer>
+    <MudText Typo="Typo.h5">Meus Anúncios</MudText>
+
+    @if (anunciantes is null)
+    {
+        <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+    }
+    else if (!anunciantes.Any())
+    {
+        <MudText>Nenhum anúncio encontrado.</MudText>
+    }
+    else
+    {
+        @foreach (var a in anunciantes)
+        {
+            <MudPaper Class="p-3 mb-2">
+                <MudText Typo="Typo.h6">@a.Titulo</MudText>
+                <MudText>@a.Descricao</MudText>
+            </MudPaper>
+        }
+    }
+</MudContainer>
 @* }
 else
 {
@@ -66,6 +95,23 @@ else
 } *@
 
 @code {
+    private ElementReference inputFileRef;
+    private ElementReference inputFileRefe;
+
+    private List<Anunciante>? anunciantes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // anunciantes = await FirestoreService.GetAnunciantesDoUsuario();
+    }
+
+    private async Task HandleFileSelected(ChangeEventArgs e)
+    {
+        string nomeArquivo = $"anunciantes/{novoAnunciante.Nome}{Guid.NewGuid()}.jpg";
+        novoAnunciante.EnderecoFoto = await FirestoreService.UploadImagemFromInput(inputFileRef, nomeArquivo);
+        StateHasChanged(); // força renderização para mostrar a imagem
+    }
+
     private bool usuarioAutenticado = false;
 
     private Anunciante novoAnunciante = new Anunciante();
@@ -76,7 +122,6 @@ else
 
     private async Task Cadastrar()
     {
-
         if (String.IsNullOrEmpty(novoAnunciante.Nome)){
             Snackbar.Add("Por Favor, preencha o Nome", Severity.Error, c => c.HideIcon = true);
             return;
@@ -105,15 +150,22 @@ else
             Snackbar.Add("Por Favor, Selecione uma categoria", Severity.Error, c => c.HideIcon = true);
             return;
         }
+        if (string.IsNullOrEmpty(novoAnunciante.EnderecoFoto))
+        {
+            Snackbar.Add("Por Favor, Adicione uma foto", Severity.Error, c => c.HideIcon = true);
+            return;
+        }
+        // string nomeArquivo = $"anunciantes/{novoAnunciante.Nome}{Guid.NewGuid()}.jpg";
+        // novoAnunciante.EnderecoFoto = await FirestoreService.UploadImagemFromInput(inputFileRef, nomeArquivo);
         novoAnunciante.Categoria = (int)Categoria;
+        novoAnunciante.UidUsuario = await FirestoreService.GetCurrentUserId();
+        // novoAnunciante.EnderecoFoto = url;
         await FirestoreService.AddAnunciante(novoAnunciante);
+
         mensagem = "Anunciante cadastrado com sucesso!";
         novoAnunciante = new Anunciante(); // Limpa o formulário
-    }
-   
-    protected override async Task OnInitializedAsync()
-    {
-        usuarioAutenticado = await FirestoreService.Login("teste@email.com", "senha");
+        inputFileRef = inputFileRefe;
+        Categoria = 0;
     }
 
     private async Task Logout()

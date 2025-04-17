@@ -16,8 +16,8 @@ namespace AnunciadorV1.Models
         [Description("Consultoria")]
         Consultoria = 3,
 
-        [Description("Alimentação")]
-        Alimentacao = 4,
+        [Description("Outros")]
+        Outros = 4,
 
         [Description("Informatica")]
         Informatica = 5,

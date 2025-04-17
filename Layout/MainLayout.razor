@@ -44,15 +44,15 @@
                         <MudLink Href="construcao" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção</MudLink>
                         <MudLink Href="financeiro" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Financeiro</MudLink>
                         <MudLink Href="consultoria" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Assessment" Title="Favorite" />Consultoria</MudLink>
-                        <MudLink Href="alimentacao" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Fastfood" Title="Favorite" />Alimentação</MudLink>
                         <MudLink Href="informatica" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Computer" Title="Favorite" />Informática</MudLink>
+                        <MudLink Href="outros" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.Apps" Title="Favorite" />Outros</MudLink>
                         @if (FirestoreService.IsAuthenticated)
                         {
                             <MudLink Href="cadastrarAnunciante" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Cadastrar Anunciante</MudLink>
                         }
 
                         <div class="infos">
-                          @*   @if (!String.IsNullOrEmpty(FirestoreService.NomeUsuario))
+                            @*   @if (!String.IsNullOrEmpty(FirestoreService.NomeUsuario))
                             {
                                 <MudText Style="color: white; margin-right: 0.5rem;">Olá @FirestoreService.NomeUsuario</MudText>
 
@@ -64,7 +64,7 @@
                         </div>
 
                     </MudContainer>
-                  
+
                 </MudContainer>
             </div>
         }
@@ -141,7 +141,7 @@
     private void ToggleTheme()
     {
         _theme = _theme == LightTheme ? DarkTheme : LightTheme;
-        
+
         currentIcon = _theme == LightTheme ? Icons.Material.Filled.DarkMode : Icons.Material.Filled.LightMode;
     }
 
@@ -162,11 +162,14 @@
     protected override async Task OnInitializedAsync()
     {
         await FirestoreService.InicializarAsync();
+
+        // string uid = await FirestoreService.GetCurrentUserId();
     }
 
     protected override void OnInitialized()
     {
         FirestoreService.OnAuthStateChanged += StateHasChanged;
+
     }
 
     public void Dispose()

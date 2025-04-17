@@ -10,6 +10,8 @@
         public long Numero { get; set; }
         public string Instagram { get; set; }
         public int Categoria { get; set; }
+        public string UidUsuario { get; set; } = "";
+
 
     }
 }
