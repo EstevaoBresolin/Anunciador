@@ -1,6 +1,10 @@
 ﻿// Importar os módulos necessários do Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+<<<<<<< Updated upstream
 import { getFirestore, collection, getDocs, addDoc, query, where, } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+=======
+import { getFirestore, collection, getDocs, addDoc, doc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+>>>>>>> Stashed changes
 import { getAuth, setPersistence, browserLocalPersistence, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-storage.js";
 // Inicializar o Firebase com a configuração fornecida
@@ -20,6 +24,8 @@ window.firebaseService = {
         onAuthStateChanged(this.auth, (user) => {
             if (user && this.dotnetHelper) {
                 this.dotnetHelper.invokeMethodAsync("SetUserLogged", user.email);
+            } else if (this.dotnetHelper) {
+                this.dotnetHelper.invokeMethodAsync("SetUserLoggedOut");
             }
         });
 
@@ -28,6 +34,38 @@ window.firebaseService = {
 
     setDotnetHelper: function (helper) {
         this.dotnetHelper = helper;
+    },
+
+    getProdutos: async function () {
+    const db = getFirestore(); // Usa o Firestore já inicializado
+
+    const productsSnap = await getDocs(query(collection(db, "products"), where("active", "==", true)));
+    const produtos = [];
+
+    for (const productDoc of productsSnap.docs) {
+        const data = productDoc.data();
+        const product = {
+            id: productDoc.id,
+            name: data.name,
+            active: data.active,
+            precos: []
+        };
+
+        const pricesSnap = await getDocs(collection(productDoc.ref, "prices"));
+        pricesSnap.forEach(priceDoc => {
+            const priceData = priceDoc.data();
+            product.precos.push({
+                id: priceDoc.id,
+                unit_amount: priceData.unit_amount,
+                description: priceData.description,
+                currency: priceData.currency
+            });
+        });
+
+        produtos.push(product);
+    }
+
+    return produtos;
     },
 
     getAnunciantes: async function (db) {
@@ -85,6 +123,15 @@ window.firebaseService = {
         }
     },
 
+    getCurrentUserUid: async function () {
+        const user = getAuth().currentUser;
+        if (user) {
+            return user.uid;
+        } else {
+            return null;
+        }
+    },
+
     logout: async function () {
         if (!this.auth) {
             throw new Error('Auth não foi inicializado corretamente');
@@ -101,6 +148,7 @@ window.firebaseService = {
         }
     },
 
+<<<<<<< Updated upstream
     uploadImageFromInput: async function (element, path) {
         const file = element.files[0];
         if (!file) throw new Error("Nenhum arquivo selecionado");
@@ -123,6 +171,42 @@ window.firebaseService = {
         return user ? user.uid : null;
     },
 
+=======
+    // Adiciona uma sessão de checkout
+    addCheckoutSession: async function (uid, sessionData) {
+        const db = getFirestore();
+
+        // Caminho: /customers/{uid}/checkout_sessions
+        const checkoutSessionsRef = collection(doc(collection(db, "customers"), uid), "checkout_sessions");
+
+        const docRef = await addDoc(checkoutSessionsRef, sessionData);
+        return {
+            id: docRef.id,
+            path: docRef.path
+        };
+    },
+
+    listenToCheckoutSession: function (uid, docId, dotNetHelper) {
+        const db = getFirestore();
+        const checkoutSessionRef = doc(collection(doc(collection(db, "customers"), uid), "checkout_sessions"), docId);
+
+        return onSnapshot(checkoutSessionRef, (docSnapshot) => {
+            if (docSnapshot.exists()) {
+                dotNetHelper.invokeMethodAsync("OnCheckoutSessionChanged", docSnapshot.data());
+            }
+        });
+    },
+
+    getActiveSubscriptionStatus: async function (uid) {
+        const db = getFirestore();
+        const subscriptionsSnapshot = await getDocs(query(
+            collection(doc(collection(db, "customers"), uid), "subscriptions"),
+            where("status", "in", ["trialing", "active"])
+        ));
+
+        return !subscriptionsSnapshot.empty;
+    },
+>>>>>>> Stashed changes
 };
 
 

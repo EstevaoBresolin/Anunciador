@@ -1,7 +1,11 @@
 {
   "mainAssemblyName": "AnunciadorV1",
   "resources": {
+<<<<<<< Updated upstream
     "hash": "sha256-jXVn9zzByiS5ertnalYeuKdaycIVvgjEvIRMfS3K82I=",
+=======
+    "hash": "sha256-OZ4C4VJyRYlDTQ9QFedPr7PdeXKtJ98I3KT2vUJMfKE=",
+>>>>>>> Stashed changes
     "fingerprinting": {
       "Microsoft.AspNetCore.Authorization.n41ua9ceve.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.h4ild4sjod.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -205,8 +209,13 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
+<<<<<<< Updated upstream
       "AnunciadorV1.386gym6saf.wasm": "AnunciadorV1.wasm",
       "AnunciadorV1.u33p05bpid.pdb": "AnunciadorV1.pdb"
+=======
+      "AnunciadorV1.w6406ix38f.wasm": "AnunciadorV1.wasm",
+      "AnunciadorV1.fz4h2bc8eb.pdb": "AnunciadorV1.pdb"
+>>>>>>> Stashed changes
     },
     "jsModuleNative": {
       "dotnet.native.hvg7u8bimp.js": "sha256-LX9rFEWGVxhkOkAVPG0w5RxPwzPBlEUz6dQNjWS7M+M="
@@ -420,10 +429,17 @@
       "WindowsBase.5lai2eowco.wasm": "sha256-GcDi5293y2A7oSiFYTbBTUe0d+ISbvgeel4ZNd8KkPM=",
       "mscorlib.wzkfrp7u5k.wasm": "sha256-9PjsU0gaxxz5Vyw++p9DeYUWLsaXbaMS2RbX6wmTUmk=",
       "netstandard.d82br99ghv.wasm": "sha256-DS8keXxU4eQpa1kIoiFxOA2Ii2g9hoNWSaVi8F8AnIE=",
+<<<<<<< Updated upstream
       "AnunciadorV1.386gym6saf.wasm": "sha256-g12spYyaZgJD8cfcVtWY95YleegPCYCVxs4JU5Km+4o="
     },
     "pdb": {
       "AnunciadorV1.u33p05bpid.pdb": "sha256-BgCJRiQc1x3OH10WpA75Wm50UhoEtspnJd1RJlY0YVo="
+=======
+      "AnunciadorV1.w6406ix38f.wasm": "sha256-ODNZxdCrlGYwdJNqddkdQX+tIq0g3Mm/7ZMDw/BQnlM="
+    },
+    "pdb": {
+      "AnunciadorV1.fz4h2bc8eb.pdb": "sha256-e0GVZ2FA7jxb0QAyn+kAr4C7CAH/CHTZaqYY9T82tO0="
+>>>>>>> Stashed changes
     }
   },
   "cacheBootResources": true,

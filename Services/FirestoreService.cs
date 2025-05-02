@@ -1,4 +1,5 @@
-﻿using AnunciadorV1.Models;
+﻿using System.Text.Json;
+using AnunciadorV1.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Text.Json;
@@ -11,6 +12,9 @@ namespace AnunciadorV1.Services
         private DotNetObjectReference<FirestoreService>? _dotNetRef;
         private bool _isAuthenticated = false;
         public string NomeUsuario = "";
+        public string? UidUsuario { get; private set; } = null;
+        public bool TemAssinaturaAtiva { get; private set; } = false;
+
         public bool IsAuthenticated
         {
             get => _isAuthenticated;
@@ -32,10 +36,15 @@ namespace AnunciadorV1.Services
             _dotNetRef = DotNetObjectReference.Create(this);
             _jsRuntime.InvokeVoidAsync("firebaseService.setDotnetHelper", _dotNetRef);
         }
-        public void SetAuthenticated(bool isAuthenticated)
+        public async void SetAuthenticated(bool isAuthenticated)
         {
             _isAuthenticated = isAuthenticated;
             OnAuthStateChanged?.Invoke();
+
+            if (isAuthenticated && !string.IsNullOrEmpty(UidUsuario))
+            {
+                await IniciarMonitoramentoAssinaturaAsync(UidUsuario);
+            }
         }
         public async Task AddAnunciante(object anunciante)
         {
@@ -97,6 +106,9 @@ namespace AnunciadorV1.Services
             if(user != null)
             {
                 NomeUsuario = email.Split('@')[0];
+
+                UidUsuario = await _jsRuntime.InvokeAsync<string>("firebaseService.getCurrentUserUid");
+
                 _isAuthenticated = true;
                 OnAuthStateChanged?.Invoke();
             }
@@ -107,6 +119,10 @@ namespace AnunciadorV1.Services
         {
             await _jsRuntime.InvokeVoidAsync("firebaseService.logout");
             _isAuthenticated = false;
+            SetAuthenticated(false);
+            UidUsuario = "";
+            TemAssinaturaAtiva = false;
+            NomeUsuario = "";
             OnAuthStateChanged?.Invoke();
         }
 
@@ -137,6 +153,15 @@ namespace AnunciadorV1.Services
             OnAuthStateChanged?.Invoke();
         }
 
+        [JSInvokable]
+        public void SetUserLoggedOut()
+        {
+            _isAuthenticated = false;
+            NomeUsuario = "";
+            UidUsuario = null;
+            OnAuthStateChanged?.Invoke();
+        }
+
         public async Task InicializarAsync()
         {
             _dotNetRef ??= DotNetObjectReference.Create(this);
@@ -156,6 +181,75 @@ namespace AnunciadorV1.Services
             await _jsRuntime.InvokeVoidAsync("firebaseService.initializeApp", firebaseConfig);
         }
 
+        public async Task<List<Produto>> GetProdutos()
+        {
+            // Chamar a função JS para buscar os produtos
+            var result = await _jsRuntime.InvokeAsync<List<object>>("firebaseService.getProdutos");
+
+            var produtos = new List<Produto>();
+
+            foreach (var item in result)
+            {
+                var produtoData = JsonSerializer.Deserialize<Dictionary<string, object>>(item.ToString());
+                if (produtoData != null)
+                {
+                    var produto = new Produto
+                    {
+                        Id = produtoData["id"]?.ToString(),
+                        Name = produtoData["name"]?.ToString(),
+                        Active = produtoData.ContainsKey("active") && produtoData["active"] is bool active && active,
+                        Precos = new List<Preco>()
+                    };
+
+                    if (produtoData.ContainsKey("precos"))
+                    {
+                        var precosElement = produtoData["precos"] as JsonElement?;
+                        if (precosElement.HasValue && precosElement.Value.ValueKind == JsonValueKind.Array)
+                        {
+                            foreach (var precoItem in precosElement.Value.EnumerateArray())
+                            {
+                                var precoData = JsonSerializer.Deserialize<Dictionary<string, object>>(precoItem.ToString());
+                                if (precoData != null)
+                                {
+                                    var preco = new Preco
+                                    {
+                                        Id = precoData["id"]?.ToString(),
+                                        Currency = precoData["currency"]?.ToString(),
+                                        Description = precoData["description"]?.ToString(),
+                                        UnitAmount = TryParseDecimal(precoData["unit_amount"])
+                                    };
+
+                                    produto.Precos.Add(preco);
+                                }
+                            }
+                        }
+                    }
+
+
+                    produtos.Add(produto);
+                }
+            }
+
+            return produtos;
+        }
+
+        // Função auxiliar para parse seguro de decimal
+        private decimal? TryParseDecimal(object value)
+        {
+            if (value == null)
+                return null;
+
+            if (decimal.TryParse(value.ToString(), out var result))
+                return result;
+
+            return null;
+        }
+
+        public async Task IniciarMonitoramentoAssinaturaAsync(string userUid)
+        {
+            var temAssinatura = await _jsRuntime.InvokeAsync<bool>("firebaseService.getActiveSubscriptionStatus", userUid);
+            TemAssinaturaAtiva = temAssinatura;
+        }
         public async Task<string> UploadImagemFromInput(ElementReference inputRef, string path)
         {
             return await _jsRuntime.InvokeAsync<string>("firebaseService.uploadImageFromInput", inputRef, path);

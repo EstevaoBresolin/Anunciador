@@ -1,0 +1,114 @@
+﻿@page "/produtos"
+@using AnunciadorV1.Models
+@using AnunciadorV1.Services
+@inject IJSRuntime _jsRuntime
+@inject NavigationManager Navigation
+@inject FirestoreService FirestoreService
+
+<PageTitle>Assinaturas</PageTitle>
+
+<MudContainer>
+    @if (produtos == null)
+    {
+        <MudProgressCircular Indeterminate="true" />
+    }
+    else
+    {
+        @foreach (var produto in produtos)
+        {
+            <MudPaper Class="p-4 mb-4">
+                <MudText Typo="Typo.h5">@produto.Name</MudText>
+                <MudStack Spacing="2">
+                    @foreach (var preco in produto.Precos)
+                    {
+                        <MudPaper Class="p-2 d-flex justify-between align-center">
+                            <MudText>@preco.Description - @FormatarPreco(preco.UnitAmount, preco.Currency)</MudText>
+                            <MudButton OnClick="() => CriarSessaoCheckoutAsync(preco.Id)" Color="Color.Primary">
+                                Assinar
+                            </MudButton>
+                        </MudPaper>
+                    }
+                </MudStack>
+
+            </MudPaper>
+        }
+    }
+</MudContainer>
+
+@code {
+    private List<Produto> produtos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        produtos = await FirestoreService.GetProdutos();
+    }
+
+    private string FormatarPreco(decimal? valor, string currency)
+    {
+        return string.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", valor / 100);
+    }
+
+    private async Task CriarSessaoCheckoutAsync(string precoId)
+    {
+        try
+        {
+            // Pega o usuário logado
+            var userUid = await _jsRuntime.InvokeAsync<string>("firebaseService.getCurrentUserUid");
+
+            if (string.IsNullOrEmpty(userUid))
+            {
+                await _jsRuntime.InvokeVoidAsync("alert", "Usuário não está logado.");
+                return;
+            }
+
+            // Monta os dados para criar a sessão
+            var sessionData = new Dictionary<string, object>
+            {
+                { "price", precoId },
+                { "success_url", Navigation.Uri },
+                { "cancel_url", Navigation.Uri }
+            };
+
+            // Cria o documento em /customers/{uid}/checkout_sessions
+            var sessionResult = await _jsRuntime.InvokeAsync<SessionResult>("firebaseService.addCheckoutSession", userUid, sessionData);
+
+            // Escuta mudanças no documento
+            var dotNetRef = DotNetObjectReference.Create(this);
+            await _jsRuntime.InvokeVoidAsync("firebaseService.listenToCheckoutSession", userUid, sessionResult.Id, dotNetRef);
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao criar sessão de checkout: {ex.Message}");
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnCheckoutSessionChanged(Dictionary<string, object> docData)
+    {
+        if (docData != null)
+        {
+            if (docData.ContainsKey("error"))
+            {
+                var error = docData["error"] as Dictionary<string, object>;
+                var errorMessage = error?["message"]?.ToString();
+                _ = _jsRuntime.InvokeVoidAsync("alert", $"Ocorreu um erro: {errorMessage}");
+            }
+            else if (docData.ContainsKey("url"))
+            {
+                var url = docData["url"]?.ToString();
+                if (!string.IsNullOrEmpty(url))
+                {
+                    _ = _jsRuntime.InvokeVoidAsync("window.location.assign", url);
+                }
+            }
+        }
+    }
+
+    public class SessionResult
+    {
+        public string Id { get; set; }
+        public string Path { get; set; }
+    }
+
+}
