@@ -1,5 +1,13 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /* Manifest version: ptEbC2YY */
+=======
+/* Manifest version: 3DdqLFyw */
+>>>>>>> Stashed changes
+=======
+/* Manifest version: 3DdqLFyw */
+>>>>>>> Stashed changes
 =======
 /* Manifest version: 3DdqLFyw */
 >>>>>>> Stashed changes

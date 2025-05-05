@@ -1,6 +1,14 @@
 self.assetsManifest = {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   "version": "ECP057fi",
+=======
+  "version": "N3LKqYkz",
+>>>>>>> Stashed changes
+=======
+  "version": "N3LKqYkz",
+>>>>>>> Stashed changes
 =======
   "version": "N3LKqYkz",
 >>>>>>> Stashed changes
@@ -43,12 +51,30 @@ self.assetsManifest = {
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "hash": "sha256-MyMCbor7sBfv5wPwluHThSFaTxoqhwlTb/8tCT/nOqo=",
       "url": "_framework/AnunciadorV1.hbb2zxxkap.pdb"
     },
     {
       "hash": "sha256-mYujaExGtVr9sZSuyT+KT/wI+trRN+XL9OeLWMRRZMw=",
       "url": "_framework/AnunciadorV1.z90grtktyf.wasm"
+=======
+      "hash": "sha256-9jAgB1GdlRT+d5jbZhps17pWdnB9R1cvF9Xg1oWQ36A=",
+      "url": "_framework/AnunciadorV1.65te44rm83.pdb"
+    },
+    {
+      "hash": "sha256-/gY/dtJpNSDDJB8DyolSiVQVcv5hj/276MG0+JRySM0=",
+      "url": "_framework/AnunciadorV1.ut1z9jfdgz.wasm"
+>>>>>>> Stashed changes
+=======
+      "hash": "sha256-9jAgB1GdlRT+d5jbZhps17pWdnB9R1cvF9Xg1oWQ36A=",
+      "url": "_framework/AnunciadorV1.65te44rm83.pdb"
+    },
+    {
+      "hash": "sha256-/gY/dtJpNSDDJB8DyolSiVQVcv5hj/276MG0+JRySM0=",
+      "url": "_framework/AnunciadorV1.ut1z9jfdgz.wasm"
+>>>>>>> Stashed changes
 =======
       "hash": "sha256-9jAgB1GdlRT+d5jbZhps17pWdnB9R1cvF9Xg1oWQ36A=",
       "url": "_framework/AnunciadorV1.65te44rm83.pdb"
@@ -832,7 +858,15 @@ self.assetsManifest = {
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "hash": "sha256-7boJ+qsbj0PT1+mJWZRP5qGvfQC53oEj8hWeHKR/ZKQ=",
+=======
+      "hash": "sha256-W/2/9M+yvkUcabRkd9v2f4avgMFPWLYs8/+SSjvrPqI=",
+>>>>>>> Stashed changes
+=======
+      "hash": "sha256-W/2/9M+yvkUcabRkd9v2f4avgMFPWLYs8/+SSjvrPqI=",
+>>>>>>> Stashed changes
 =======
       "hash": "sha256-W/2/9M+yvkUcabRkd9v2f4avgMFPWLYs8/+SSjvrPqI=",
 >>>>>>> Stashed changes
@@ -896,7 +930,15 @@ self.assetsManifest = {
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "hash": "sha256-QYJJX72N+7PyxQ86wu/8z26vhmlIKkuC3/3wBiZqWZY=",
+=======
+      "hash": "sha256-cmBH+91CDszLmbK86DhZlXXOqcnVgojREmfi3LsBT9A=",
+>>>>>>> Stashed changes
+=======
+      "hash": "sha256-cmBH+91CDszLmbK86DhZlXXOqcnVgojREmfi3LsBT9A=",
+>>>>>>> Stashed changes
 =======
       "hash": "sha256-cmBH+91CDszLmbK86DhZlXXOqcnVgojREmfi3LsBT9A=",
 >>>>>>> Stashed changes
@@ -912,7 +954,15 @@ self.assetsManifest = {
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "hash": "sha256-BjVJMwq2dSunjAMgZTqDA0ysB0Iodzyt/hqvK154zmg=",
+=======
+      "hash": "sha256-xb6ytc8Fn5vjGC47bM9m6xx78SbXqCJSo6jskfXof2o=",
+>>>>>>> Stashed changes
+=======
+      "hash": "sha256-xb6ytc8Fn5vjGC47bM9m6xx78SbXqCJSo6jskfXof2o=",
+>>>>>>> Stashed changes
 =======
       "hash": "sha256-xb6ytc8Fn5vjGC47bM9m6xx78SbXqCJSo6jskfXof2o=",
 >>>>>>> Stashed changes

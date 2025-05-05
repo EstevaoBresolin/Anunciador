@@ -1,5 +1,13 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /* Manifest version: BWKNIjyC */
+=======
+/* Manifest version: SSmP3icS */
+>>>>>>> Stashed changes
+=======
+/* Manifest version: SSmP3icS */
+>>>>>>> Stashed changes
 =======
 /* Manifest version: SSmP3icS */
 >>>>>>> Stashed changes

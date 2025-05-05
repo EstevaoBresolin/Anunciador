@@ -1,7 +1,15 @@
 ﻿// Importar os módulos necessários do Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { getFirestore, collection, getDocs, addDoc, query, where, } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+=======
+import { getFirestore, collection, getDocs, addDoc, doc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+>>>>>>> Stashed changes
+=======
+import { getFirestore, collection, getDocs, addDoc, doc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+>>>>>>> Stashed changes
 =======
 import { getFirestore, collection, getDocs, addDoc, doc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 >>>>>>> Stashed changes
@@ -149,6 +157,8 @@ window.firebaseService = {
     },
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     uploadImageFromInput: async function (element, path) {
         const file = element.files[0];
         if (!file) throw new Error("Nenhum arquivo selecionado");
@@ -172,6 +182,10 @@ window.firebaseService = {
     },
 
 =======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     // Adiciona uma sessão de checkout
     addCheckoutSession: async function (uid, sessionData) {
         const db = getFirestore();
@@ -206,6 +220,12 @@ window.firebaseService = {
 
         return !subscriptionsSnapshot.empty;
     },
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 };
 

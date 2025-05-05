@@ -2,9 +2,21 @@
   "mainAssemblyName": "AnunciadorV1",
   "resources": {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "hash": "sha256-/i+lJI02HOwwpxd2zaYji+F+TAKFjquMahC/qsIdShA=",
     "fingerprinting": {
       "AnunciadorV1.386gym6saf.wasm": "AnunciadorV1.wasm",
+=======
+    "hash": "sha256-l5Twa2TFYriIsDXoR1p6kJQL3wf/LvWor2QBAnjrFNE=",
+    "fingerprinting": {
+      "AnunciadorV1.w6406ix38f.wasm": "AnunciadorV1.wasm",
+>>>>>>> Stashed changes
+=======
+    "hash": "sha256-l5Twa2TFYriIsDXoR1p6kJQL3wf/LvWor2QBAnjrFNE=",
+    "fingerprinting": {
+      "AnunciadorV1.w6406ix38f.wasm": "AnunciadorV1.wasm",
+>>>>>>> Stashed changes
 =======
     "hash": "sha256-l5Twa2TFYriIsDXoR1p6kJQL3wf/LvWor2QBAnjrFNE=",
     "fingerprinting": {
@@ -28,7 +40,15 @@
       "Microsoft.JSInterop.agnux60n3l.wasm": "Microsoft.JSInterop.wasm",
       "Microsoft.JSInterop.WebAssembly.8eb000j8w7.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "MudBlazor.zxvwwl41wj.wasm": "MudBlazor.wasm",
+=======
+      "MudBlazor.t0h76d6tpu.wasm": "MudBlazor.wasm",
+>>>>>>> Stashed changes
+=======
+      "MudBlazor.t0h76d6tpu.wasm": "MudBlazor.wasm",
+>>>>>>> Stashed changes
 =======
       "MudBlazor.t0h76d6tpu.wasm": "MudBlazor.wasm",
 >>>>>>> Stashed changes
@@ -48,15 +68,27 @@
       "System.Net.Primitives.8x3nzqo64g.wasm": "System.Net.Primitives.wasm",
       "System.ObjectModel.62kyprpgve.wasm": "System.ObjectModel.wasm",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "System.Private.CoreLib.q3qxf554ol.wasm": "System.Private.CoreLib.wasm",
       "System.Private.Uri.m7cwnwwnnu.wasm": "System.Private.Uri.wasm",
       "System.Runtime.InteropServices.JavaScript.zp9u3yqbi4.wasm": "System.Runtime.InteropServices.JavaScript.wasm",
       "System.Runtime.kld8vgp7mz.wasm": "System.Runtime.wasm",
 =======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
       "System.Private.CoreLib.bzpf0g4c3i.wasm": "System.Private.CoreLib.wasm",
       "System.Private.Uri.8f490lswpi.wasm": "System.Private.Uri.wasm",
       "System.Runtime.InteropServices.JavaScript.zp9u3yqbi4.wasm": "System.Runtime.InteropServices.JavaScript.wasm",
       "System.Runtime.f79tttrdq3.wasm": "System.Runtime.wasm",
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "System.Text.Encodings.Web.wmi2z5c0zd.wasm": "System.Text.Encodings.Web.wasm",
       "System.Text.Json.r0v0ugxuew.wasm": "System.Text.Json.wasm",
@@ -87,11 +119,27 @@
     },
     "coreAssembly": {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "System.Private.CoreLib.q3qxf554ol.wasm": "sha256-ZvX9CwnDhPIcp+WKTVTwg3pZDeEgp3joDa4ZjnQQUgA=",
       "System.Runtime.InteropServices.JavaScript.zp9u3yqbi4.wasm": "sha256-t5fC5E2r9YJ+puOWw7YuXXMwvd7LxeR0Zt16THexNM0="
     },
     "assembly": {
       "AnunciadorV1.386gym6saf.wasm": "sha256-g12spYyaZgJD8cfcVtWY95YleegPCYCVxs4JU5Km+4o=",
+=======
+      "System.Private.CoreLib.bzpf0g4c3i.wasm": "sha256-uU7IX1cxe7XwWu/kzaj7SA7v4roJS3hIUQCL/UWIDho=",
+      "System.Runtime.InteropServices.JavaScript.zp9u3yqbi4.wasm": "sha256-t5fC5E2r9YJ+puOWw7YuXXMwvd7LxeR0Zt16THexNM0="
+    },
+    "assembly": {
+      "AnunciadorV1.w6406ix38f.wasm": "sha256-ODNZxdCrlGYwdJNqddkdQX+tIq0g3Mm/7ZMDw/BQnlM=",
+>>>>>>> Stashed changes
+=======
+      "System.Private.CoreLib.bzpf0g4c3i.wasm": "sha256-uU7IX1cxe7XwWu/kzaj7SA7v4roJS3hIUQCL/UWIDho=",
+      "System.Runtime.InteropServices.JavaScript.zp9u3yqbi4.wasm": "sha256-t5fC5E2r9YJ+puOWw7YuXXMwvd7LxeR0Zt16THexNM0="
+    },
+    "assembly": {
+      "AnunciadorV1.w6406ix38f.wasm": "sha256-ODNZxdCrlGYwdJNqddkdQX+tIq0g3Mm/7ZMDw/BQnlM=",
+>>>>>>> Stashed changes
 =======
       "System.Private.CoreLib.bzpf0g4c3i.wasm": "sha256-uU7IX1cxe7XwWu/kzaj7SA7v4roJS3hIUQCL/UWIDho=",
       "System.Runtime.InteropServices.JavaScript.zp9u3yqbi4.wasm": "sha256-t5fC5E2r9YJ+puOWw7YuXXMwvd7LxeR0Zt16THexNM0="
@@ -117,7 +165,15 @@
       "Microsoft.JSInterop.agnux60n3l.wasm": "sha256-xtQtSoK56ZLcZdr1TPIw4dex5O90dyRzRhWC9Coj9J8=",
       "Microsoft.JSInterop.WebAssembly.8eb000j8w7.wasm": "sha256-sGms9Oai1ztzgfMsqBvmeKwa5ZyGWr/AEXr6thw0lso=",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "MudBlazor.zxvwwl41wj.wasm": "sha256-t32hMKFCDwpY/aq+m5Q6dQ+KDOV//vN1bhKvFEbH0sE=",
+=======
+      "MudBlazor.t0h76d6tpu.wasm": "sha256-E/StGV3uwcrkkRLS++3ssO5yI0Kt3VajHSR8kL2sDVg=",
+>>>>>>> Stashed changes
+=======
+      "MudBlazor.t0h76d6tpu.wasm": "sha256-E/StGV3uwcrkkRLS++3ssO5yI0Kt3VajHSR8kL2sDVg=",
+>>>>>>> Stashed changes
 =======
       "MudBlazor.t0h76d6tpu.wasm": "sha256-E/StGV3uwcrkkRLS++3ssO5yI0Kt3VajHSR8kL2sDVg=",
 >>>>>>> Stashed changes
@@ -137,8 +193,18 @@
       "System.Net.Primitives.8x3nzqo64g.wasm": "sha256-nB5JS/nQn/pNhPGXYrb1uDoDn3cuo9TQKE1RKnVa648=",
       "System.ObjectModel.62kyprpgve.wasm": "sha256-8tBz+GN0TPvU205OThbWUGNOvSBXFEyYs11ymezgh5U=",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "System.Private.Uri.m7cwnwwnnu.wasm": "sha256-0ryBEg9heDsCjyob0pAFmF4vRRy3RQ4zsaHMr9wEHI4=",
       "System.Runtime.kld8vgp7mz.wasm": "sha256-KPoWnYOFPhja/DXD3MDhCfIFU2SRhbFngWRkzATro7w=",
+=======
+      "System.Private.Uri.8f490lswpi.wasm": "sha256-pLI0ieUXW00F4El1woBT92x5Qn2BsAgpLVu6hlS+sII=",
+      "System.Runtime.f79tttrdq3.wasm": "sha256-25QmLYQrd5FiSxRsiYruRSpTotk+ZjlrIFg5by6zfnI=",
+>>>>>>> Stashed changes
+=======
+      "System.Private.Uri.8f490lswpi.wasm": "sha256-pLI0ieUXW00F4El1woBT92x5Qn2BsAgpLVu6hlS+sII=",
+      "System.Runtime.f79tttrdq3.wasm": "sha256-25QmLYQrd5FiSxRsiYruRSpTotk+ZjlrIFg5by6zfnI=",
+>>>>>>> Stashed changes
 =======
       "System.Private.Uri.8f490lswpi.wasm": "sha256-pLI0ieUXW00F4El1woBT92x5Qn2BsAgpLVu6hlS+sII=",
       "System.Runtime.f79tttrdq3.wasm": "sha256-25QmLYQrd5FiSxRsiYruRSpTotk+ZjlrIFg5by6zfnI=",

@@ -178,7 +178,6 @@ window.firebaseService = {
 
         return !subscriptionsSnapshot.empty;
     },
-    },
 
     uploadImageFromInput: async function (element, path) {
         const file = element.files[0];

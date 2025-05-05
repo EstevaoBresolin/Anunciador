@@ -1,5 +1,13 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /* Manifest version: ECP057fi */
+=======
+/* Manifest version: N3LKqYkz */
+>>>>>>> Stashed changes
+=======
+/* Manifest version: N3LKqYkz */
+>>>>>>> Stashed changes
 =======
 /* Manifest version: N3LKqYkz */
 >>>>>>> Stashed changes
