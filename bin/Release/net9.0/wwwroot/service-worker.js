@@ -1,16 +1,4 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-/* Manifest version: ptEbC2YY */
-=======
-/* Manifest version: 3DdqLFyw */
->>>>>>> Stashed changes
-=======
-/* Manifest version: 3DdqLFyw */
->>>>>>> Stashed changes
-=======
-/* Manifest version: 3DdqLFyw */
->>>>>>> Stashed changes
+/* Manifest version: 2rR0zcZ2 */
 // In development, always fetch from the network and do not enable offline support.
 // This is because caching would make development more difficult (changes would not
 // be reflected on the first load after each change).

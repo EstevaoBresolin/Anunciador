@@ -1,17 +1,5 @@
 self.assetsManifest = {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  "version": "ptEbC2YY",
-=======
-  "version": "3DdqLFyw",
->>>>>>> Stashed changes
-=======
-  "version": "3DdqLFyw",
->>>>>>> Stashed changes
-=======
-  "version": "3DdqLFyw",
->>>>>>> Stashed changes
+  "version": "2rR0zcZ2",
   "assets": [
     {
       "hash": "sha256-LoGIGNjKzpPYd/CuPNcoe46XPkqmix6w2YumcPOL9gg=",
@@ -50,39 +38,12 @@ self.assetsManifest = {
       "url": "_content/MudBlazor/MudBlazor.min.js"
     },
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "hash": "sha256-g12spYyaZgJD8cfcVtWY95YleegPCYCVxs4JU5Km+4o=",
-      "url": "_framework/AnunciadorV1.386gym6saf.wasm"
+      "hash": "sha256-Y/d1E4GTiX78IsyXXsJ2DiR/yO2LwdNJ91QFjJ2XVvg=",
+      "url": "_framework/AnunciadorV1.lq2j05kkto.pdb"
     },
     {
-      "hash": "sha256-BgCJRiQc1x3OH10WpA75Wm50UhoEtspnJd1RJlY0YVo=",
-      "url": "_framework/AnunciadorV1.u33p05bpid.pdb"
-=======
-      "hash": "sha256-e0GVZ2FA7jxb0QAyn+kAr4C7CAH/CHTZaqYY9T82tO0=",
-      "url": "_framework/AnunciadorV1.fz4h2bc8eb.pdb"
-    },
-    {
-      "hash": "sha256-ODNZxdCrlGYwdJNqddkdQX+tIq0g3Mm/7ZMDw/BQnlM=",
-      "url": "_framework/AnunciadorV1.w6406ix38f.wasm"
->>>>>>> Stashed changes
-=======
-      "hash": "sha256-e0GVZ2FA7jxb0QAyn+kAr4C7CAH/CHTZaqYY9T82tO0=",
-      "url": "_framework/AnunciadorV1.fz4h2bc8eb.pdb"
-    },
-    {
-      "hash": "sha256-ODNZxdCrlGYwdJNqddkdQX+tIq0g3Mm/7ZMDw/BQnlM=",
-      "url": "_framework/AnunciadorV1.w6406ix38f.wasm"
->>>>>>> Stashed changes
-=======
-      "hash": "sha256-e0GVZ2FA7jxb0QAyn+kAr4C7CAH/CHTZaqYY9T82tO0=",
-      "url": "_framework/AnunciadorV1.fz4h2bc8eb.pdb"
-    },
-    {
-      "hash": "sha256-ODNZxdCrlGYwdJNqddkdQX+tIq0g3Mm/7ZMDw/BQnlM=",
-      "url": "_framework/AnunciadorV1.w6406ix38f.wasm"
->>>>>>> Stashed changes
+      "hash": "sha256-XGqaOTmZ5zP6Pka93EnFeIFVkTunNBFHc3yIWM0e9BU=",
+      "url": "_framework/AnunciadorV1.whqinykzdd.wasm"
     },
     {
       "hash": "sha256-N6/4dp+rtuEu+iWs7ZZs30QrZzpGpF9KC6ulCWZCo2w=",
@@ -857,19 +818,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.5lai2eowco.wasm"
     },
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "hash": "sha256-i2yMx0qljwLNDhkzB+dxBCJABpG3amKz34kYvkiROq8=",
-=======
-      "hash": "sha256-h6q687GibABF15rmhiyExkR0c3i9Z3WpCcNi55CSS0w=",
->>>>>>> Stashed changes
-=======
-      "hash": "sha256-h6q687GibABF15rmhiyExkR0c3i9Z3WpCcNi55CSS0w=",
->>>>>>> Stashed changes
-=======
-      "hash": "sha256-h6q687GibABF15rmhiyExkR0c3i9Z3WpCcNi55CSS0w=",
->>>>>>> Stashed changes
+      "hash": "sha256-2A8hRAylQHFIizx1567p9gdsrz+guMf/o5paVtoZ4Ug=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -929,19 +878,7 @@ self.assetsManifest = {
       "url": "favicon.png"
     },
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "hash": "sha256-QJ1TwohUrkl82A8xxLBK6H4annt5NEIl7FhxdIEWCGk=",
-=======
-      "hash": "sha256-cmBH+91CDszLmbK86DhZlXXOqcnVgojREmfi3LsBT9A=",
->>>>>>> Stashed changes
-=======
-      "hash": "sha256-cmBH+91CDszLmbK86DhZlXXOqcnVgojREmfi3LsBT9A=",
->>>>>>> Stashed changes
-=======
-      "hash": "sha256-cmBH+91CDszLmbK86DhZlXXOqcnVgojREmfi3LsBT9A=",
->>>>>>> Stashed changes
+      "hash": "sha256-n9HSXnZuIZPGG4pVNKpwl0jU3zEFBhNuOLjedb/DRuo=",
       "url": "firebase.js"
     },
     {
