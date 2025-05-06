@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "2rR0zcZ2",
+  "version": "pLQLnICt",
   "assets": [
     {
       "hash": "sha256-LoGIGNjKzpPYd/CuPNcoe46XPkqmix6w2YumcPOL9gg=",
@@ -38,12 +38,12 @@ self.assetsManifest = {
       "url": "_content/MudBlazor/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-Y/d1E4GTiX78IsyXXsJ2DiR/yO2LwdNJ91QFjJ2XVvg=",
-      "url": "_framework/AnunciadorV1.lq2j05kkto.pdb"
+      "hash": "sha256-ebRCoEIt95F9eYSky2XgRs70W/XcGawlswV83MN1vmU=",
+      "url": "_framework/AnunciadorV1.9keby500ah.wasm"
     },
     {
-      "hash": "sha256-XGqaOTmZ5zP6Pka93EnFeIFVkTunNBFHc3yIWM0e9BU=",
-      "url": "_framework/AnunciadorV1.whqinykzdd.wasm"
+      "hash": "sha256-m11LDntFpJ5JiXgpFJjnOciaioziP2UqRvvFBG81flI=",
+      "url": "_framework/AnunciadorV1.rkzihiubm1.pdb"
     },
     {
       "hash": "sha256-N6/4dp+rtuEu+iWs7ZZs30QrZzpGpF9KC6ulCWZCo2w=",
@@ -818,7 +818,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.5lai2eowco.wasm"
     },
     {
-      "hash": "sha256-2A8hRAylQHFIizx1567p9gdsrz+guMf/o5paVtoZ4Ug=",
+      "hash": "sha256-0BdvAYPjVI7PrHMtd+n4oBW+tNQNVNHt1ri9I1wMlis=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -878,7 +878,7 @@ self.assetsManifest = {
       "url": "favicon.png"
     },
     {
-      "hash": "sha256-n9HSXnZuIZPGG4pVNKpwl0jU3zEFBhNuOLjedb/DRuo=",
+      "hash": "sha256-DYpFkxrpgtlymDu4sUIErvAHNNLym/qggcaZpQF6mgs=",
       "url": "firebase.js"
     },
     {

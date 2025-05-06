@@ -2,6 +2,7 @@
 {
     public class Anunciante
     {
+        public string Id { get; set; }
         public string Nome { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
@@ -11,6 +12,7 @@
         public string Instagram { get; set; }
         public int Categoria { get; set; }
         public string UidUsuario { get; set; } = "";
+        public bool AtivoInativo { get; set; }
 
 
     }

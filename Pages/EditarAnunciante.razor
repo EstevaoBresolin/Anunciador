@@ -1,4 +1,4 @@
-﻿@page "/cadastrarAnunciante"
+﻿@page "/editarAnunciante/{id}"
 
 @inject IJSRuntime JS
 @inject ISnackbar Snackbar
@@ -65,7 +65,12 @@
         </MudCardContent>
     </MudCard>
 </MudContainer>
+@* }
+else
+{
 
+    <MudAlert Severity="Severity.Warning">Faça login para acessar esta página.</MudAlert>
+} *@
 
 @code {
     private MudForm? form;
@@ -81,9 +86,14 @@
     private Anunciante novoAnunciante = new Anunciante();
     private EnumCategorias Categoria { get; set; } = EnumCategorias.Selecionar;
 
+    [Parameter]
+    public string id { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        anunciantes = await FirestoreService.GetAnunciosUsuario();
+        novoAnunciante = await FirestoreService.GetAnuncioPorId(id);
+        Categoria = (EnumCategorias)novoAnunciante.Categoria;
+        // novoAnunciante = anunciantes[0];
     }
 
     private async Task HandleFileSelected(ChangeEventArgs e)
@@ -131,15 +141,20 @@
         // string nomeArquivo = $"anunciantes/{novoAnunciante.Nome}{Guid.NewGuid()}.jpg";
         // novoAnunciante.EnderecoFoto = await FirestoreService.UploadImagemFromInput(inputFileRef, nomeArquivo);
         novoAnunciante.Categoria = (int)Categoria;
-        novoAnunciante.AtivoInativo = true;
+        // novoAnunciante.AtivoInativo = true;
         novoAnunciante.UidUsuario = await FirestoreService.GetCurrentUserId();
         // novoAnunciante.EnderecoFoto = url;
-        await FirestoreService.AddAnunciante(novoAnunciante);
+        await FirestoreService.UpdateAnunciante(novoAnunciante, id);
 
-        mensagem = "Anunciante cadastrado com sucesso!";
-        novoAnunciante = new Anunciante(); // Limpa o formulário
-        inputFileRef = inputFileRefe;
-        Categoria = 0;
+        mensagem = "Anuncio editado com sucesso!";
+        // novoAnunciante = new Anunciante(); // Limpa o formulário
+        // inputFileRef = inputFileRefe;
+        // Categoria = 0;
+    }
+
+    private void Editar(string id)
+    {
+        Navigation.NavigateTo($"/editar/{id}");
     }
 
     private async Task Logout()
@@ -148,16 +163,6 @@
         usuarioAutenticado = false;
     }
    
-    public class AnuncianteModel
-    {
-        public string Nome { get; set; } = "";
-        public string Titulo { get; set; } = "";
-        public string Descricao { get; set; } = "";
-        public string Endereco { get; set; } = "";
-        public int Numero { get; set; } = 0;
-        public string Instagram { get; set; } = "";
-        public int Categoria { get; set; }
-    }
 }
 
 <style>

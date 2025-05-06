@@ -3,6 +3,7 @@ using AnunciadorV1.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Text.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace AnunciadorV1.Services
 {
@@ -12,6 +13,7 @@ namespace AnunciadorV1.Services
         private DotNetObjectReference<FirestoreService>? _dotNetRef;
         private bool _isAuthenticated = false;
         public string NomeUsuario = "";
+        public string Email = "";
         public string? UidUsuario { get; private set; } = null;
         public bool TemAssinaturaAtiva { get; private set; } = false;
 
@@ -63,6 +65,17 @@ namespace AnunciadorV1.Services
 
         }
 
+        public async Task UpdateAnunciante(object anunciante, string id)
+        {
+            var docId = await _jsRuntime.InvokeAsync<string>("firebaseService.updateAnuncio", id, anunciante);
+        }
+
+        public async Task ExcluirAnuncio(string id)
+        {
+            var docId = await _jsRuntime.InvokeAsync<string>("firebaseService.deleteAnuncio", id);
+
+        }
+
         public async Task<List<Anunciante>> GetAnunciantes()
         {
             var firebaseConfig = new
@@ -83,21 +96,71 @@ namespace AnunciadorV1.Services
             return result.Select(d => ConverterParaAnunciante(d)).ToList();
         }
 
+        public async Task<List<Anunciante>> GetAnunciosUsuario()
+        {
+            var result = await _jsRuntime.InvokeAsync<List<Dictionary<string, object>>>("firebaseService.getAnunciosUsuario", UidUsuario);
+
+            return result.Select(d => ConverterParaAnunciante(d)).ToList();
+        }
+
+        public async Task<Anunciante> GetAnuncioPorId(string id)
+        {
+            //var result = await _jsRuntime.InvokeAsync<List<Dictionary<string, object>>>("firebaseService.getAnuncioPorId", id);
+
+            //return result.Select(d => ConverterParaAnunciante(d)).ToList();
+
+            var dados = await _jsRuntime.InvokeAsync<Dictionary<string, object>>("firebaseService.getAnuncioPorId", id);
+            if (dados == null) return null;
+
+            return ConverterParaAnunciante(dados);
+        }
+
         private Anunciante ConverterParaAnunciante(Dictionary<string, object> dados)
         {
-            var anunciante =  new Anunciante
-            {
-                Nome = dados.TryGetValue("nome", out var nome) ? nome.ToString() : "Nome não informado",
-                Descricao = dados.TryGetValue("descricao", out var descricao) ? descricao.ToString() : "",
-                Titulo = dados.TryGetValue("titulo", out var titulo) ? titulo.ToString() : "Titulo não informado",
-                EnderecoFoto = dados.TryGetValue("enderecoFoto", out var enderecoFoto) ? enderecoFoto.ToString() : "Endereço da foto não informado",
-                Endereco = dados.TryGetValue("endereco", out var endereco) ? endereco.ToString() : "Localização não informada",
-                Numero = dados.TryGetValue("numero", out var numero) && int.TryParse(numero?.ToString(), out var numeroConvertido) ? numeroConvertido : 0,
-                Categoria = dados.TryGetValue("categoria", out var categoria) && int.TryParse(categoria?.ToString(), out var categoriaConvertida) ? categoriaConvertida : 0,
-                Instagram = dados.TryGetValue("instagram", out var instagram) ? instagram.ToString() : "instagram não disponível"
-            };
+            //long numeroConvertido = 0;
+            //if (dados.TryGetValue("numero", out var numeroRaw) &&
+            //    numeroRaw is JsonElement jsonNumero &&
+            //    jsonNumero.ValueKind == JsonValueKind.Number)
+            //{
+            //    try
+            //    {
+            //        numeroConvertido = jsonNumero.GetInt64();
+            //    }
+            //    catch
+            //    {
+            //        numeroConvertido = 0;
+            //    }
+            //}
 
-            return anunciante;
+            try
+            {
+                int numeroConvertido = dados.TryGetValue("numero", out var numero) && int.TryParse(numero?.ToString(), out var tempNumero)
+                    ? tempNumero
+                    : 0;
+
+                var anunciante = new Anunciante
+                {
+                    Id = dados.TryGetValue("idFirestore", out var idFirestore) ? idFirestore.ToString() : null,
+                    Nome = dados.TryGetValue("nome", out var nome) ? nome.ToString() : "Nome não informado",
+                    Descricao = dados.TryGetValue("descricao", out var descricao) ? descricao.ToString() : "",
+                    Titulo = dados.TryGetValue("titulo", out var titulo) ? titulo.ToString() : "Titulo não informado",
+                    EnderecoFoto = dados.TryGetValue("enderecoFoto", out var enderecoFoto) ? enderecoFoto.ToString() : "Endereço da foto não informado",
+                    Endereco = dados.TryGetValue("endereco", out var endereco) ? endereco.ToString() : "Localização não informada",
+                    Numero = numeroConvertido,
+                    Categoria = dados.TryGetValue("categoria", out var categoria) && int.TryParse(categoria?.ToString(), out var categoriaConvertida) ? categoriaConvertida : 0,
+                    Instagram = dados.TryGetValue("instagram", out var instagram) ? instagram.ToString() : "instagram não disponível",
+                    UidUsuario = dados.TryGetValue("uidUsuario", out var uidUsuario) ? uidUsuario.ToString() : "",
+                };
+
+                return anunciante;
+            }
+            catch (Exception e)
+            {
+                // Faça log ou trate o erro adequadamente
+                throw new Exception("Erro ao converter dados do anunciante", e);
+            }
+
+            return null;
         }
 
         public async Task<bool> Login(string email, string senha)
@@ -106,6 +169,7 @@ namespace AnunciadorV1.Services
             if(user != null)
             {
                 NomeUsuario = email.Split('@')[0];
+                Email = email;
 
                 UidUsuario = await _jsRuntime.InvokeAsync<string>("firebaseService.getCurrentUserUid");
 
@@ -123,6 +187,7 @@ namespace AnunciadorV1.Services
             UidUsuario = "";
             TemAssinaturaAtiva = false;
             NomeUsuario = "";
+            Email = "";
             OnAuthStateChanged?.Invoke();
         }
 
@@ -146,10 +211,14 @@ namespace AnunciadorV1.Services
         }
 
         [JSInvokable]
-        public void SetUserLogged(string email)
+        public void SetUserLogged(string email, string uid)
         {
             _isAuthenticated = true;
             NomeUsuario = email.Split('@')[0];
+            Email = email;
+            UidUsuario = uid;
+            IniciarMonitoramentoAssinaturaAsync(uid);
+
             OnAuthStateChanged?.Invoke();
         }
 
@@ -158,6 +227,7 @@ namespace AnunciadorV1.Services
         {
             _isAuthenticated = false;
             NomeUsuario = "";
+            Email = "";
             UidUsuario = null;
             OnAuthStateChanged?.Invoke();
         }
@@ -258,5 +328,21 @@ namespace AnunciadorV1.Services
         {
             return await _jsRuntime.InvokeAsync<string>("firebaseService.getCurrentUserId");
         }
+
+        public async Task<User?> GetStatusAssinatura()
+        {
+            var result = await _jsRuntime.InvokeAsync<Dictionary<string, object>>("firebaseService.getActiveSubscriptionStatus", UidUsuario);
+
+            if (result == null) return null;
+
+            return new User
+            {
+                //Ativa = result.TryGetValue("ativa", out var ativa) && Convert.ToBoolean(ativa),
+                Status = result.TryGetValue("status", out var status) ? status?.ToString() : "desconhecido",
+                Tipo = result.TryGetValue("tipo", out var tipo) ? tipo?.ToString() : "indefinido",
+                DataExpiracao = result.TryGetValue("dataExpiracao", out var dataExp) ? dataExp?.ToString() : "indefinida"
+            };
+        }
+       
     }
 }

@@ -57,7 +57,9 @@
 
             if (string.IsNullOrEmpty(userUid))
             {
-                await _jsRuntime.InvokeVoidAsync("alert", "Usuário não está logado.");
+                Navigation.NavigateTo("login");
+
+                // await _jsRuntime.InvokeVoidAsync("alert", "Usuário não está logado.");
                 return;
             }
 

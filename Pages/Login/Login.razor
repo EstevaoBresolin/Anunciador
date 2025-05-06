@@ -38,7 +38,7 @@
         var user = await FirestoreService.Login(loginModel.Email, loginModel.Senha);
         if (user != null && user != false)
         {
-            Snackbar.Add("Login realizado com sucesso!", Severity.Success);
+            // Snackbar.Add("Login realizado com sucesso!", Severity.Success);
             FirestoreService.SetAuthenticated(true);
             navigation.NavigateTo(navigation.BaseUri);
         }

@@ -7,8 +7,8 @@ namespace AnunciadorV1.Models
         [Description("Selecionar")]
         Selecionar = 0,
 
-        [Description("Construção")]
-        Construcao = 1,
+        //[Description("Construção")]
+        //Construcao = 1,
 
         [Description("Financeiro")]
         Financeiro = 2,

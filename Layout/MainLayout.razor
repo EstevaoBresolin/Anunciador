@@ -41,16 +41,22 @@
                     <MudContainer Class="d-flex justify-center align-center menu-itens">
                         <MudLink Href="@navigation.BaseUri" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AutoAwesomeMosaic" Title="Favorite" /> Todos os Departamentos</MudLink>
                         <MudLink Href="saudeEBeleza" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AccessibilityNew" Title="Favorite" /> Saúde e Beleza</MudLink>
-                        <MudLink Href="construcao" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção</MudLink>
+                        @* <MudLink Href="construcao" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Construction" Title="Favorite" /> Construção</MudLink> *@
                         <MudLink Href="financeiro" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Financeiro</MudLink>
                         <MudLink Href="consultoria" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Assessment" Title="Favorite" />Consultoria</MudLink>
-                        <MudLink Href="alimentacao" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Fastfood" Title="Favorite" />Alimentação</MudLink>
+                        @* <MudLink Href="alimentacao" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.Fastfood" Title="Favorite" />Alimentação</MudLink> *@
                         <MudLink Href="informatica" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.Computer" Title="Favorite" />Informática</MudLink>
-                        <MudLink Href="produtos" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.Computer" Title="Favorite" />produtos</MudLink>
-                        @if (FirestoreService.TemAssinaturaAtiva)
+                       @*  @if (FirestoreService.TemAssinaturaAtiva)
                         {
-                            <MudLink Href="cadastrarAnunciante" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Cadastrar Anunciante</MudLink>
+                            <MudLink Href="meusAnuncios" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.Article" Title="Favorite" />Meus Anuncios</MudLink>
+                            <MudLink Href="cadastrarAnunciante" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Cadastrar Anunciante</MudLink>
+                        } *@
+                        @if (FirestoreService.IsAuthenticated)
+                        {
+                            <MudLink Href="minha-conta" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Minha Conta</MudLink>
+
                         }
+                        <MudLink Href="produtos" Style="background-color: #65cb65;" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AddCard" Title="Favorite" />Assinatura</MudLink>
 
                         <div class="infos">
                             @*   @if (!String.IsNullOrEmpty(FirestoreService.NomeUsuario))

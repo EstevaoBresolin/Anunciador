@@ -1,0 +1,67 @@
+﻿@page "/minha-conta"
+@using AnunciadorV1.Models
+@using AnunciadorV1.Services
+@inject NavigationManager Navigation
+@inject FirestoreService FirestoreService
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-6">
+    <MudPaper Elevation="4" Class="pa-6 rounded-xl">
+        <MudText Typo="Typo.h5" GutterBottom="true">Minha Conta</MudText>
+
+        <MudDivider Class="mb-4" />
+
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudTextField Label="Nome" @bind-Value="FirestoreService.NomeUsuario" ReadOnly="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudTextField Label="Email" @bind-Value="FirestoreService.Email" ReadOnly="true" />
+            </MudItem>
+        </MudGrid>
+
+        <MudPaper Elevation="2" Class="pa-4 mt-6 rounded-md">
+            <MudText Style="color: black" Typo="Typo.subtitle1">Assinatura</MudText>
+            @if (infos.Status == "active")
+            {
+                <MudText Typo="Typo.body2" Style="color: black">Plano Ativo - @infos.Tipo</MudText>
+                <MudText Typo="Typo.body2" Style="color: black">Válido até @infos.DataExpiracao</MudText>
+            }
+            else
+            {
+                <MudText Typo="Typo.body2" Style="color: black">Nenhuma assinatura ativa</MudText>
+                <MudButton Variant="Variant.Filled" Style="color: black" Class="mt-2" OnClick="IrParaGerenciarAssinatura">Ativar Assinatura</MudButton>
+            }
+        </MudPaper>
+
+        <MudDivider Class="my-4" />
+
+        <MudStack Direction="Row" Spacing="2">
+            <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaMeusAnuncios">
+                <MudIcon Icon="@Icons.Material.Filled.List" Class="me-2" /> Meus Anúncios
+            </MudButton>
+
+            <MudButton Variant="Variant.Outlined" Color="Color.Default" OnClick="IrParaCadastrar">
+                <MudIcon Icon="@Icons.Material.Filled.AddCircleOutline" Class="me-2" /> Cadastrar Anúncio
+            </MudButton>
+
+            <MudButton Variant="Variant.Text" Color="Color.Default" OnClick="IrParaPagamento">
+                <MudIcon Icon="@Icons.Material.Filled.Payment" Class="me-2" /> Gerenciar Assinatura
+            </MudButton>
+        </MudStack>
+    </MudPaper>
+</MudContainer>
+
+@code {
+
+    private User infos = new User();
+
+    protected override async Task OnInitializedAsync()
+    {
+        infos = await FirestoreService.GetStatusAssinatura();
+    }
+
+    private void IrParaMeusAnuncios() => Navigation.NavigateTo("/meusAnuncios");
+    private void IrParaCadastrar() => Navigation.NavigateTo("/cadastrarAnunciante");
+    private void IrParaGerenciarAssinatura() => Navigation.NavigateTo("/assinatura");
+    private void IrParaPagamento() => Navigation.NavigateTo("/pagamento");
+}
