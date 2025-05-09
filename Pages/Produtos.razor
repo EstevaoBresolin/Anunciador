@@ -7,31 +7,46 @@
 
 <PageTitle>Assinaturas</PageTitle>
 
-<MudContainer>
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-6">
+    <MudText Typo="Typo.h4" Style="font-size: 28px; text-align: center !important;" Class="mb-4">Escolha sua assinatura</MudText>
+
     @if (produtos == null)
     {
-        <MudProgressCircular Indeterminate="true" />
+        <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
     }
     else
     {
-        @foreach (var produto in produtos)
-        {
-            <MudPaper Class="p-4 mb-4">
-                <MudText Typo="Typo.h5">@produto.Name</MudText>
-                <MudStack Spacing="2">
-                    @foreach (var preco in produto.Precos)
-                    {
-                        <MudPaper Class="p-2 d-flex justify-between align-center">
-                            <MudText>@preco.Description - @FormatarPreco(preco.UnitAmount, preco.Currency)</MudText>
-                            <MudButton OnClick="() => CriarSessaoCheckoutAsync(preco.Id)" Color="Color.Primary">
-                                Assinar
-                            </MudButton>
-                        </MudPaper>
-                    }
-                </MudStack>
-
-            </MudPaper>
-        }
+        <MudGrid Style="justify-content: center !important;">
+            @foreach (var produto in produtos)
+            {
+                <MudItem xs="12" sm="6">
+                    <MudCard Class="rounded-xl shadow-lg">
+                        <MudCardContent>
+                            @* <MudText Typo="Typo.h6">@produto.Name</MudText> *@
+                            <MudStack Spacing="3" Class="mt-2">
+                                @foreach (var preco in produto.Precos)
+                                {
+                                    <MudPaper Elevation="1" Class="p-3 d-flex justify-between align-center rounded-lg" Style="background-color: #f9f9f9; height: 170px;">
+                                        <MudStack Style="align-items: center; justify-content: space-between" Class="w-100">
+                                            <MudText>
+                                                @* <MudIcon Icon="@Icons.Material.Filled.StarOutline" Class="mr-1" /> *@
+                                                @preco.Description
+                                            </MudText>
+                                            <MudText Color="Color.Primary" Class="font-weight-bold">
+                                                @FormatarPreco(preco.UnitAmount, preco.Currency)
+                                            </MudText>
+                                            <MudButton OnClick="() => CriarSessaoCheckoutAsync(preco.Id)" Color="Color.Primary" Variant="Variant.Filled" Size="Size.Small">
+                                                Assinar
+                                            </MudButton>
+                                        </MudStack>
+                                    </MudPaper>
+                                }
+                            </MudStack>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
     }
 </MudContainer>
 

@@ -1,6 +1,6 @@
 {
-  "name": "AnunciadorV1",
-  "short_name": "AnunciadorV1",
+  "name": "Conecte Fé",
+  "short_name": "Conecte Fé",
   "id": "./",
   "start_url": "./",
   "display": "standalone",
@@ -9,12 +9,12 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "icon-512.png",
+      "src": "icone-conectefe_512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "icon-192.png",
+      "src": "icone-conectefe_192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     }

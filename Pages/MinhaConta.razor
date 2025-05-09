@@ -3,6 +3,7 @@
 @using AnunciadorV1.Services
 @inject NavigationManager Navigation
 @inject FirestoreService FirestoreService
+@inject IJSRuntime _jsRuntime
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-6">
     <MudPaper Elevation="4" Class="pa-6 rounded-xl">
@@ -12,10 +13,10 @@
 
         <MudGrid>
             <MudItem xs="12" sm="6">
-                <MudTextField Label="Nome" @bind-Value="FirestoreService.NomeUsuario" ReadOnly="true" />
+                <MudTextField Label="Nome" @bind-Value="FirestoreService.NomeUsuario" Disabled ReadOnly="true" />
             </MudItem>
             <MudItem xs="12" sm="6">
-                <MudTextField Label="Email" @bind-Value="FirestoreService.Email" ReadOnly="true" />
+                <MudTextField Label="Email" @bind-Value="FirestoreService.Email" Disabled ReadOnly="true" />
             </MudItem>
         </MudGrid>
 
@@ -35,23 +36,33 @@
 
         <MudDivider Class="my-4" />
 
-        <MudStack Direction="Row" Spacing="2">
-            <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaMeusAnuncios">
-                <MudIcon Icon="@Icons.Material.Filled.List" Class="me-2" /> Meus Anúncios
-            </MudButton>
+        @if(redirecionando){
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
+                <MudProgressCircular Indeterminate="true"/>
+                <p style="text-align:center;"> Redirecionando... </p>
+            </div>
+        }
+        else{
+            <MudStack Direction="Row" Spacing="3">
+                <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaMeusAnuncios">
+                    <MudIcon Icon="@Icons.Material.Filled.List" Class="me-2" /> Meus Anúncios
+                </MudButton>
 
-            <MudButton Variant="Variant.Outlined" Color="Color.Default" OnClick="IrParaCadastrar">
-                <MudIcon Icon="@Icons.Material.Filled.AddCircleOutline" Class="me-2" /> Cadastrar Anúncio
-            </MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaCadastrar">
+                    <MudIcon Icon="@Icons.Material.Filled.AddCircleOutline" Class="me-2" /> Cadastrar Anúncio
+                </MudButton>
 
-            <MudButton Variant="Variant.Text" Color="Color.Default" OnClick="IrParaPagamento">
-                <MudIcon Icon="@Icons.Material.Filled.Payment" Class="me-2" /> Gerenciar Assinatura
-            </MudButton>
-        </MudStack>
+                <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="AcessarPortalCliente">
+                    <MudIcon Icon="@Icons.Material.Filled.Payment" Class="me-2" /> Gerenciar Assinatura
+                </MudButton>
+            </MudStack>
+        }
+
     </MudPaper>
 </MudContainer>
 
 @code {
+    private bool redirecionando = false;
 
     private User infos = new User();
 
@@ -63,5 +74,23 @@
     private void IrParaMeusAnuncios() => Navigation.NavigateTo("/meusAnuncios");
     private void IrParaCadastrar() => Navigation.NavigateTo("/cadastrarAnunciante");
     private void IrParaGerenciarAssinatura() => Navigation.NavigateTo("/assinatura");
-    private void IrParaPagamento() => Navigation.NavigateTo("/pagamento");
+
+    private async Task AcessarPortalCliente()
+    {
+        redirecionando = true;
+        try{
+            await _jsRuntime.InvokeVoidAsync("firebaseService.createLinkPortalCliente",
+                Navigation.BaseUri
+            );
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao acessar o portal do cliente: {ex.Message}");
+        }
+        finally{
+            await Task.Delay(1000);
+            redirecionando = false;
+        }
+    }
 }

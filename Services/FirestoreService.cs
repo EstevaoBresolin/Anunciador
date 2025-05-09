@@ -40,13 +40,21 @@ namespace AnunciadorV1.Services
         }
         public async void SetAuthenticated(bool isAuthenticated)
         {
-            _isAuthenticated = isAuthenticated;
-            OnAuthStateChanged?.Invoke();
-
-            if (isAuthenticated && !string.IsNullOrEmpty(UidUsuario))
+            try
             {
-                await IniciarMonitoramentoAssinaturaAsync(UidUsuario);
+                _isAuthenticated = isAuthenticated;
+                OnAuthStateChanged?.Invoke();
+
+                if (isAuthenticated && !string.IsNullOrEmpty(UidUsuario))
+                {
+                    await IniciarMonitoramentoAssinaturaAsync(UidUsuario);
+                }
             }
+            catch(Exception ex)
+            {
+
+            }
+            
         }
         public async Task AddAnunciante(object anunciante)
         {
@@ -134,9 +142,9 @@ namespace AnunciadorV1.Services
 
             try
             {
-                int numeroConvertido = dados.TryGetValue("numero", out var numero) && int.TryParse(numero?.ToString(), out var tempNumero)
-                    ? tempNumero
-                    : 0;
+                long numeroConvertido = dados.TryGetValue("numero", out var numero) && long.TryParse(numero?.ToString(), out var tempNumero)
+                ? tempNumero
+                : 0;
 
                 var anunciante = new Anunciante
                 {
@@ -314,16 +322,23 @@ namespace AnunciadorV1.Services
 
             return null;
         }
-
+      
         public async Task IniciarMonitoramentoAssinaturaAsync(string userUid)
         {
-            var temAssinatura = await _jsRuntime.InvokeAsync<bool>("firebaseService.getActiveSubscriptionStatus", userUid);
-            TemAssinaturaAtiva = temAssinatura;
+            var temAssinatura = await _jsRuntime.InvokeAsync<ResultadoAssinatura>("firebaseService.getActiveSubscriptionStatus", userUid);
+            TemAssinaturaAtiva = temAssinatura.Sucesso;
         }
+       
+        //public async Task RedirecionarParaPortal()
+        //{
+        //    await _jsRuntime.InvokeAsync<string>("firebaseService.getCurrentUserId", NavigationManager.);
+        //}
+
         public async Task<string> UploadImagemFromInput(ElementReference inputRef, string path)
         {
             return await _jsRuntime.InvokeAsync<string>("firebaseService.uploadImageFromInput", inputRef, path);
         }
+       
         public async Task<string> GetCurrentUserId()
         {
             return await _jsRuntime.InvokeAsync<string>("firebaseService.getCurrentUserId");
@@ -343,6 +358,9 @@ namespace AnunciadorV1.Services
                 DataExpiracao = result.TryGetValue("dataExpiracao", out var dataExp) ? dataExp?.ToString() : "indefinida"
             };
         }
-       
+        public class ResultadoAssinatura
+        {
+            public bool Sucesso { get; set; }
+        }
     }
 }

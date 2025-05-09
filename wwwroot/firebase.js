@@ -3,6 +3,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebas
 import { getFirestore, collection, getDoc, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 import { getAuth, setPersistence, browserLocalPersistence, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-storage.js";
+import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-functions.js";
+
 // Inicializar o Firebase com a configuração fornecida
 window.firebaseService = {
     app: null,
@@ -75,7 +77,7 @@ window.firebaseService = {
 
 
         const anunciantesRef = collection(db, 'anunciantes');
-        const ativosQuery = query(anunciantesRef, where('AtivoInativo', '==', true)); // ou 'ativo', se for o nome do campo
+        const ativosQuery = query(anunciantesRef, where('ativoInativo', '==', true)); // ou 'ativo', se for o nome do campo
         const querySnapshot = await getDocs(ativosQuery);
 
         // Mapeia os documentos para um formato legível
@@ -206,7 +208,6 @@ window.firebaseService = {
         }
     },
 
-    // Adiciona uma sessão de checkout
     addCheckoutSession: async function (uid, sessionData) {
         const db = getFirestore();
 
@@ -231,15 +232,18 @@ window.firebaseService = {
         });
     },
 
-    //getActiveSubscriptionStatus: async function (uid) {
-    //    const db = getFirestore();
-    //    const subscriptionsSnapshot = await getDocs(query(
-    //        collection(doc(collection(db, "customers"), uid), "subscriptions"),
-    //        where("status", "in", ["trialing", "active"])
-    //    ));
+    createLinkPortalCliente: async function (returnUrl) {
+        const functions = getFunctions(this.app, "southamerica-east1"); // região
+        const createPortalLink = httpsCallable(functions, "ext-firestore-stripe-payments-createPortalLink");
 
-    //    return !subscriptionsSnapshot.empty;
-    //},
+        const { data } = await createPortalLink({
+            returnUrl: returnUrl,
+            locale: "auto",
+            configuration: null, // ou remova se não quiser
+        })
+
+        window.location.assign(data.url);
+    },
 
     getActiveSubscriptionStatus: async function (uid) {
         const db = getFirestore();
@@ -284,6 +288,7 @@ window.firebaseService = {
         const user = auth.currentUser;
         return user ? user.uid : null;
     },
+
 
 };
 

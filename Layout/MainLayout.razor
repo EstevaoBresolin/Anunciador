@@ -20,7 +20,7 @@
     <MudPaper Class="mud-background-secondary menu-bar">
         <div style="display: flex;justify-content: space-between;align-items: center;background: royalblue;position: absolute;width: 100%; z-index: 2;">
             <MudIconButton OnClick="OpenMenu" Icon="@Icons.Material.Filled.Menu" Color="Color.Default" style="color: white !important;" />
-            <MudLink Href="@navigation.BaseUri" style="font-size: 1rem; color: white !important;">Conecte Membros</MudLink>
+            <MudLink Href="@navigation.BaseUri" style="font-size: 1rem; color: white !important;">Conecte Fé</MudLink>
             @if (FirestoreService.IsAuthenticated)
             {
                 <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.Logout" Color="Color.Default" OnClick="Logout" />
@@ -56,7 +56,8 @@
                             <MudLink Href="minha-conta" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Minha Conta</MudLink>
 
                         }
-                        <MudLink Href="produtos" Style="background-color: #65cb65;" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AddCard" Title="Favorite" />Assinatura</MudLink>
+                            <MudLink Href="produtos" Style="background-color: #65cb65;" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AddCard" Title="Favorite" />Assinatura</MudLink>
+                      
 
                         <div class="infos">
                             @*   @if (!String.IsNullOrEmpty(FirestoreService.NomeUsuario))
