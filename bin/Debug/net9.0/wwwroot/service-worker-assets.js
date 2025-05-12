@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "IrSa45cL",
+  "version": "SexaU7Ha",
   "assets": [
     {
       "hash": "sha256-LoGIGNjKzpPYd/CuPNcoe46XPkqmix6w2YumcPOL9gg=",
@@ -18,12 +18,12 @@ self.assetsManifest = {
       "url": "_content/MudBlazor/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-PweUmXf1ys2VwMpEgG2Q/D6QtPqrpv/MwTR20+TIzEA=",
-      "url": "_framework/AnunciadorV1.9munq9ijft.pdb"
+      "hash": "sha256-vnycUnuxh+h+QNRNDf25v+qYePouwkoL2Nurnge+9Ps=",
+      "url": "_framework/AnunciadorV1.apf9hppmix.pdb"
     },
     {
-      "hash": "sha256-58hnj1jGLDRajHlu5ypfsq1aFSJGAfd7ipqdRzAXvPE=",
-      "url": "_framework/AnunciadorV1.fumdsmav2d.wasm"
+      "hash": "sha256-CMnibrvmOPcVonGkqo0qst2yezOkB7f6lKrSyYzAzrQ=",
+      "url": "_framework/AnunciadorV1.wmt461rdrk.wasm"
     },
     {
       "hash": "sha256-N6/4dp+rtuEu+iWs7ZZs30QrZzpGpF9KC6ulCWZCo2w=",
@@ -798,7 +798,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.5lai2eowco.wasm"
     },
     {
-      "hash": "sha256-pJs5grmJLoxDrecMMGTsZcMUhJsVGikrtGNHfasQ7sQ=",
+      "hash": "sha256-9bOkoY/PaqmcDM3mwD8u9PEBzGE47b6Nt7zu6LLnO4w=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -886,7 +886,7 @@ self.assetsManifest = {
       "url": "icone-conectefe_512x512.png"
     },
     {
-      "hash": "sha256-dZvvGo3t+C6wCgwVzS6cisRwwgbpaTzyVoF5J4qUkbE=",
+      "hash": "sha256-qK9IpEQ1xz9ehFxnxT08EEdS+vsulC/LyyIraVRPv1s=",
       "url": "index.html"
     },
     {
@@ -1072,6 +1072,10 @@ self.assetsManifest = {
     {
       "hash": "sha256-enKgCMkYmCpfEcmg6Annbmc40VZ/A6aYYSQjZfVn2cU=",
       "url": "sample-data/weather.json"
+    },
+    {
+      "hash": "sha256-ypuCsEhykTz2F9nzuEDSbJGA/oRbpF3FTfGjSO4mtHg=",
+      "url": "sitemap.xml"
     }
   ]
 };

@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "/pSikEiv",
+  "version": "YL6I05W3",
   "assets": [
     {
       "hash": "sha256-LoGIGNjKzpPYd/CuPNcoe46XPkqmix6w2YumcPOL9gg=",
@@ -18,8 +18,8 @@ self.assetsManifest = {
       "url": "_content/MudBlazor/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-TPHDOgAK+AlqANNmFQtrjrbpSJ0hccDU2S2BhKXHaX4=",
-      "url": "_framework/AnunciadorV1.42k7s5co1s.wasm"
+      "hash": "sha256-vEkU//XtOD+mYyVd4iF5DSsOKD4bwHDLvSYhBRfm0nk=",
+      "url": "_framework/AnunciadorV1.cybn2i5ks1.wasm"
     },
     {
       "hash": "sha256-6TjAnwK83qx2u7jJRERCUpe4alFqntX4/M0Mk/AXYRA=",
@@ -190,7 +190,7 @@ self.assetsManifest = {
       "url": "_framework/System.f0fr8djds0.wasm"
     },
     {
-      "hash": "sha256-FlTgEzJZDxsbuGPVg2DV9I+iKwGG/GqGG/8bPnkjhzw=",
+      "hash": "sha256-jnrMCb08wFYVPWNVJ4PEKRpRCS8ShUjkt/LI/g19XMU=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -262,7 +262,7 @@ self.assetsManifest = {
       "url": "icone-conectefe_512x512.png"
     },
     {
-      "hash": "sha256-dZvvGo3t+C6wCgwVzS6cisRwwgbpaTzyVoF5J4qUkbE=",
+      "hash": "sha256-qK9IpEQ1xz9ehFxnxT08EEdS+vsulC/LyyIraVRPv1s=",
       "url": "index.html"
     },
     {
@@ -448,6 +448,10 @@ self.assetsManifest = {
     {
       "hash": "sha256-enKgCMkYmCpfEcmg6Annbmc40VZ/A6aYYSQjZfVn2cU=",
       "url": "sample-data/weather.json"
+    },
+    {
+      "hash": "sha256-ypuCsEhykTz2F9nzuEDSbJGA/oRbpF3FTfGjSO4mtHg=",
+      "url": "sitemap.xml"
     }
   ]
 };
