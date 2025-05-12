@@ -54,6 +54,10 @@
                         @if (FirestoreService.IsAuthenticated)
                         {
                             <MudLink Href="minha-conta" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Minha Conta</MudLink>
+                            @if(FirestoreService.IsAdm){
+                                <MudLink Href="administrador" Style="background-color: #65cb65;" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AdminPanelSettings" Title="Favorite" />Administrador</MudLink>
+
+                            }
 
                         }
                             <MudLink Href="produtos" Style="background-color: #65cb65;" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AddCard" Title="Favorite" />Assinatura</MudLink>

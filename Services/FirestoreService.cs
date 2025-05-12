@@ -16,7 +16,7 @@ namespace AnunciadorV1.Services
         public string Email = "";
         public string? UidUsuario { get; private set; } = null;
         public bool TemAssinaturaAtiva { get; private set; } = false;
-
+        public bool IsAdm { get; private set; } = false;
         public bool IsAuthenticated
         {
             get => _isAuthenticated;
@@ -86,20 +86,20 @@ namespace AnunciadorV1.Services
 
         public async Task<List<Anunciante>> GetAnunciantes()
         {
-            var firebaseConfig = new
-            {
-                apiKey = "AIzaSyC4yQ7qg9u8y7h9wh7y0GZygKdMgaoGDE8",
-                authDomain = "conectemembros.firebaseapp.com",
-                projectId = "conectemembros",
-                storageBucket = "conectemembros.firebasestorage.app",
-                messagingSenderId = "882219848815",
-                appId = "1:882219848815:web:f04520e555863ccf2d699a"
-            };
+            //var firebaseConfig = new
+            //{
+            //    apiKey = "AIzaSyC4yQ7qg9u8y7h9wh7y0GZygKdMgaoGDE8",
+            //    authDomain = "conectemembros.firebaseapp.com",
+            //    projectId = "conectemembros",
+            //    storageBucket = "conectemembros.firebasestorage.app",
+            //    messagingSenderId = "882219848815",
+            //    appId = "1:882219848815:web:f04520e555863ccf2d699a"
+            //};
 
-            var db = await _jsRuntime.InvokeAsync<IJSObjectReference>("firebaseService.initializeApp", firebaseConfig);
+            //var db = await _jsRuntime.InvokeAsync<IJSObjectReference>("firebaseService.initializeApp", firebaseConfig);
 
             // Passar a instância do Firestore (db) para a função getAnunciantes
-             var result = await _jsRuntime.InvokeAsync<List<Dictionary<string, object>>>("firebaseService.getAnunciantes", db);
+             var result = await _jsRuntime.InvokeAsync<List<Dictionary<string, object>>>("firebaseService.getAnunciantes");
 
             return result.Select(d => ConverterParaAnunciante(d)).ToList();
         }
@@ -107,6 +107,13 @@ namespace AnunciadorV1.Services
         public async Task<List<Anunciante>> GetAnunciosUsuario()
         {
             var result = await _jsRuntime.InvokeAsync<List<Dictionary<string, object>>>("firebaseService.getAnunciosUsuario", UidUsuario);
+
+            return result.Select(d => ConverterParaAnunciante(d)).ToList();
+        }
+
+        public async Task<List<Anunciante>> GetAnunciosUsuario(string uid)
+        {
+            var result = await _jsRuntime.InvokeAsync<List<Dictionary<string, object>>>("firebaseService.getAnunciosUsuario", uid);
 
             return result.Select(d => ConverterParaAnunciante(d)).ToList();
         }
@@ -158,6 +165,7 @@ namespace AnunciadorV1.Services
                     Categoria = dados.TryGetValue("categoria", out var categoria) && int.TryParse(categoria?.ToString(), out var categoriaConvertida) ? categoriaConvertida : 0,
                     Instagram = dados.TryGetValue("instagram", out var instagram) ? instagram.ToString() : "instagram não disponível",
                     UidUsuario = dados.TryGetValue("uidUsuario", out var uidUsuario) ? uidUsuario.ToString() : "",
+                    AtivoInativo = dados.TryGetValue("ativoInativo", out var ativoInativo) && bool.TryParse(ativoInativo?.ToString(), out var resultado) ? resultado : false,
                 };
 
                 return anunciante;
@@ -178,7 +186,6 @@ namespace AnunciadorV1.Services
             {
                 NomeUsuario = email.Split('@')[0];
                 Email = email;
-
                 UidUsuario = await _jsRuntime.InvokeAsync<string>("firebaseService.getCurrentUserUid");
 
                 _isAuthenticated = true;
@@ -326,6 +333,7 @@ namespace AnunciadorV1.Services
         public async Task IniciarMonitoramentoAssinaturaAsync(string userUid)
         {
             var temAssinatura = await _jsRuntime.InvokeAsync<ResultadoAssinatura>("firebaseService.getActiveSubscriptionStatus", userUid);
+            GetAdm();
             TemAssinaturaAtiva = temAssinatura.Sucesso;
         }
        
@@ -358,6 +366,59 @@ namespace AnunciadorV1.Services
                 DataExpiracao = result.TryGetValue("dataExpiracao", out var dataExp) ? dataExp?.ToString() : "indefinida"
             };
         }
+
+        public async Task GetAdm()
+        {
+            var temAssinatura = await _jsRuntime.InvokeAsync<string>("firebaseService.getAdm");
+            if (temAssinatura == UidUsuario)
+            {
+                IsAdm = true;
+            }
+            else
+            {
+                IsAdm = false;
+            }
+        }
+
+        public async Task<List<Anunciante>> GetAnunciosComAssinaturaExpirada()
+        {
+            List<Anunciante> anuncios = new();
+            var anunciantes = await GetAnunciantes();
+            foreach (var anunciante in anunciantes)
+            {
+                Usuario usuario = new();
+                var assinaturaStatus = await GetAssinaturaStatus(anunciante.UidUsuario);
+                if (assinaturaStatus == null) continue;
+                usuario.AssinaturaAtiva = assinaturaStatus.Sucesso;
+                usuario.TemAnuncioAtivo = await VerificarAnuncioAtivo(anunciante.UidUsuario);
+
+                if(usuario.TemAnuncioAtivo == true && usuario.AssinaturaAtiva == false)
+                {
+                    anuncios.Add(anunciante);
+                }
+            }
+            return anuncios;
+        }
+
+        private async Task<ResultadoAssinatura> GetAssinaturaStatus(string userId)
+        {
+            if (String.IsNullOrEmpty(userId))
+            {
+                return null;
+            }
+            var result = await _jsRuntime.InvokeAsync<Dictionary<string, object>>("firebaseService.getActiveSubscriptionStatus", userId);
+            return new ResultadoAssinatura
+            {
+                Sucesso = result != null && result.ContainsKey("status") && result["status"].ToString().Equals("active", StringComparison.OrdinalIgnoreCase)
+            };
+        }
+
+        private async Task<bool> VerificarAnuncioAtivo(string userId)
+        {
+            var anuncios = await GetAnunciosUsuario(userId);
+            return anuncios.Any(anuncio => anuncio.AtivoInativo);
+        }
+
         public class ResultadoAssinatura
         {
             public bool Sucesso { get; set; }

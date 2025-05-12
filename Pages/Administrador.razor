@@ -1,0 +1,54 @@
+﻿@page "/administrador"
+@using AnunciadorV1.Models
+@using AnunciadorV1.Services
+
+@inject FirestoreService FirestoreService
+@inject ISnackbar Snackbar
+
+<h1>Página de Administrador</h1>
+
+@if (anuncios == null)
+{
+    <p>Carregando...</p>
+}
+else
+{
+    <h2> Anuncios com assinatura expirada</h2>
+    <MudGrid GutterSize="3">
+        @foreach (var a in anuncios)
+        {
+            <MudItem xs="12" sm="6">
+                <MudCard Elevation="4" Class="h-100">
+                    <MudCardContent>
+                        <MudText Typo="Typo.h6">Titulo: @a.Titulo</MudText>
+                        <MudText Typo="Typo.body2">Nome: @a.Nome</MudText>
+                        <MudText Typo="Typo.body2">Descrição: @a.Descricao</MudText>
+                    </MudCardContent>
+                    <MudCardActions Class="justify-end">
+                        @* <MudButton Style="margin-right: 0.5rem; background-color: royalblue; color: white;" Variant="Variant.Filled" OnClick="() => Editar(a.Id)">Editar</MudButton> *@
+                        <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="() => Editar(a)">Inativar</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+}
+
+@code {
+    private List<Anunciante> anuncios;
+
+    protected override async Task OnInitializedAsync()
+    {
+        anuncios = await FirestoreService.GetAnunciosComAssinaturaExpirada();
+    }
+
+    private async void Editar(Anunciante anunciante)
+    {
+        anunciante.AtivoInativo = false;
+        await FirestoreService.UpdateAnunciante(anunciante, anunciante.Id);
+        anuncios.Remove(anunciante);
+        StateHasChanged();
+        Snackbar.Add("Anuncio inativado com sucesso", Severity.Success, c => c.HideIcon = true);
+
+    }
+}

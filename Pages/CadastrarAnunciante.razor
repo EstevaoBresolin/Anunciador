@@ -72,6 +72,7 @@
     private string? mensagem;
 
     private List<Anunciante>? anunciantes;
+    private List<Anunciante>? quantidadeDeAnuncios;
 
     private ElementReference inputFileRef;
     private ElementReference inputFileRefe;
@@ -133,6 +134,15 @@
         novoAnunciante.Categoria = (int)Categoria;
         novoAnunciante.AtivoInativo = true;
         novoAnunciante.UidUsuario = await FirestoreService.GetCurrentUserId();
+
+        quantidadeDeAnuncios = await FirestoreService.GetAnunciosUsuario();
+
+        if (quantidadeDeAnuncios.Count >= 5)
+        {
+            Snackbar.Add("Você já possui 5 anúncios ativos. Para cadastrar mais, desative um anúncio existente.", Severity.Error, c => c.HideIcon = true);
+            return;
+        }
+
         // novoAnunciante.EnderecoFoto = url;
         await FirestoreService.AddAnunciante(novoAnunciante);
 

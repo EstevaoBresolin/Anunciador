@@ -4,6 +4,7 @@
 @inject NavigationManager Navigation
 @inject FirestoreService FirestoreService
 @inject IJSRuntime _jsRuntime
+@inject ISnackbar Snackbar
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-6">
     <MudPaper Elevation="4" Class="pa-6 rounded-xl">
@@ -22,7 +23,7 @@
 
         <MudPaper Elevation="2" Class="pa-4 mt-6 rounded-md">
             <MudText Style="color: black" Typo="Typo.subtitle1">Assinatura</MudText>
-            @if (infos.Status == "active")
+            @if (infos != null && infos.Status == "active")
             {
                 <MudText Typo="Typo.body2" Style="color: black">Plano Ativo - @infos.Tipo</MudText>
                 <MudText Typo="Typo.body2" Style="color: black">Válido até @infos.DataExpiracao</MudText>
@@ -44,17 +45,21 @@
         }
         else{
             <MudStack Direction="Row" Spacing="3">
-                <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaMeusAnuncios">
-                    <MudIcon Icon="@Icons.Material.Filled.List" Class="me-2" /> Meus Anúncios
-                </MudButton>
+                @if (infos != null && infos.Status == "active")
+                {
+                    <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaMeusAnuncios">
+                        <MudIcon Icon="@Icons.Material.Filled.List" Class="me-2" /> Meus Anúncios
+                    </MudButton>
 
-                <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaCadastrar">
-                    <MudIcon Icon="@Icons.Material.Filled.AddCircleOutline" Class="me-2" /> Cadastrar Anúncio
-                </MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaCadastrar">
+                        <MudIcon Icon="@Icons.Material.Filled.AddCircleOutline" Class="me-2" /> Cadastrar Anúncio
+                    </MudButton>
 
-                <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="AcessarPortalCliente">
-                    <MudIcon Icon="@Icons.Material.Filled.Payment" Class="me-2" /> Gerenciar Assinatura
-                </MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="AcessarPortalCliente">
+                        <MudIcon Icon="@Icons.Material.Filled.Payment" Class="me-2" /> Gerenciar Assinatura
+                    </MudButton>
+                }
+                
             </MudStack>
         }
 
@@ -72,8 +77,21 @@
     }
 
     private void IrParaMeusAnuncios() => Navigation.NavigateTo("/meusAnuncios");
-    private void IrParaCadastrar() => Navigation.NavigateTo("/cadastrarAnunciante");
-    private void IrParaGerenciarAssinatura() => Navigation.NavigateTo("/assinatura");
+    private void IrParaCadastrar(){
+        if (infos != null && infos.Status == "active")
+        {
+            Navigation.NavigateTo("/cadastrarAnunciante");
+            return;
+        }
+        else
+        {
+            Snackbar.Add("Você não possui uma assinatura.", Severity.Error);
+
+            return;
+        }
+        // Navigation.NavigateTo("/cadastrarAnunciante");
+    }
+    private void IrParaGerenciarAssinatura() => Navigation.NavigateTo("/produtos");
 
     private async Task AcessarPortalCliente()
     {
@@ -89,7 +107,7 @@
             Console.WriteLine($"Erro ao acessar o portal do cliente: {ex.Message}");
         }
         finally{
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             redirecionando = false;
         }
     }
