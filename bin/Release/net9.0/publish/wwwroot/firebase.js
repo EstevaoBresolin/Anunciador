@@ -66,23 +66,15 @@ window.firebaseService = {
     return produtos;
     },
 
-    getAnunciantes: async function (db) {
-        if (!db) {
-            throw new Error('Firestore não foi inicializado corretamente');
-        }
-
-        // Usar a API modular para acessar a coleção
-        //const anunciantesRef = collection(db, 'anunciantes');  // Referência à coleção
-        //const querySnapshot = await getDocs(anunciantesRef);  // Obtém os documentos da coleção
-
-
+    getAnunciantes: async function () {
+        const db = getFirestore();
         const anunciantesRef = collection(db, 'anunciantes');
         const ativosQuery = query(anunciantesRef, where('ativoInativo', '==', true)); // ou 'ativo', se for o nome do campo
         const querySnapshot = await getDocs(ativosQuery);
 
         // Mapeia os documentos para um formato legível
         return querySnapshot.docs.map(doc => ({
-            id: doc.id,
+            idFirestore: doc.id,
             ...doc.data()
         }));
         //return querySnapshot.docs.map(doc => doc.data());
@@ -267,6 +259,8 @@ window.firebaseService = {
         };
     },
 
+
+
     uploadImageFromInput: async function (element, path) {
         const file = element.files[0];
         if (!file) throw new Error("Nenhum arquivo selecionado");
@@ -289,7 +283,24 @@ window.firebaseService = {
         return user ? user.uid : null;
     },
 
+    getAdm: async function () {
+        const db = getFirestore();
 
+        if (!db) {
+            throw new Error('Firestore não foi inicializado corretamente');
+        }
+
+        const admRef = collection(db, "adm");
+        const admSnapshot = await getDocs(admRef);
+
+        // Supondo que exista apenas um documento
+        if (!admSnapshot.empty) {
+            const doc = admSnapshot.docs[0]; // Pega o primeiro (e único) documento
+            return doc.data().uid; // Substitua "campo" pelo nome real do campo que você deseja
+        } else {
+            throw new Error('Documento não encontrado');
+        }
+    }
 };
 
 
