@@ -10,19 +10,19 @@ namespace AnunciadorV1.Models
         //[Description("Construção")]
         //Construcao = 1,
 
-        [Description("Financeiro")]
+        [Description("Indústria e Comércio")]
         Financeiro = 2,
 
-        [Description("Consultoria")]
+        [Description("Profissionais e Consultoria Especializada")]
         Consultoria = 3,
 
         [Description("Outros")]
         Outros = 4,
 
-        [Description("Informatica")]
+        [Description("Construção, Manutenção e Tecnologia")]
         Informatica = 5,
 
-        [Description("Saúde e Beleza")]
+        [Description("Serviços Pessoais e Bem-estar")]
         SaudeEBeleza = 6
     }
 }

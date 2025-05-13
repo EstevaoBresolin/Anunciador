@@ -77,12 +77,6 @@
 
     private async Task CriarSessaoCheckoutAsync(string precoId)
     {
-        infos = await FirestoreService.GetStatusAssinatura();
-        if (infos != null && infos.Status == "active"){
-            Snackbar.Add("Você já possui uma assinatura ativa.", Severity.Success);
-
-            return;
-        }
         try
         {
             redirecionando = true;
@@ -92,9 +86,20 @@
 
             if (string.IsNullOrEmpty(userUid))
             {
+                Snackbar.Add("Faça login, antes de escolher uma assinatura", Severity.Success);
+
                 Navigation.NavigateTo("login");
 
                 // await _jsRuntime.InvokeVoidAsync("alert", "Usuário não está logado.");
+                return;
+            }
+
+            infos = await FirestoreService.GetStatusAssinatura();
+            if (infos != null && infos.Status == "active")
+            {
+                Snackbar.Add("Você já possui uma assinatura ativa. Se deseja alterar sua assinatura, vá para minha conta", Severity.Success);
+                redirecionando = false;
+
                 return;
             }
 
