@@ -4,6 +4,7 @@
 @inject IJSRuntime _jsRuntime
 @inject NavigationManager Navigation
 @inject FirestoreService FirestoreService
+@inject ISnackbar Snackbar
 
 <PageTitle>Assinaturas</PageTitle>
 
@@ -60,7 +61,10 @@
 
 @code {
     private List<Produto> produtos;
+    private User infos = new User();
+
     private bool redirecionando = false;
+
     protected override async Task OnInitializedAsync()
     {
         produtos = await FirestoreService.GetProdutos();
@@ -73,6 +77,12 @@
 
     private async Task CriarSessaoCheckoutAsync(string precoId)
     {
+        infos = await FirestoreService.GetStatusAssinatura();
+        if (infos != null && infos.Status == "active"){
+            Snackbar.Add("Você já possui uma assinatura ativa.", Severity.Success);
+
+            return;
+        }
         try
         {
             redirecionando = true;
@@ -92,8 +102,8 @@
             var sessionData = new Dictionary<string, object>
             {
                 { "price", precoId },
-                { "success_url", Navigation.Uri },
-                { "cancel_url", Navigation.Uri }
+                { "success_url", Navigation.BaseUri },
+                { "cancel_url", Navigation.BaseUri }
             };
 
             // Cria o documento em /customers/{uid}/checkout_sessions
