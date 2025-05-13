@@ -134,6 +134,9 @@
         novoAnunciante.Categoria = (int)Categoria;
         novoAnunciante.AtivoInativo = true;
         novoAnunciante.UidUsuario = await FirestoreService.GetCurrentUserId();
+        if (String.IsNullOrEmpty(novoAnunciante.Instagram)){
+            novoAnunciante.Instagram = " ";
+        }
 
         quantidadeDeAnuncios = await FirestoreService.GetAnunciosUsuario();
 
