@@ -7,11 +7,11 @@
 
 @using AnunciadorV1.Models
 @using AnunciadorV1.Services
-
+<PageTitle>Cadastrar Anuncio</PageTitle>
 <MudContainer>
     <MudCard Class="p-4">
         <MudCardHeader>
-            <MudText Typo="Typo.h5">Cadastro de Anunciante</MudText>
+            <MudText Typo="Typo.h5">Cadastro de Anuncio</MudText>
         </MudCardHeader>
         <MudCardContent>
             <MudForm Model="@novoAnunciante" >
@@ -137,16 +137,16 @@
 
         quantidadeDeAnuncios = await FirestoreService.GetAnunciosUsuario();
 
-        if (quantidadeDeAnuncios.Count >= 5)
+        if (quantidadeDeAnuncios.Count >= 2)
         {
-            Snackbar.Add("Você já possui 5 anúncios ativos. Para cadastrar mais, desative um anúncio existente.", Severity.Error, c => c.HideIcon = true);
+            Snackbar.Add("Você já possui 2 anúncios ativos. Para cadastrar mais, exclua um dos anúncios existentes.", Severity.Error, c => c.HideIcon = true);
             return;
         }
 
         // novoAnunciante.EnderecoFoto = url;
         await FirestoreService.AddAnunciante(novoAnunciante);
 
-        mensagem = "Anunciante cadastrado com sucesso!";
+        mensagem = "Anuncio cadastrado com sucesso!";
         novoAnunciante = new Anunciante(); // Limpa o formulário
         inputFileRef = inputFileRefe;
         Categoria = 0;
