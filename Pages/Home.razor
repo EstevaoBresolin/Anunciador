@@ -28,10 +28,10 @@ else
         @foreach (var anunciante in Anunciantes)
         {
             <div class="card">
-              @*   <MudCarousel Class="mud-width-full" Style="height:250px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
+                @*   <MudCarousel Class="mud-width-full" Style="height:250px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
                     <MudCarouselItem Transition="@Transition.Fade"> *@
-                        <img src="@anunciante.EnderecoFoto" class="card-img-top" alt="Foto" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none; height: 285px;">
-                   @*  </MudCarouselItem>
+                <img src="@anunciante.EnderecoFoto" class="card-img-top" alt="Foto" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none; height: 285px;">
+                @*  </MudCarouselItem>
 
                     <MudCarouselItem Transition="@Transition.Fade">
                         <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto2.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
@@ -48,15 +48,24 @@ else
                     <p class="card-text">@anunciante.Titulo</p>
                     <p> <strong>Localização:</strong> <a href="https://www.google.com/maps/search/@Uri.EscapeDataString(anunciante.Endereco)" target="_blank"> @anunciante.Endereco </a> </p>
                     <div style="display: flex; gap: 10px;">
-                        <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="@($"https://wa.me/{anunciante.Numero}")" target="_blank">
-                            <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
-                        </a>
-                        @if(!String.IsNullOrWhiteSpace(anunciante.Instagram)){
+
+                        @if(!String.IsNullOrWhiteSpace(anunciante.Instagram))
+                        {
+                            <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="@($"https://wa.me/{anunciante.Numero}")" target="_blank">
+                                <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
+                            </a>
+
                             <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="@($"https://www.instagram.com/{anunciante.Instagram}")" target="_blank">
                                 <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
                             </a>
                         }
-                        
+                        else
+                        {
+                            <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 100%; text-align: center" href="@($"https://wa.me/{anunciante.Numero}")" target="_blank">
+                                <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
+                            </a>
+                        }
+
                     </div>
                 </div>
 

@@ -138,8 +138,10 @@ else
             Snackbar.Add("Por Favor, Adicione uma foto", Severity.Error, c => c.HideIcon = true);
             return;
         }
-        // string nomeArquivo = $"anunciantes/{novoAnunciante.Nome}{Guid.NewGuid()}.jpg";
-        // novoAnunciante.EnderecoFoto = await FirestoreService.UploadImagemFromInput(inputFileRef, nomeArquivo);
+        if (String.IsNullOrEmpty(novoAnunciante.Instagram))
+        {
+            novoAnunciante.Instagram = " ";
+        }
         novoAnunciante.Categoria = (int)Categoria;
         // novoAnunciante.AtivoInativo = true;
         novoAnunciante.UidUsuario = await FirestoreService.GetCurrentUserId();
