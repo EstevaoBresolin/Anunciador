@@ -155,8 +155,20 @@ window.firebaseService = {
 
     registerUser: async function (email, password) {
         try {
+            const db = getFirestore();
+
             await setPersistence(this.auth, browserLocalPersistence);
             const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+
+            const userTermos = {
+                email: email,
+                uid: userCredential.user.uid,
+                termosAceitos: true,
+                dataAceite: new Date().toDateString()
+            }
+            const usuariosAceitoTermo = collection(db, 'usuariosAceitoTermo');
+            const docRef = await addDoc(usuariosAceitoTermo, userTermos);
+
             return userCredential.user;
         } catch (error) {
             console.error("Erro ao cadastrar usuário:", error.message);

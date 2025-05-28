@@ -19,7 +19,14 @@
                     <MudTextField Placeholder="E-mail" Label="E-mail" @bind-Value="novoUsuario.Email" Required="true" RequiredError="O e-mail é obrigatório." Type="email" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Email" Variant="Variant.Outlined" />
                     <MudTextField Placeholder="Senha" Label="Senha" @bind-Value="novoUsuario.Senha" InputType="InputType.Password" Required="true" RequiredError="A senha é obrigatória." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Lock" Variant="Variant.Outlined" />
                     <MudTextField Placeholder="Confirme a Senha" Label="Confirme a Senha" @bind-Value="confirmarSenha" InputType="InputType.Password" Required="true" RequiredError="Confirme a senha." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Lock" Variant="Variant.Outlined" />
-                    <MudButton OnClick="Cadastrar" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #4169E1; color: white; font-weight: bold;">Cadastrar</MudButton>
+                    <MudItem xs="12">
+                            <MudCheckBox Style="text-align: center;" @bind-Value="aceitouTermos" Required="true" RequiredError="Você deve aceitar os termos de uso." Label="Aceito os termos de uso." />
+                            <MudLink Href="/termosDeUso" Style="display: flex; justify-content: center;">Ler termos de uso</MudLink>
+                    </MudItem>
+                    @if(aceitouTermos)
+                    {
+                        <MudButton OnClick="Cadastrar" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #4169E1; color: white; font-weight: bold;">Cadastrar</MudButton>
+                    }
                 </MudForm>
                 <MudText Class="mt-3 text-center">
                     <MudLink OnClick="VoltarParaLogin" Class="cursor-pointer" Style="color: #4169E1;">Já tem uma conta? Faça login</MudLink>
@@ -32,6 +39,7 @@
 @code {
     private UsuarioModel novoUsuario = new UsuarioModel();
     private string? confirmarSenha;
+    private bool aceitouTermos = false;
 
     private async Task Cadastrar()
     {

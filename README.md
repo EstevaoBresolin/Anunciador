@@ -62,8 +62,3 @@ dotnet publish -c:Release -o docs --nologo
 
 
 
---------- Imagens Hospedadas ---------
-
-
-
-https://estevaobresolin.imgur.com/all

@@ -1,0 +1,130 @@
+@page "/termosDeUso"
+@using AnunciadorV1.Models
+@using AnunciadorV1.Services
+@inject FirestoreService FirestoreService
+
+<PageTitle>Termos de Uso</PageTitle>
+
+<div class="body">
+    <div class="header">
+        <h1>Termo de Uso e Política de Privacidade</h1>
+        <p><strong>Aplicativo de Classificados Profissionais e Anúncios Domésticos</strong></p>
+    </div>
+
+    <main>
+        <p>Este documento estabelece os termos de responsabilidade e a política de privacidade aplicáveis ao uso do aplicativo de classificados profissionais e anúncios domésticos desenvolvido pela [Nome da Escola].</p>
+
+        <div class="divider"></div>
+
+        <section class="section">
+            <h2>1. Isenção de Responsabilidade</h2>
+            <p>A Associação Educacional George Muller, responsável pelo desenvolvimento e disponibilização deste aplicativo, declara que:</p>
+            <ul>
+                <li>Atua apenas como intermediária tecnológica, oferecendo uma plataforma digital para a publicação de anúncios de serviços e produtos entre os usuários.</li>
+                <li>Não realiza qualquer intermediação, fiscalização, validação ou garantia sobre os serviços ofertados, nem sobre a idoneidade dos usuários cadastrados.</li>
+                <li>Não se responsabiliza por qualquer dano, prejuízo, fraude, inadimplemento, perda financeira ou conflito decorrente de transações ou interações realizadas entre os usuários do aplicativo.</li>
+                <li>O uso do aplicativo é feito por conta e risco dos próprios usuários, que devem adotar todas as medidas necessárias para garantir sua segurança nas transações realizadas.</li>
+            </ul>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="section">
+            <h2>2. Proteção de Dados Pessoais – LGPD</h2>
+            <p>A Associação Educacional George Muller compromete-se a proteger os dados pessoais dos usuários do aplicativo em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 – LGPD). Assim, declara que:</p>
+            <ul>
+                <li>Os dados fornecidos pelos usuários são coletados e utilizados exclusivamente para os fins de cadastro, funcionamento e uso do aplicativo.</li>
+                <li>Nenhuma informação pessoal será compartilhada com terceiros, exceto mediante consentimento expresso do titular ou por exigência legal.</li>
+                <li>O usuário poderá, a qualquer momento, solicitar a correção ou exclusão de seus dados pessoais, conforme os direitos garantidos pela LGPD.</li>
+                <li>Medidas técnicas e organizacionais adequadas foram adotadas para garantir a segurança dos dados coletados, prevenindo acessos não autorizados, vazamentos ou outras violações.</li>
+            </ul>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="section">
+            <h2>3. Consentimento do Usuário</h2>
+            <p>Ao utilizar o aplicativo, o usuário:</p>
+            <ul>
+                <li>Reconhece e aceita que a escola não possui responsabilidade direta ou indireta sobre os serviços anunciados, nem sobre os resultados de qualquer transação realizada.</li>
+                <li>Concorda com o tratamento de seus dados pessoais conforme descrito nesta Política de Privacidade e nos termos da LGPD.</li>
+            </ul>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="section">
+            <h2>4. Alterações deste Documento</h2>
+            <p>Este documento poderá ser atualizado periodicamente. Toda alteração será comunicada aos usuários por meio do próprio aplicativo ou dos canais de contato cadastrados.</p>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="section">
+            <h2>5. Contato</h2>
+            <p>Para esclarecimentos, solicitações ou reclamações relacionadas a este Termo ou ao tratamento de dados pessoais, o usuário poderá entrar em contato pelo e-mail: [email da escola ou responsável].</p>
+        </section>
+    </main>
+
+    <div class="divider"></div>
+
+    <div class="footer">
+        <p>Caxias do Sul, 28/05/2025</p>
+        <p><strong>Associação Educacional George Muller</strong></p>
+    </div>
+</div>
+
+@code{
+    @* private List<Anunciante>? Anunciantes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Anunciantes = await FirestoreService.GetAnunciantes();
+
+        Anunciantes = Anunciantes.Where(x => x.Categoria == 6).ToList();
+    } *@
+
+}
+
+ <style>
+        .body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .divider {
+            border-top: 1px solid #eee;
+            margin: 30px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
