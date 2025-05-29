@@ -5,28 +5,43 @@
 @inject FirestoreService FirestoreService
 @inject IJSRuntime _jsRuntime
 @inject ISnackbar Snackbar
+<div style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: contain; width: 100vw; height: 95vh; position: absolute; z-index: 1; opacity: 0.1; margin-top: -2rem; margin-left: -2rem;">
 
-<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-6">
+</div>
+<MudContainer Style="background: white; z-index: 2; position: relative; padding: 0;" MaxWidth="MaxWidth.Medium" Class="mt-6">
     <MudPaper Elevation="4" Class="pa-6 rounded-xl">
-        <MudText Typo="Typo.h5" GutterBottom="true">Minha Conta</MudText>
+        <MudText Typo="Typo.h5" Style="background: linear-gradient(90deg, #2274a8, #d16776, #ff5d04); text-align: center; color: white; width: fit-content; padding: 0.5rem; border-radius: 8px; margin: auto; margin-bottom: 2rem; font-size: 30px; font-weight: bold; margin-top: -3rem;" 
+        GutterBottom="true">Minha Conta</MudText>
 
         <MudDivider Class="mb-4" />
 
         <MudGrid>
             <MudItem xs="12" sm="6">
-                <MudTextField Label="Nome" @bind-Value="FirestoreService.NomeUsuario" Disabled ReadOnly="true" />
+                <p>Nome: <MudTextField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" @bind-Value="FirestoreService.NomeUsuario" Disabled ReadOnly="true" />
+                </p>
+                
             </MudItem>
             <MudItem xs="12" sm="6">
-                <MudTextField Label="Email" @bind-Value="FirestoreService.Email" Disabled ReadOnly="true" />
+                E-mail:
+
+                <MudTextField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" @bind-Value="FirestoreService.Email" Disabled ReadOnly="true" />
             </MudItem>
         </MudGrid>
 
-        <MudPaper Elevation="2" Class="pa-4 mt-6 rounded-md">
-            <MudText Style="color: black" Typo="Typo.subtitle1">Assinatura</MudText>
+        <MudPaper Style="background: #f4f4f2; border-radius: 8px;" Elevation="2" Class="pa-4 mt-6 rounded-md">
+            <MudText Style="color: black; font-weight: bold; font-size: 30px" Typo="Typo.subtitle1">Assinatura</MudText>
             @if (infos != null && infos.Status == "active")
             {
-                <MudText Typo="Typo.body2" Style="color: black">Plano Ativo - @infos.Tipo</MudText>
-                <MudText Typo="Typo.body2" Style="color: black">Válido até @infos.DataExpiracao</MudText>
+                <MudText Typo="Typo.body2" Style="color: black; font-size: 18px"><b>Tipo de plano:</b>  @infos.Tipo</MudText>
+                <MudText Typo="Typo.body2" Style="color: black; font-size: 18px"><b>Validade:</b> @infos.DataExpiracao</MudText>
+
+                <MudButton Variant="Variant.Filled" Style="text-transform: none;border-radius: 8px; background-color: #d16776; color: white; padding: 0.3rem; font-size: 18px;" OnClick="AcessarPortalCliente">
+                        <MudIcon Icon="@Icons.Material.Filled.Payment" Class="me-2" /> Gerenciar Assinatura
+                </MudButton>
+
+                <MudChip T="string" Color="Color.Success" Class="mt-2" Style="background-color: #4caf50; color: white; font-weight: bold; font-size: 18px; padding: 1rem;">
+                    Ativo
+                </MudChip>
             }
             else
             {
@@ -44,20 +59,20 @@
             </div>
         }
         else{
-            <MudStack Direction="Row" Spacing="3">
+            <MudStack Style="flex-direction: row !important;" Direction="Row" Spacing="3">
                 @if (infos != null && infos.Status == "active")
                 {
-                    <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaMeusAnuncios">
+                    <MudButton Variant="Variant.Filled" Style="text-transform: none;border-radius: 12px; background-color: #f45d0b; color: white; padding: 0.5rem; font-size: 25px;" OnClick="IrParaMeusAnuncios">
                         <MudIcon Icon="@Icons.Material.Filled.List" Class="me-2" /> Meus Anúncios
                     </MudButton>
 
-                    <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="IrParaCadastrar">
+                    <MudButton Variant="Variant.Filled" Style="text-transform: none;border-radius: 12px; background-color: #2274a8; color: white; padding: 0.5rem; font-size: 25px;" OnClick="IrParaCadastrar">
                         <MudIcon Icon="@Icons.Material.Filled.AddCircleOutline" Class="me-2" /> Cadastrar Anúncio
                     </MudButton>
 
-                    <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="AcessarPortalCliente">
+                    @* <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="AcessarPortalCliente">
                         <MudIcon Icon="@Icons.Material.Filled.Payment" Class="me-2" /> Gerenciar Assinatura
-                    </MudButton>
+                    </MudButton> *@
                 }
                 
             </MudStack>
