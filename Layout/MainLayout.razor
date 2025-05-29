@@ -3,6 +3,7 @@
 @using System.Text
 @using System.Text.Json
 @using System.Globalization
+@using AnunciadorV1.Models
 @using AnunciadorV1.Services
 @implements IDisposable
 @inject NavigationManager navigation
@@ -44,15 +45,15 @@
                             Assinatura
                         </MudMenuItem>
 
-                        <MudMenuItem OnClick="Logout" Style="background-color: #C62828; color: white; border-radius: 8px;">
+                        <MudMenuItem OnClick="Logout" Style="background-color: #C62828; color: white; border-radius: 8px; width: 80%; padding: 0.2rem; margin: auto;">
                             <img style="width: 20px;" src="imgs/icone-10.png"/>
 
                             Sair
                         </MudMenuItem>
                     }
                     else{
-                        <MudMenuItem OnClick="Logar" Style="background-color: #C62828; color: white; border-radius: 8px;">
-                            <MudIcon Icon="@Icons.Material.Filled.AccountCircle" Style="margin-right: 8px;" />
+                        <MudMenuItem OnClick="Logar" >
+                            <img style="width: 20px;" src="imgs/icone-9.png"/>
                             Entrar
                         </MudMenuItem>
                     }
@@ -69,22 +70,22 @@
                 <MudContainer Style="padding-left: 0 !important; padding-right: 0 !important;" Class="menu d-flex justify-space-between align-center px-4">
 
                     <MudContainer Class="d-flex justify-center align-center menu-itens">
-                        <MudLink Href="@navigation.BaseUri" Class="menu-item" ><MudIcon Icon="@Icons.Material.Filled.AutoAwesomeMosaic" Title="Favorite" /> Todos os Departamentos</MudLink>
-                        <MudLink Href="consultoria" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.Assessment" Title="Favorite" />Profissionais e Consultoria Especializada</MudLink>
-                        <MudLink Href="informatica" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.Computer" Title="Favorite" />Construção, Manutenção e Tecnologia</MudLink>
-                        <MudLink Href="saudeEBeleza" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AccessibilityNew" Title="Favorite" /> Serviços Pessoais e Bem-estar</MudLink>
-                        <MudLink Href="comercio" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Title="Favorite" /> Indústria e Comércio</MudLink>
+                        <MudLink Href="@navigation.BaseUri" Class="menu-item"> <img style="width: 25px;" src="imgs/Prancheta1.png"/> Todos os Departamentos</MudLink>
+                        <MudLink Href="consultoria" Class="menu-item"> <img style="width: 25px;" src="imgs/icone-6.png"/> Profissionais e Consultoria Especializada</MudLink>
+                        <MudLink Href="informatica" Class="menu-item"> <img style="width: 25px;" src="imgs/icone-2.png"/> Construção, Manutenção e Tecnologia</MudLink>
+                        <MudLink Href="saudeEBeleza" Class="menu-item"> <img style="width: 25px;" src="imgs/icone-3.png"/>Serviços Pessoais e Bem-estar</MudLink>
+                        <MudLink Href="comercio" Class="menu-item"><img style="width: 25px;" src="imgs/icone-4.png"/> Indústria e Comércio</MudLink>
 
                         @if (FirestoreService.IsAuthenticated)
                         {
-                            <MudLink Href="minha-conta" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Minha Conta</MudLink>
+                            @* <MudLink Href="minha-conta" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AccountCircle" Title="Favorite" />Minha Conta</MudLink> *@
                             @if(FirestoreService.IsAdm){
-                                <MudLink Href="administrador" Style="background-color: #65cb65;" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AdminPanelSettings" Title="Favorite" />Administrador</MudLink>
+                                <MudLink Href="administrador" Style="background-color: #000000; color: white !important;" Class="menu-item"> <img style="width: 25px;" src="imgs/icone-8.png"/>Administrador</MudLink>
 
                             }
 
                         }
-                            <MudLink Href="produtos" Style="background-color: #65cb65;" Class="menu-item"><MudIcon Icon="@Icons.Material.Filled.AddCard" Title="Favorite" />Assinatura</MudLink>
+                            <MudLink Href="produtos" Class="menu-item-assinatura"><img style="width: 25px;" src="imgs/icone-7.png"/>Assinatura</MudLink>
                       
 
                         <div class="infos">
@@ -152,11 +153,19 @@
 
     private async Task AcessarPortalCliente()
     {
-        @* redirecionando = true; *@
+        User infos = new User();
+
+        infos = await FirestoreService.GetStatusAssinatura();
+
         try{
-            await _jsRuntime.InvokeVoidAsync("firebaseService.createLinkPortalCliente",
-                navigation.BaseUri
-            );
+            if(infos == null || infos?.Status != "active")
+            {
+                navigation.NavigateTo("produtos");
+
+            }
+            else{
+                await _jsRuntime.InvokeVoidAsync("firebaseService.createLinkPortalCliente", navigation.BaseUri);
+            }
 
         }
         catch (Exception ex)
@@ -164,7 +173,7 @@
             Console.WriteLine($"Erro ao acessar o portal do cliente: {ex.Message}");
         }
         finally{
-            await Task.Delay(2000);
+            @* await Task.Delay(2000); *@
             @* redirecionando = false; *@
         }
     }
@@ -242,7 +251,7 @@
 
     .menu-itens {
         margin-top: 3rem;
-        background: #7698ff;
+        background: #f4f4f2;
         
         @@media(max-width: 700px) {
             flex-direction: column;
@@ -260,8 +269,35 @@
         }
     }
 
+    .menu-item-assinatura{
+        background-color: #000000;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 8px;
+        color: white !important;
+
+        text-decoration: none;
+        font-weight: bold;
+        width: fit-content;
+        display: flex;
+        gap: 5px;
+        font-size: 14px;
+        align-items: center;
+
+        @@media(max-width: 700px) {
+            border-bottom: 0.5px solid #fff;
+            width: 100%;
+            margin: 0;
+        }
+
+        @@media(max-width: 1200px) {
+            gap: 2px;
+            padding: 0.8rem;
+        }
+    }
+
     .menu-item {
-        color: #ffffff !important;
+        color: #000000 !important;
         text-decoration: none;
         font-weight: bold;
         padding: 1rem;
@@ -284,7 +320,7 @@
 
     .menu-item:hover {
         cursor: pointer;
-        background: #6f90f1;
+        background: #fff;
     }
     /* //// MENU ////// */
 
@@ -335,7 +371,119 @@
         }
     }
 
-    .card {
+    .barra-pesquisa{
+        @@media(min-width: 700px) {
+            margin-top: 3rem;
+        }
+    }
+
+    .input-search{
+        background-position: center;
+        padding: 7px 16px;
+        border-radius: 50px;
+        width: 100%;
+        color: black;
+    }
+
+    .barra-pesquisa .mud-input-control{
+        border-radius: 50px;
+    }
+
+    .barra-pesquisa .mud-input.mud-input-underline:before{
+        border-bottom: none !important;
+    }
+
+    .barra-pesquisa .mud-input:focus-within.mud-input-underline:after {
+        border-bottom: none !important;
+    }
+
+    .anunciante-card {
+        background-color: #f4f4f2;
+        border-radius: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        width: 20rem;
+        padding: 0.8rem;
+
+        @@media(max-width: 700px) {
+            width: 100%;
+        }
+    }
+
+    .anunciante-img {
+        width: 100%;
+        height: 285px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .anunciante-body {
+        padding: 1rem;
+    }
+
+    .anunciante-nome {
+        margin: 0;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .anunciante-titulo {
+        margin: 0;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .anunciante-descricao {
+        margin-top: 0.5rem;
+        font-size: 16px;
+    }
+
+    .anunciante-actions {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 1rem;
+    }
+
+    .btn-whatsapp {
+        background-color: #25D366;
+        padding: 10px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        width: 60px;
+    }
+
+    .btn-instagram {
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, 
+                    #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        padding: 10px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        width: 60px;
+    }
+
+    .btn-maps {
+        background-color: #333;
+        padding: 10px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        width: 60px;
+    }
+
+    .icon-social {
+        color: white !important;
+        font-size: 24px;
+    }
+
+    @* .card {
         font-family: Arial, sans-serif;
         background-color: #fff;
         width: 18rem;
@@ -363,7 +511,7 @@
     .card-text {
         font-size: 1rem;
         color: #666;
-    }
+    }*@
 
     .container {
         display: flex;
@@ -375,7 +523,7 @@
             width: 100%;
             flex-direction: column;
         }
-    }
+    } 
 
     main .login {
         margin-top: -2px;

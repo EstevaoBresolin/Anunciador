@@ -145,7 +145,7 @@
             Snackbar.Add("Você já possui 2 anúncios ativos. Para cadastrar mais, exclua um dos anúncios existentes.", Severity.Error, c => c.HideIcon = true);
             return;
         }
-
+        novoAnunciante.DataAnuncio = DateTime.Now;
         // novoAnunciante.EnderecoFoto = url;
         await FirestoreService.AddAnunciante(novoAnunciante);
 

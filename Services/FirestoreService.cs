@@ -132,20 +132,6 @@ namespace AnunciadorV1.Services
 
         private Anunciante ConverterParaAnunciante(Dictionary<string, object> dados)
         {
-            //long numeroConvertido = 0;
-            //if (dados.TryGetValue("numero", out var numeroRaw) &&
-            //    numeroRaw is JsonElement jsonNumero &&
-            //    jsonNumero.ValueKind == JsonValueKind.Number)
-            //{
-            //    try
-            //    {
-            //        numeroConvertido = jsonNumero.GetInt64();
-            //    }
-            //    catch
-            //    {
-            //        numeroConvertido = 0;
-            //    }
-            //}
 
             try
             {
@@ -166,6 +152,7 @@ namespace AnunciadorV1.Services
                     Instagram = dados.TryGetValue("instagram", out var instagram) ? instagram.ToString() : "instagram não disponível",
                     UidUsuario = dados.TryGetValue("uidUsuario", out var uidUsuario) ? uidUsuario.ToString() : "",
                     AtivoInativo = dados.TryGetValue("ativoInativo", out var ativoInativo) && bool.TryParse(ativoInativo?.ToString(), out var resultado) ? resultado : false,
+                    DataAnuncio = dados.TryGetValue("dataAnuncio", out var dataAnuncio) && DateTime.TryParse(dataAnuncio.ToString(), out var dataParsed) ? dataParsed : DateTime.Now,
                 };
 
                 return anunciante;

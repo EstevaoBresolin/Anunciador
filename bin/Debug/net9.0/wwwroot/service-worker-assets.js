@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "YP4btilo",
+  "version": "P39P20f4",
   "assets": [
     {
       "hash": "sha256-LoGIGNjKzpPYd/CuPNcoe46XPkqmix6w2YumcPOL9gg=",
@@ -18,12 +18,12 @@ self.assetsManifest = {
       "url": "_content/MudBlazor/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-peEOJ66S69DdvYa5LeRtXWIXciJwUh/atPZKf9zm9rU=",
-      "url": "_framework/AnunciadorV1.bcyehy8ig4.pdb"
+      "hash": "sha256-7ANtetgW5sxACAavNuMIHS2dKuMO43URXmlrGHCmwSE=",
+      "url": "_framework/AnunciadorV1.0fdk30q457.pdb"
     },
     {
-      "hash": "sha256-wynMzierqrwJsWIga1ZRSoXTyjdUdELG2qN9vaq9tNg=",
-      "url": "_framework/AnunciadorV1.beckapy9ru.wasm"
+      "hash": "sha256-KD1Pa2j/s3i96YQxbQvapPz44e4Ulgv48ZfH/7ixQ3g=",
+      "url": "_framework/AnunciadorV1.41r0envj38.wasm"
     },
     {
       "hash": "sha256-N6/4dp+rtuEu+iWs7ZZs30QrZzpGpF9KC6ulCWZCo2w=",
@@ -798,7 +798,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.pe1q66fox7.wasm"
     },
     {
-      "hash": "sha256-1HmTIRCC4ct5bsRebh2xnBSrvjq0YwTDFFr3Zodr454=",
+      "hash": "sha256-mksbJJN2skRN8Gre0DItbLJeiKYvc42dj28bkDJr+WM=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -858,7 +858,7 @@ self.assetsManifest = {
       "url": "favicon.png"
     },
     {
-      "hash": "sha256-xMnQbU/T3N0jZBm+PhvHKUGq7K4yO9ehaVlPu6f6vmg=",
+      "hash": "sha256-yWaDh/3FtWsySGGa61zj7xWpybkwAPiWuJBOR3o+Odg=",
       "url": "firebase.js"
     },
     {
@@ -891,7 +891,7 @@ self.assetsManifest = {
     },
     {
       "hash": "sha256-4xFp1C1h7XCVIg5CL3VwrDNeVQeYafrGC9GBa6JHWOI=",
-      "url": "imgs/Prancheta 1.png"
+      "url": "imgs/Prancheta1.png"
     },
     {
       "hash": "sha256-SWLIpontJt4v1lMCbN0tAVwgsD3W+Tplzd8VsKDtU9I=",
@@ -962,12 +962,48 @@ self.assetsManifest = {
       "url": "imgs/icone-10.png"
     },
     {
+      "hash": "sha256-XmuCOHgCnJ3FKRQwBhUGvp2giBZygyyOVIbNQN4HkgQ=",
+      "url": "imgs/icone-11.png"
+    },
+    {
+      "hash": "sha256-LDAzWp54vu3deCmROYaeCxeg5VJqK+0pQIQ/qwJVz9A=",
+      "url": "imgs/icone-12.png"
+    },
+    {
+      "hash": "sha256-lMjQj2e3eup+woj9ENImF1mpbADRXq9upZu3noXUscg=",
+      "url": "imgs/icone-2.png"
+    },
+    {
+      "hash": "sha256-JhRZoUb9BAzzBJ5tFD/K1ymvv1Av0vyAkYr2Lc7lCTs=",
+      "url": "imgs/icone-3.png"
+    },
+    {
+      "hash": "sha256-zay0l0u/KletIR6MzoijrbyXY3qkj1xTLK8AfXUxn8Y=",
+      "url": "imgs/icone-4.png"
+    },
+    {
+      "hash": "sha256-tbHKha0vZOJ2Qx+BJFtP6nV5LbCwe121rICJI3C5BEI=",
+      "url": "imgs/icone-5.png"
+    },
+    {
+      "hash": "sha256-SINPqLECWQRx0g4Rnorw7ggK0oMTD3kAMsr+48mXxWk=",
+      "url": "imgs/icone-6.png"
+    },
+    {
       "hash": "sha256-z43mQSJ/4fhNplxT3G2cWgnle4Y3wV6KQy+SXxnDcWg=",
       "url": "imgs/icone-7.png"
     },
     {
+      "hash": "sha256-PZb+E2nrg9mxc7iXG9G7YcaocDm4K+drbUdqWMtS9Wc=",
+      "url": "imgs/icone-8.png"
+    },
+    {
       "hash": "sha256-i+kdVXqlisoSOoLihdS81tDqzUBlYewc7DmcTYxEHa4=",
       "url": "imgs/icone-9.png"
+    },
+    {
+      "hash": "sha256-/YEFKEBZNwMuMXqqx6yVDyF4fVjmuWr8XWHDx4YOefk=",
+      "url": "imgs/icone13.png"
     },
     {
       "hash": "sha256-Fn7pin3uUIkigwM/TCaMUMiceqoDtfi3ZqEyGsOkvi8=",
@@ -992,42 +1028,6 @@ self.assetsManifest = {
     {
       "hash": "sha256-b+i+EYg4/bos9DQD0EUIcjidfOHV1aR1Wk0Kcr9qvNk=",
       "url": "imgs/usuario-de-perfil.psd"
-    },
-    {
-      "hash": "sha256-XmuCOHgCnJ3FKRQwBhUGvp2giBZygyyOVIbNQN4HkgQ=",
-      "url": "imgs/ícone 11.png"
-    },
-    {
-      "hash": "sha256-LDAzWp54vu3deCmROYaeCxeg5VJqK+0pQIQ/qwJVz9A=",
-      "url": "imgs/ícone 12.png"
-    },
-    {
-      "hash": "sha256-/YEFKEBZNwMuMXqqx6yVDyF4fVjmuWr8XWHDx4YOefk=",
-      "url": "imgs/ícone 13.png"
-    },
-    {
-      "hash": "sha256-lMjQj2e3eup+woj9ENImF1mpbADRXq9upZu3noXUscg=",
-      "url": "imgs/ícone 2.png"
-    },
-    {
-      "hash": "sha256-JhRZoUb9BAzzBJ5tFD/K1ymvv1Av0vyAkYr2Lc7lCTs=",
-      "url": "imgs/ícone 3.png"
-    },
-    {
-      "hash": "sha256-zay0l0u/KletIR6MzoijrbyXY3qkj1xTLK8AfXUxn8Y=",
-      "url": "imgs/ícone 4.png"
-    },
-    {
-      "hash": "sha256-tbHKha0vZOJ2Qx+BJFtP6nV5LbCwe121rICJI3C5BEI=",
-      "url": "imgs/ícone 5.png"
-    },
-    {
-      "hash": "sha256-SINPqLECWQRx0g4Rnorw7ggK0oMTD3kAMsr+48mXxWk=",
-      "url": "imgs/ícone 6.png"
-    },
-    {
-      "hash": "sha256-PZb+E2nrg9mxc7iXG9G7YcaocDm4K+drbUdqWMtS9Wc=",
-      "url": "imgs/ícone 8.png"
     },
     {
       "hash": "sha256-BWcDblNAmGcgnzeJuY66WI5tJ4Vp466PmTGs0DJNsN0=",

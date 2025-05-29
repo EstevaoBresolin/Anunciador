@@ -13,7 +13,7 @@
         public int Categoria { get; set; }
         public string UidUsuario { get; set; } = "";
         public bool AtivoInativo { get; set; }
-
+        public DateTime DataAnuncio { get; set; }
 
     }
 }
