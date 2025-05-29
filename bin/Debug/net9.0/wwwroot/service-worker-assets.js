@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "vzU8LucG",
+  "version": "YP4btilo",
   "assets": [
     {
       "hash": "sha256-LoGIGNjKzpPYd/CuPNcoe46XPkqmix6w2YumcPOL9gg=",
@@ -18,12 +18,12 @@ self.assetsManifest = {
       "url": "_content/MudBlazor/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-w3lZriwVMMc29/8bVFsfRP37WwaWgr6HwZ4QjfgNVa0=",
-      "url": "_framework/AnunciadorV1.flwvjkgsvq.pdb"
+      "hash": "sha256-peEOJ66S69DdvYa5LeRtXWIXciJwUh/atPZKf9zm9rU=",
+      "url": "_framework/AnunciadorV1.bcyehy8ig4.pdb"
     },
     {
-      "hash": "sha256-GHtJzCtPJGrR3HymMC+6S96xhb/oSsNCvG8rqmAHcE8=",
-      "url": "_framework/AnunciadorV1.s3ip13leve.wasm"
+      "hash": "sha256-wynMzierqrwJsWIga1ZRSoXTyjdUdELG2qN9vaq9tNg=",
+      "url": "_framework/AnunciadorV1.beckapy9ru.wasm"
     },
     {
       "hash": "sha256-N6/4dp+rtuEu+iWs7ZZs30QrZzpGpF9KC6ulCWZCo2w=",
@@ -798,7 +798,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.pe1q66fox7.wasm"
     },
     {
-      "hash": "sha256-fHEE2LTyAnMvFw7nhp2wdmghqwkrUUgvpqlvJ5BbeR4=",
+      "hash": "sha256-1HmTIRCC4ct5bsRebh2xnBSrvjq0YwTDFFr3Zodr454=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -886,7 +886,151 @@ self.assetsManifest = {
       "url": "icone-conectefe_512x512.png"
     },
     {
-      "hash": "sha256-qK9IpEQ1xz9ehFxnxT08EEdS+vsulC/LyyIraVRPv1s=",
+      "hash": "sha256-Hjf2Wnzq2IBjSZ4XwaeKYa4pJMapWtZLgXmKspDs5O4=",
+      "url": "imgs/Pattern-colorido-semfundo.png"
+    },
+    {
+      "hash": "sha256-4xFp1C1h7XCVIg5CL3VwrDNeVQeYafrGC9GBa6JHWOI=",
+      "url": "imgs/Prancheta 1.png"
+    },
+    {
+      "hash": "sha256-SWLIpontJt4v1lMCbN0tAVwgsD3W+Tplzd8VsKDtU9I=",
+      "url": "imgs/adicionar-2.psd"
+    },
+    {
+      "hash": "sha256-TAnEOjm8Z8r2wyvx1KlVC81wEWj3AhunU5VjP3rtp+4=",
+      "url": "imgs/adicionar.psd"
+    },
+    {
+      "hash": "sha256-FFWSyHckS5mJdD4X4JR9O26UDW6POmJG3bP7XOKW7Xg=",
+      "url": "imgs/assinatura.psd"
+    },
+    {
+      "hash": "sha256-I8cj6BiaZunYzjN20QfX5L/UsdV3ZCXZobdeyz7wjEc=",
+      "url": "imgs/bem estar.psd"
+    },
+    {
+      "hash": "sha256-PLQZQapgrzya5K9VurXaxwbgSrtzU/O+wOz/hL+5VW0=",
+      "url": "imgs/comércio.psd"
+    },
+    {
+      "hash": "sha256-AsdxsCPhp2KSQjooEoAWXqFGmZgVZesNdzKfXM/ss0E=",
+      "url": "imgs/concete fé logo branco escrita vertical.png"
+    },
+    {
+      "hash": "sha256-SdW9rN6OgaVY4+nO02aTXyR2ZAlUdJN+Def7d6mRw/A=",
+      "url": "imgs/concete fé logo branco.png"
+    },
+    {
+      "hash": "sha256-bh+3MZ+TmVY+s4aOElcnwHjHVCLSGEz+svOPapNEpS4=",
+      "url": "imgs/concete fé logo colorido.png"
+    },
+    {
+      "hash": "sha256-Szl8LoQe2VsGOm8GU1kl3MfWgkaDa2zsiHCp1DrosP4=",
+      "url": "imgs/concete fé logo preto escrita horizontal.png"
+    },
+    {
+      "hash": "sha256-dfZCh0smmvVlF7gtIxfrdKYKVymBGrfXVA/H/wcBtL4=",
+      "url": "imgs/concete-fé-logo-branco-escrita-horizontal.png"
+    },
+    {
+      "hash": "sha256-rhmy6ilFVqYknjG0hWX3cnx5H8qYoCDpKen6vP1+Ii4=",
+      "url": "imgs/concete-fé-logo-preto-escrita-vertical.png"
+    },
+    {
+      "hash": "sha256-4wnNxH6oRKGn1Sp9sPR5RwlR1Jf64IT9S79aiwcbftc=",
+      "url": "imgs/concete-fé-logo-preto.png"
+    },
+    {
+      "hash": "sha256-snGO81BGDwhNFBahSZYRm+o0BCbl/0TClIyFMQrTp0A=",
+      "url": "imgs/conecte fe.psb"
+    },
+    {
+      "hash": "sha256-GOoUNIgO+5rJtVBn4+VyejFR1wih1evN9gvoKsiY94o=",
+      "url": "imgs/conecte fe.psd"
+    },
+    {
+      "hash": "sha256-ONyDSQ+9MMLwj7w18gT0y4IAdb43RnFwnWj795t0ftQ=",
+      "url": "imgs/editar-2.psd"
+    },
+    {
+      "hash": "sha256-HliOYQMsDI6PgIZLA5FoJkIbBhqjEunSr5EqeW3WJd8=",
+      "url": "imgs/filtro.psd"
+    },
+    {
+      "hash": "sha256-otXPNhTh6bG12O29BDgEhipOHFPhwM4GlC2OCgn5TY4=",
+      "url": "imgs/icone-10.png"
+    },
+    {
+      "hash": "sha256-z43mQSJ/4fhNplxT3G2cWgnle4Y3wV6KQy+SXxnDcWg=",
+      "url": "imgs/icone-7.png"
+    },
+    {
+      "hash": "sha256-i+kdVXqlisoSOoLihdS81tDqzUBlYewc7DmcTYxEHa4=",
+      "url": "imgs/icone-9.png"
+    },
+    {
+      "hash": "sha256-Fn7pin3uUIkigwM/TCaMUMiceqoDtfi3ZqEyGsOkvi8=",
+      "url": "imgs/lista.psd"
+    },
+    {
+      "hash": "sha256-/nGzMp43+8IJgkltDuX9gCbr3Xotv4uT051uAtyDQ1I=",
+      "url": "imgs/profissional.psd"
+    },
+    {
+      "hash": "sha256-V+wnwMjwMhdycB/vWHunfVmdyDTAx1zAccoAKa28+50=",
+      "url": "imgs/sair.psd"
+    },
+    {
+      "hash": "sha256-scF7PqMVrPp8ukVi2riGF4Yt9QOJ05Y6RIrVo7vfi6g=",
+      "url": "imgs/tecnologia.psd"
+    },
+    {
+      "hash": "sha256-3exS38AMIFXKS1XmaBJ0xcCYhmMS93+Vu5l4D94mWcY=",
+      "url": "imgs/todos departamentos.psd"
+    },
+    {
+      "hash": "sha256-b+i+EYg4/bos9DQD0EUIcjidfOHV1aR1Wk0Kcr9qvNk=",
+      "url": "imgs/usuario-de-perfil.psd"
+    },
+    {
+      "hash": "sha256-XmuCOHgCnJ3FKRQwBhUGvp2giBZygyyOVIbNQN4HkgQ=",
+      "url": "imgs/ícone 11.png"
+    },
+    {
+      "hash": "sha256-LDAzWp54vu3deCmROYaeCxeg5VJqK+0pQIQ/qwJVz9A=",
+      "url": "imgs/ícone 12.png"
+    },
+    {
+      "hash": "sha256-/YEFKEBZNwMuMXqqx6yVDyF4fVjmuWr8XWHDx4YOefk=",
+      "url": "imgs/ícone 13.png"
+    },
+    {
+      "hash": "sha256-lMjQj2e3eup+woj9ENImF1mpbADRXq9upZu3noXUscg=",
+      "url": "imgs/ícone 2.png"
+    },
+    {
+      "hash": "sha256-JhRZoUb9BAzzBJ5tFD/K1ymvv1Av0vyAkYr2Lc7lCTs=",
+      "url": "imgs/ícone 3.png"
+    },
+    {
+      "hash": "sha256-zay0l0u/KletIR6MzoijrbyXY3qkj1xTLK8AfXUxn8Y=",
+      "url": "imgs/ícone 4.png"
+    },
+    {
+      "hash": "sha256-tbHKha0vZOJ2Qx+BJFtP6nV5LbCwe121rICJI3C5BEI=",
+      "url": "imgs/ícone 5.png"
+    },
+    {
+      "hash": "sha256-SINPqLECWQRx0g4Rnorw7ggK0oMTD3kAMsr+48mXxWk=",
+      "url": "imgs/ícone 6.png"
+    },
+    {
+      "hash": "sha256-PZb+E2nrg9mxc7iXG9G7YcaocDm4K+drbUdqWMtS9Wc=",
+      "url": "imgs/ícone 8.png"
+    },
+    {
+      "hash": "sha256-BWcDblNAmGcgnzeJuY66WI5tJ4Vp466PmTGs0DJNsN0=",
       "url": "index.html"
     },
     {

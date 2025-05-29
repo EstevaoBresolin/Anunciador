@@ -5,13 +5,75 @@
 
 <PageTitle>Home</PageTitle>
 
+<MudContainer Class="text-center my-6">
+    <div class="container1">
+        <MudText Typo="Typo.h5" Style="font-size: 32px; text-align: start;" Class="mb-2 container1-divs">
+            Seu portal <br> completo de <br> <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 32px;">serviços online</MudText>
+        </MudText>
+
+        <img src="imgs/concete-fé-logo-preto-escrita-vertical.png" alt="Logo Conecte Fé" style="margin: 20px auto; max-width: 265px;" class="container1-divs"/>
+
+        <MudStack Direction="Row" Style="justify-content: space-between; text-align: end;" Class="my-4 container1-divs">
+            <MudText Style="font-size: 32px;" Typo="Typo.h6">Comece a anunciar hoje e veja seu serviço <br> <b>prosperar!</b></MudText>
+        </MudStack>
+    </div>
+    
+
+    <MudGrid>
+        <MudItem xs="12" sm="4">
+            <MudPaper Elevation="3" Class="pa-4 rounded-xl section2" Style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: cover;">
+                <div class="section-2-fundo" style="">
+                </div>
+                <div style="position: relative; z-index: 2;">
+                    <MudText Typo="Typo.h6" Class="mb-2">
+                        <MudChip Class="chips" T="string"> O que é?</MudChip>
+                    </MudText>
+                    <MudText Class="section2-texts">
+                        No Conecte Fé, conectamos você a uma vasta rede de serviços qualificados, oferecidos por pessoas e profissionais em sua região. Seja para encontrar a solução ideal para suas necessidades ou para divulgar seu talento e expandir seus negócios, estamos aqui para facilitar.
+                    </MudText>
+                </div> 
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="4">
+            <MudPaper Elevation="3" Class="pa-4 rounded-xl section2" Style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: cover;">
+                <div class="section-2-fundo" style="">
+                </div>
+                <div style="position: relative; z-index: 2;">
+                    <MudText Typo="Typo.h6" Class="mb-2">
+                        <MudChip Class="chips" T="string"> Como funciona?</MudChip>
+                    </MudText>
+                    <MudText Class="section2-texts">
+                        No Conecte Fé, conectamos você a uma vasta rede de serviços qualificados, oferecidos por pessoas e profissionais em sua região. Seja para encontrar a solução ideal para suas necessidades ou para divulgar seu talento e expandir seus negócios, estamos aqui para facilitar.
+                    </MudText>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="4">
+            <MudPaper Elevation="3" Class="pa-4 rounded-xl section2" Style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: cover;">
+                <div class="section-2-fundo" style="">
+                </div>
+                <div style="position: relative; z-index: 2;">
+                    <MudText Typo="Typo.h6" Class="mb-2">
+                        <MudChip Class="chips" T="string">Como assino?</MudChip>
+                    </MudText>
+                    <MudText Class="section2-texts">
+                        No Conecte Fé, conectamos você a uma vasta rede de serviços qualificados, oferecidos por pessoas e profissionais em sua região. Seja para encontrar a solução ideal para suas necessidades ou para divulgar seu talento e expandir seus negócios, estamos aqui para facilitar.
+                    </MudText>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
 @if (Anunciantes is null)
 {
     <p>Carregando...</p>
 }
 else
 {
-    <MudContainer Class="d-flex align-center barra-pesquisa">
+    @* <MudContainer Class="d-flex align-center barra-pesquisa">
         <MudTextField @bind-Value="@searchText" Placeholder="Buscar..." Style="padding: 7px 0;"
         Adornment="Adornment.Start"
         Class="mud-elevation-2 mud-rounded" />
@@ -19,57 +81,73 @@ else
         <MudIconButton Icon="@Icons.Material.Filled.Search" Color="Color.Primary" Style="width: 45px; height: 45px;"
         Variant="Variant.Filled" OnClick="Pesquisar" Class="ml-2">
         </MudIconButton>
-    </MudContainer>
+    </MudContainer> *@
 
+    <MudContainer Class="d-flex align-center barra-pesquisa" Style="gap: 8px; border-radius: 25px;">
+        <MudTextField @bind-Value="@searchText"
+                    Placeholder="Buscar..."
+                    Adornment="Adornment.None"
+                    Class="mud-elevation-2 input-search">
+        </MudTextField>
+
+        <MudIconButton Icon="@Icons.Material.Filled.Search"
+                    Style="width: 45px; height: 45px; border-radius: 50%; color: white !important; background: #2274a8;"
+                    Color=Color.Inherit
+                    OnClick="Pesquisar" />
+
+        @* <MudButton StartIcon="@Icons.Material.Filled.Tune"
+                Variant="Variant.Text"
+                Color="Color.Error"
+                OnClick="AbrirFiltros"
+                Style="font-weight: bold;">
+            Filtros
+        </MudButton> *@
+    </MudContainer>
     <div class="container">
         @if (Anunciantes.Count == 0){
             <p>Nenhum encontrado</p>
         }
         @foreach (var anunciante in Anunciantes)
         {
-            <div class="card">
-                @*   <MudCarousel Class="mud-width-full" Style="height:250px;" AutoCycle="false" ShowBullets="false" EnableSwipeGesture="true" TData="object">
-                    <MudCarouselItem Transition="@Transition.Fade"> *@
-                <img src="@anunciante.EnderecoFoto" class="card-img-top" alt="Foto" style="border-top-left-radius: 10px; border-top-right-radius: 10px; background: none; height: 285px;">
-                @*  </MudCarouselItem>
+           <div class="anunciante-card">
 
-                    <MudCarouselItem Transition="@Transition.Fade">
-                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto2.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    </MudCarouselItem>
+                <img src="@anunciante.EnderecoFoto" alt="Foto" class="anunciante-img" />
 
-                    <MudCarouselItem Transition="@Transition.Fade">
-                        <img src="https://github.com/EstevaoBresolin/Anunciador/blob/gh-pages/wwwroot/Imagens/rosto.png?raw=true" class="card-img-top" alt="Foto do Dentista" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    </MudCarouselItem>
+                <div class="anunciante-body">
+                    <p class="anunciante-nome">@anunciante.Nome</p>
+                    <p class="anunciante-titulo">@anunciante.Titulo</p>
+                    <p class="anunciante-descricao">@anunciante.Descricao</p>
+                    <p class="anunciante-descricao">
+                        <strong>Endereço:</strong> 
+                        @(!string.IsNullOrWhiteSpace(anunciante.Endereco) ? @anunciante.Endereco : "Não possui endereço fixo")
+                    </p>
 
-                </MudCarousel> *@
+                    <div class="anunciante-actions">
+                        <a class="btn-whatsapp"
+                        href="@($"https://wa.me/{anunciante.Numero}?text={Uri.EscapeDataString("Olá, vim do ConecteFé e gostaria de mais informações!")}")"
+                        target="_blank">
+                            <MudIcon Icon="@Icons.Custom.Brands.WhatsApp" class="icon-social" />
+                        </a>
 
-                <div class="card-body">
-                    <h5 class="card-title">@anunciante.Nome</h5>
-                    <p class="card-text">@anunciante.Titulo</p>
-                    <p class="card-text">@anunciante.Descricao</p>
-                    <p> <strong>Localização:</strong> <a href="https://www.google.com/maps/search/@Uri.EscapeDataString(anunciante.Endereco)" target="_blank"> @anunciante.Endereco </a> </p>
-                    <div style="display: flex; gap: 10px;">
-
-                        @if(!String.IsNullOrWhiteSpace(anunciante.Instagram))
+                        @if (!string.IsNullOrWhiteSpace(anunciante.Instagram))
                         {
-                            <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="@($"https://wa.me/{anunciante.Numero}?text={Uri.EscapeDataString("Olá, vim do ConecteFé e gostaria de mais informações!")}")" target="_blank">
-                                <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
-                            </a>
-
-                            <a style="color: white;background: #cb144e;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 50%; text-align: center" href="@($"https://www.instagram.com/{anunciante.Instagram}")" target="_blank">
-                                <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Dark" /><strong> Instagram</strong>
-                            </a>
-                        }
-                        else
-                        {
-                            <a style="color: white;background: #04bf04;padding: 0.5rem;font-size: 12px;border-radius: 8px; width: 100%; text-align: center" href="@($"https://wa.me/{anunciante.Numero}?text={Uri.EscapeDataString("Olá, vim do ConecteFé e gostaria de mais informações!")}")" target="_blank">
-                                <MudIcon Style="color: white !important; font-size: 20px;" Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Dark" /> WhastApp
+                            <a class="btn-instagram"
+                            href="@($"https://www.instagram.com/{anunciante.Instagram}")"
+                            target="_blank">
+                                <MudIcon Icon="@Icons.Custom.Brands.Instagram" class="icon-social" />
                             </a>
                         }
 
+                        @if (!string.IsNullOrWhiteSpace(anunciante.Endereco))
+                        {
+                            <a class="btn-maps"
+                            href="@($"https://www.google.com/maps/search/{Uri.EscapeDataString(anunciante.Endereco)}")"
+                            target="_blank">
+                                <MudIcon Icon="@Icons.Material.Filled.LocationOn" class="icon-social" />
+                            </a>
+                        }
                     </div>
                 </div>
-
             </div>
 
         }
@@ -110,9 +188,183 @@ else
 }
 
 <style>
+    .container1{
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 4rem;
+
+        @@media(min-width: 700px) {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 4rem;
+        }
+    }
+
+    .container1-divs{
+        width: 100%;
+
+        @@media(min-width: 700px) {
+            width: 33%;
+        }
+    }
+
+    .chips{
+        margin-top: -4rem;
+        font-size: 30px !important;
+        background: linear-gradient(90deg, #2274a8, #d16776, #ff5d04);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 6px;
+    }
+
+    .section2{
+        position: relative;
+        background: url('imgs/Pattern-colorido-sem-fundo.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+
+        @@media(min-width: 700px) {
+            margin-bottom: 0;
+        }
+
+    }
+
+    .section-2-fundo{
+        position: absolute;
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: rgb(238 239 239 / 90%);
+        border-radius: 15px;
+        z-index: 1;
+    }
+
+    .section2-texts{
+        font-size: 16px;
+        color: #000000;
+        font-weight: bold;
+    }
+
     .barra-pesquisa{
         @@media(min-width: 700px) {
             margin-top: 3rem;
         }
     }
+
+    .input-search{
+        background-position: center;
+        padding: 7px 16px;
+        border-radius: 50px;
+        width: 100%;
+        color: black;
+    }
+
+    .barra-pesquisa .mud-input-control{
+        border-radius: 50px;
+    }
+
+    .barra-pesquisa .mud-input.mud-input-underline:before{
+        border-bottom: none !important;
+    }
+
+    .barra-pesquisa .mud-input:focus-within.mud-input-underline:after {
+        border-bottom: none !important;
+    }
+
+    .anunciante-card {
+        background-color: #f4f4f2;
+        border-radius: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        width: 20rem;
+        padding: 0.8rem;
+
+        @@media(max-width: 700px) {
+            width: 100%;
+        }
+    }
+
+    .anunciante-img {
+        width: 100%;
+        height: 285px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .anunciante-body {
+        padding: 1rem;
+    }
+
+    .anunciante-nome {
+        margin: 0;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .anunciante-titulo {
+        margin: 0;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .anunciante-descricao {
+        margin-top: 0.5rem;
+        font-size: 16px;
+    }
+
+    .anunciante-actions {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 1rem;
+    }
+
+    .btn-whatsapp {
+        background-color: #25D366;
+        padding: 10px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        width: 60px;
+    }
+
+    .btn-instagram {
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, 
+                    #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        padding: 10px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        width: 60px;
+    }
+
+    .btn-maps {
+        background-color: #333;
+        padding: 10px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        width: 60px;
+    }
+
+    .icon-social {
+        color: white !important;
+        font-size: 24px;
+    }
+
 </style>

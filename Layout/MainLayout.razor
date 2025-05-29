@@ -7,6 +7,8 @@
 @implements IDisposable
 @inject NavigationManager navigation
 @inject FirestoreService FirestoreService
+@inject IJSRuntime _jsRuntime
+@inject ISnackbar Snackbar
 
 <MudThemeProvider />
 <MudPopoverProvider />
@@ -18,16 +20,44 @@
 
     <!-- Menu de Navegação -->
     <MudPaper Class="mud-background-secondary menu-bar">
-        <div style="display: flex;justify-content: space-between;align-items: center;background: royalblue;position: absolute;width: 100%; z-index: 2;">
+        <div style="display: flex;justify-content: space-between;align-items: center;background: #000000 ;position: absolute;width: 100%; z-index: 2;">
             <MudIconButton OnClick="OpenMenu" Icon="@Icons.Material.Filled.Menu" Color="Color.Default" style="color: white !important;" />
-            <MudLink Href="@navigation.BaseUri" style="font-size: 1rem; color: white !important;">Conecte Fé</MudLink>
-            @if (FirestoreService.IsAuthenticated)
+            <MudLink Href="@navigation.BaseUri" style="font-size: 1rem; color: white !important;"> <img style="max-height: 35px; " src="imgs/concete-fé-logo-branco-escrita-horizontal.png"/> </MudLink>
+            @* @if (FirestoreService.IsAuthenticated)
             {
                 <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.Logout" Color="Color.Default" OnClick="Logout" />
             }
             else{
                 <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Default" OnClick="Logar" />
-            }
+            } *@
+                <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Color=Color.Inherit Style="color: white !important; padding-bottom: 0 !important;">
+        
+                    @if (FirestoreService.IsAuthenticated){
+                        <MudMenuItem Href="/minha-conta">
+                            <img style="width: 20px;" src="imgs/icone-9.png"/>
+                            Minha Conta
+                        </MudMenuItem>
+
+                        <MudMenuItem OnClick="AcessarPortalCliente">
+                            <img style="width: 20px;" src="imgs/icone-7.png"/>
+
+                            Assinatura
+                        </MudMenuItem>
+
+                        <MudMenuItem OnClick="Logout" Style="background-color: #C62828; color: white; border-radius: 8px;">
+                            <img style="width: 20px;" src="imgs/icone-10.png"/>
+
+                            Sair
+                        </MudMenuItem>
+                    }
+                    else{
+                        <MudMenuItem OnClick="Logar" Style="background-color: #C62828; color: white; border-radius: 8px;">
+                            <MudIcon Icon="@Icons.Material.Filled.AccountCircle" Style="margin-right: 8px;" />
+                            Entrar
+                        </MudMenuItem>
+                    }
+
+                </MudMenu>
 
 
         </div>
@@ -118,6 +148,25 @@
         FirestoreService.NomeUsuario = "";
         FirestoreService.Logout();
         navigation.NavigateTo("/", forceLoad: true);
+    }
+
+    private async Task AcessarPortalCliente()
+    {
+        @* redirecionando = true; *@
+        try{
+            await _jsRuntime.InvokeVoidAsync("firebaseService.createLinkPortalCliente",
+                navigation.BaseUri
+            );
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao acessar o portal do cliente: {ex.Message}");
+        }
+        finally{
+            await Task.Delay(2000);
+            @* redirecionando = false; *@
+        }
     }
 
     private async Task TrocarUrl(LocationChangingContext context)
@@ -319,6 +368,7 @@
     .container {
         display: flex;
         gap: 1rem;
+        justify-content: center;
         flex-wrap: wrap;
         margin-top: 1rem;
         @@media(max-width: 700px) {
