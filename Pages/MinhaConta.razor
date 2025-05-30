@@ -59,7 +59,7 @@
             </div>
         }
         else{
-            <MudStack Style="flex-direction: row !important;" Direction="Row" Spacing="3">
+            <MudStack Class="minha-conta-botoes" Spacing="3">
                 @if (infos != null && infos.Status == "active")
                 {
                     <MudButton Variant="Variant.Filled" Style="text-transform: none;border-radius: 12px; background-color: #f45d0b; color: white; padding: 0.5rem; font-size: 25px;" OnClick="IrParaMeusAnuncios">
@@ -127,3 +127,16 @@
         }
     }
 }
+
+
+<style>
+    .minha-conta-botoes{
+        display: flex;
+        flex-direction: column !important;
+
+         @@media(max-width: 700px) {
+            width: 100%;
+            flex-direction: row !important;
+        }
+    }
+</style>

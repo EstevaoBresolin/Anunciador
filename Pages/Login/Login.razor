@@ -6,24 +6,29 @@
 @inject FirestoreService FirestoreService
 @inject NavigationManager navigation
 
-<MudContainer Class="d-flex justify-center align-center" Style="height: 95vh; background: royalblue;margin-top: -1px;max-width: none;">
+<div style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: contain; width: 100vw; height: 95vh; position: absolute; z-index: 1; opacity: 0.1; margin-top: -2rem; margin-left: -2rem;">
+
+</div>
+<MudContainer Class="d-flex justify-center align-center" Style="height: 95vh; margin-top: -1px;max-width: none; z-index: 2; position: relative; padding: 0;">
     <MudPaper Class="p-6 rounded-lg shadow-lg" Style="width: 400px; background-color: white;">
-        <MudCard Class="p-4" Style="border-radius: 12px;">
-            <MudCardHeader Class="texts-login">
+        <MudText Typo="Typo.h5" Style="background: linear-gradient(90deg, #2274a8, #d16776, #ff5d04); text-align: center; color: white; width: fit-content; padding: 0.5rem; border-radius: 12px; margin: auto; margin-bottom: 2rem; font-size: 30px; font-weight: bold; margin-top: -2rem;" 
+        GutterBottom="true">Bem-vindo!</MudText>
+        <MudCard Class="p-4" Style="border-radius: 12px;box-shadow: none;">
+            @* <MudCardHeader Class="texts-login">
                 <MudText Typo="Typo.h4" Class="text-center" Style="color: #4169E1;">Bem-vindo!</MudText>
                 <MudText Typo="Typo.body2" Class="text-center" Style="color: gray;">Entre com suas credenciais</MudText>
-            </MudCardHeader>
+            </MudCardHeader> *@
             <MudCardContent>
                 <MudForm Model="@loginModel">
-                    <MudTextField Placeholder="E-mail" Label="E-mail" @bind-Value="loginModel.Email" Required="true" RequiredError="O e-mail é obrigatório." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Email" Variant="Variant.Outlined" />
-                    <MudTextField Placeholder="Senha" Label="Senha" @bind-Value="loginModel.Senha" InputType="InputType.Password" Required="true" RequiredError="A senha é obrigatória." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Lock" Variant="Variant.Outlined" />
-                    <MudButton OnClick="Logar" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #4169E1; color: white; font-weight: bold;">Entrar</MudButton>
+                    <MudTextField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Placeholder="E-mail" Label="E-mail" @bind-Value="loginModel.Email" Required="true" RequiredError="O e-mail é obrigatório." Adornment="Adornment.Start" Variant="Variant.Outlined" />
+                    <MudTextField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Placeholder="Senha" Label="Senha" @bind-Value="loginModel.Senha" InputType="InputType.Password" Required="true" RequiredError="A senha é obrigatória." Adornment="Adornment.Start" Variant="Variant.Outlined" />
+                    <MudButton OnClick="Logar" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #2274a8; color: white; font-weight: bold; width: fit-content; margin: auto;">Entrar</MudButton>
                 </MudForm>
                 <MudText Class="mt-3 text-center">
-                    <MudLink OnClick="EsqueceuSenha" Class="cursor-pointer" Style="color: #4169E1;">Esqueceu a senha?</MudLink>
+                    <MudLink OnClick="EsqueceuSenha" Class="cursor-pointer" Style="color: #2274a8 !important;">Esqueceu a senha?</MudLink>
                 </MudText>
                 <MudText Class="mt-3 text-center">
-                    <MudLink OnClick="Registrar" Class="cursor-pointer" Style="color: #4169E1;">Ainda não tem uma conta? Registre-se</MudLink>
+                    <MudLink OnClick="Registrar" Class="cursor-pointer" Style="padding: 0.5rem; border-radius: 12px; border: 1px solid #2274a8!important; color: #2274a8 !important;">Ainda não tem uma conta? Registre-se</MudLink>
                 </MudText>
             </MudCardContent>
         </MudCard>

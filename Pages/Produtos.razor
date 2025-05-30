@@ -7,8 +7,10 @@
 @inject ISnackbar Snackbar
 
 <PageTitle>Assinaturas</PageTitle>
+<div style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: contain; width: 100vw; height: 95vh; position: absolute; z-index: 1; opacity: 0.1; margin-top: -2rem; margin-left: -2rem;">
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="mt-6">
+</div>
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-6" Style="height: 95vh; margin-top: -1px;max-width: none; z-index: 2; position: relative; padding: 0;">
     <MudText Typo="Typo.h4" Style="font-size: 28px; text-align: center !important;" Class="mb-4">Escolha sua assinatura</MudText>
     @if(redirecionando){
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
@@ -28,9 +30,11 @@
                 {
                     <MudItem xs="12" sm="6">
                         <MudCard Class="rounded-xl shadow-lg">
-                            <MudCardContent>
+                            <MudCardContent >
+                                <MudText Typo="Typo.h5" Style="background: linear-gradient(90deg, #2274a8, #d16776, #ff5d04); text-align: center; color: white; width: fit-content; padding: 0.5rem; border-radius: 12px; margin: auto; margin-bottom: 2rem; font-size: 30px; font-weight: bold; margin-top: -2rem;" 
+                                GutterBottom="true">Assinaturas</MudText>
                                 @* <MudText Typo="Typo.h6">@produto.Name</MudText> *@
-                                <MudStack Spacing="3" Class="mt-2">
+                                <MudStack  Spacing="3" Class="mt-2 section1-products">
                                     @foreach (var preco in produto.Precos)
                                     {
                                         <MudPaper Elevation="1" Class="p-3 d-flex justify-between align-center rounded-lg" Style="background-color: #f9f9f9; height: 170px;">
@@ -159,3 +163,15 @@
     }
 
 }
+
+<style>
+    .section1-products {
+        
+        flex-direction: row !important;
+         @@media(max-width: 700px) {
+            flex-direction: column !important;
+            width: 100%;
+            flex-direction: column;
+        }
+    }
+</style>

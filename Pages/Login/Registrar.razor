@@ -5,31 +5,31 @@
 @inject ISnackbar Snackbar
 @inject FirestoreService firestoreService
 @inject NavigationManager navigation
+<div style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: contain; width: 100vw; height: 95vh; position: absolute; z-index: 1; opacity: 0.1; margin-top: -2rem; margin-left: -2rem;">
 
-<MudContainer Class="d-flex justify-center align-center" Style="height: 95vh; background: royalblue;margin-top: -1px;max-width: none;">
+</div>
+<MudContainer Class="d-flex justify-center align-center" Style="height: 95vh; margin-top: -1px;max-width: none; z-index: 2; position: relative; padding: 0;">
     <MudPaper Class="p-6 rounded-lg shadow-lg" Style="width: 400px; background-color: white;">
         <MudCard Class="p-4" Style="border-radius: 12px;">
-            <MudCardHeader Class="texts-login">
-                <MudText Typo="Typo.h4" Class="text-center" Style="color: #4169E1;">Criar Conta</MudText>
-                <MudText Typo="Typo.body2" Class="text-center" Style="color: gray;">Preencha os campos abaixo</MudText>
-            </MudCardHeader>
+            <MudText Typo="Typo.h5" Style="background: linear-gradient(90deg, #2274a8, #d16776, #ff5d04); text-align: center; color: white; width: fit-content; padding: 0.5rem; border-radius: 12px; margin: auto; margin-bottom: 2rem; font-size: 30px; font-weight: bold; margin-top: -2rem;" 
+        GutterBottom="true">Confirme sua conta</MudText>
             <MudCardContent>
                 <MudForm Model="@novoUsuario">
-                    <MudTextField Placeholder="Nome" Label="Nome" @bind-Value="novoUsuario.Nome" Required="true" RequiredError="O nome é obrigatório." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Person" Variant="Variant.Outlined" />
-                    <MudTextField Placeholder="E-mail" Label="E-mail" @bind-Value="novoUsuario.Email" Required="true" RequiredError="O e-mail é obrigatório." Type="email" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Email" Variant="Variant.Outlined" />
-                    <MudTextField Placeholder="Senha" Label="Senha" @bind-Value="novoUsuario.Senha" InputType="InputType.Password" Required="true" RequiredError="A senha é obrigatória." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Lock" Variant="Variant.Outlined" />
-                    <MudTextField Placeholder="Confirme a Senha" Label="Confirme a Senha" @bind-Value="confirmarSenha" InputType="InputType.Password" Required="true" RequiredError="Confirme a senha." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Lock" Variant="Variant.Outlined" />
+                    <MudTextField Placeholder="Nome" Label="Nome" @bind-Value="novoUsuario.Nome" Required="true" RequiredError="O nome é obrigatório." Adornment="Adornment.Start" Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Variant="Variant.Outlined" />
+                    <MudTextField Placeholder="E-mail" Label="E-mail" @bind-Value="novoUsuario.Email" Required="true" RequiredError="O e-mail é obrigatório." Type="email" Adornment="Adornment.Start" Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Variant="Variant.Outlined" />
+                    <MudTextField Placeholder="Senha" Label="Senha" @bind-Value="novoUsuario.Senha" InputType="InputType.Password" Required="true" RequiredError="A senha é obrigatória." Adornment="Adornment.Start" Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Variant="Variant.Outlined" />
+                    <MudTextField Placeholder="Confirme a Senha" Label="Confirme a Senha" @bind-Value="confirmarSenha" InputType="InputType.Password" Required="true" RequiredError="Confirme a senha." Adornment="Adornment.Start" Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Variant="Variant.Outlined" />
                     <MudItem xs="12">
                             <MudCheckBox Style="text-align: center;" @bind-Value="aceitouTermos" Required="true" RequiredError="Você deve aceitar os termos de uso." Label="Aceito os termos de uso." />
-                            <MudLink Href="/termosDeUso" Style="display: flex; justify-content: center;">Ler termos de uso</MudLink>
+                            <MudLink Href="/termosDeUso" Style="display: flex; justify-content: center; font-weight: bold; color: #2274a8 !important;">Ler termos de uso</MudLink>
                     </MudItem>
                     @if(aceitouTermos)
                     {
-                        <MudButton OnClick="Cadastrar" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #4169E1; color: white; font-weight: bold;">Cadastrar</MudButton>
+                        <MudButton OnClick="Cadastrar" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #2274a8; color: white; font-weight: bold; width: fit-content; margin: auto;">Cadastrar</MudButton>
                     }
                 </MudForm>
                 <MudText Class="mt-3 text-center">
-                    <MudLink OnClick="VoltarParaLogin" Class="cursor-pointer" Style="color: #4169E1;">Já tem uma conta? Faça login</MudLink>
+                    <MudLink OnClick="VoltarParaLogin" Class="cursor-pointer" Style="padding: 0.5rem; border-radius: 12px; border: 1px solid #2274a8!important; color: #2274a8 !important;">Já tem uma conta? Faça login</MudLink>
                 </MudText>
             </MudCardContent>
         </MudCard>

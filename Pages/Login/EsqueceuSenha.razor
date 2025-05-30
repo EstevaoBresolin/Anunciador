@@ -5,25 +5,25 @@
 @inject ISnackbar Snackbar
 @inject FirestoreService FirestoreService
 @inject NavigationManager navigation
+<div style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: contain; width: 100vw; height: 95vh; position: absolute; z-index: 1; opacity: 0.1; margin-top: -2rem; margin-left: -2rem;">
 
-<MudContainer Class="d-flex justify-center align-center" Style="height: 95vh; background: royalblue;margin-top: -1px;max-width: none;">
+</div>
+<MudContainer Class="d-flex justify-center align-center" Style="height: 95vh; margin-top: -1px;max-width: none; z-index: 2; position: relative; padding: 0;">
     <MudPaper Class="p-6 rounded-lg shadow-lg" Style="width: 400px; background-color: white;">
         <MudCard Class="p-4" Style="border-radius: 12px;">
-            <MudCardHeader Class="texts-login">
-                <MudText Typo="Typo.h4" Class="text-center" Style="color: #4169E1;">Recuperar Senha</MudText>
-                <MudText Typo="Typo.body2" Class="text-center" Style="color: gray;">Informe seu e-mail para redefinir a senha</MudText>
-            </MudCardHeader>
+            <MudText Typo="Typo.h5" Style="background: linear-gradient(90deg, #2274a8, #d16776, #ff5d04); text-align: center; color: white; width: fit-content; padding: 0.5rem; border-radius: 12px; margin: auto; margin-bottom: 2rem; font-size: 30px; font-weight: bold; margin-top: -2rem;" 
+            GutterBottom="true">Recuperar Senha</MudText>
             <MudCardContent>
                 <MudForm>
-                    <MudTextField Placeholder="E-mail" Label="E-mail" @bind-Value="email" Required="true" RequiredError="Informe seu e-mail" Type="email" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Email" Variant="Variant.Outlined" />
-                    <MudButton OnClick="EnviarRecuperacao" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #4169E1; color: white; font-weight: bold;">Recuperar Senha</MudButton>
+                    <MudTextField Placeholder="E-mail" Label="E-mail" @bind-Value="email" Required="true" RequiredError="Informe seu e-mail" Type="email" Adornment="Adornment.Start" Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Variant="Variant.Outlined" />
+                    <MudButton OnClick="EnviarRecuperacao" Color="Color.Primary" Class="mt-4" FullWidth Style="background-color: #2274a8; color: white; font-weight: bold; width: fit-content; margin: auto;">Recuperar Senha</MudButton>
                 </MudForm>
                 @if (!string.IsNullOrEmpty(mensagem))
                 {
                     <MudAlert Severity="Severity.Success" Dense="true" Class="mt-3">@mensagem</MudAlert>
                 }
                 <MudText Class="mt-3 text-center">
-                    <MudLink OnClick="VoltarAoLogin" Class="cursor-pointer" Style="color: #4169E1;">Voltar ao login</MudLink>
+                    <MudLink OnClick="VoltarAoLogin" Class="cursor-pointer" Style="color: #2274a8; !important;">Voltar ao login</MudLink>
                 </MudText>
             </MudCardContent>
         </MudCard>
