@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "JJPzbKbT",
+  "version": "sVZ1HAJ2",
   "assets": [
     {
       "hash": "sha256-LoGIGNjKzpPYd/CuPNcoe46XPkqmix6w2YumcPOL9gg=",
@@ -18,12 +18,12 @@ self.assetsManifest = {
       "url": "_content/MudBlazor/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-mFw3ydhj9Pu45AiJZoICsGDuZmfA1m1/iS4yr2iw3jE=",
-      "url": "_framework/AnunciadorV1.4py70a1m8e.pdb"
+      "hash": "sha256-aqqvhE6FyNiWQmbuxKF5KFhI0nh5P1hqiY4HeAueUfM=",
+      "url": "_framework/AnunciadorV1.ipcd05ymkt.pdb"
     },
     {
-      "hash": "sha256-GAxATIc2QnNp/4Vt7YsQwcDCLUSGoVKqGTLK4vfgUWM=",
-      "url": "_framework/AnunciadorV1.cb45zlr9xh.wasm"
+      "hash": "sha256-2EnMmMk4zD+ij1J8bj/hb+mqhVPFKh+K+OS33oF+CtM=",
+      "url": "_framework/AnunciadorV1.wep2t7lno9.wasm"
     },
     {
       "hash": "sha256-N6/4dp+rtuEu+iWs7ZZs30QrZzpGpF9KC6ulCWZCo2w=",
@@ -798,7 +798,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.pe1q66fox7.wasm"
     },
     {
-      "hash": "sha256-YYT4uI0wLDudZWKA520XDpj7k6vyuBFao4UDqYwLmJ4=",
+      "hash": "sha256-lV/m/esIROxUN7uFWVBtKxgpZAhS+8QLZvcg8YBfLRY=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -894,26 +894,6 @@ self.assetsManifest = {
       "url": "imgs/Prancheta1.png"
     },
     {
-      "hash": "sha256-SWLIpontJt4v1lMCbN0tAVwgsD3W+Tplzd8VsKDtU9I=",
-      "url": "imgs/adicionar-2.psd"
-    },
-    {
-      "hash": "sha256-TAnEOjm8Z8r2wyvx1KlVC81wEWj3AhunU5VjP3rtp+4=",
-      "url": "imgs/adicionar.psd"
-    },
-    {
-      "hash": "sha256-FFWSyHckS5mJdD4X4JR9O26UDW6POmJG3bP7XOKW7Xg=",
-      "url": "imgs/assinatura.psd"
-    },
-    {
-      "hash": "sha256-I8cj6BiaZunYzjN20QfX5L/UsdV3ZCXZobdeyz7wjEc=",
-      "url": "imgs/bem estar.psd"
-    },
-    {
-      "hash": "sha256-PLQZQapgrzya5K9VurXaxwbgSrtzU/O+wOz/hL+5VW0=",
-      "url": "imgs/comércio.psd"
-    },
-    {
       "hash": "sha256-AsdxsCPhp2KSQjooEoAWXqFGmZgVZesNdzKfXM/ss0E=",
       "url": "imgs/concete fé logo branco escrita vertical.png"
     },
@@ -940,22 +920,6 @@ self.assetsManifest = {
     {
       "hash": "sha256-4wnNxH6oRKGn1Sp9sPR5RwlR1Jf64IT9S79aiwcbftc=",
       "url": "imgs/concete-fé-logo-preto.png"
-    },
-    {
-      "hash": "sha256-snGO81BGDwhNFBahSZYRm+o0BCbl/0TClIyFMQrTp0A=",
-      "url": "imgs/conecte fe.psb"
-    },
-    {
-      "hash": "sha256-GOoUNIgO+5rJtVBn4+VyejFR1wih1evN9gvoKsiY94o=",
-      "url": "imgs/conecte fe.psd"
-    },
-    {
-      "hash": "sha256-ONyDSQ+9MMLwj7w18gT0y4IAdb43RnFwnWj795t0ftQ=",
-      "url": "imgs/editar-2.psd"
-    },
-    {
-      "hash": "sha256-HliOYQMsDI6PgIZLA5FoJkIbBhqjEunSr5EqeW3WJd8=",
-      "url": "imgs/filtro.psd"
     },
     {
       "hash": "sha256-otXPNhTh6bG12O29BDgEhipOHFPhwM4GlC2OCgn5TY4=",
@@ -1004,30 +968,6 @@ self.assetsManifest = {
     {
       "hash": "sha256-/YEFKEBZNwMuMXqqx6yVDyF4fVjmuWr8XWHDx4YOefk=",
       "url": "imgs/icone13.png"
-    },
-    {
-      "hash": "sha256-Fn7pin3uUIkigwM/TCaMUMiceqoDtfi3ZqEyGsOkvi8=",
-      "url": "imgs/lista.psd"
-    },
-    {
-      "hash": "sha256-/nGzMp43+8IJgkltDuX9gCbr3Xotv4uT051uAtyDQ1I=",
-      "url": "imgs/profissional.psd"
-    },
-    {
-      "hash": "sha256-V+wnwMjwMhdycB/vWHunfVmdyDTAx1zAccoAKa28+50=",
-      "url": "imgs/sair.psd"
-    },
-    {
-      "hash": "sha256-scF7PqMVrPp8ukVi2riGF4Yt9QOJ05Y6RIrVo7vfi6g=",
-      "url": "imgs/tecnologia.psd"
-    },
-    {
-      "hash": "sha256-3exS38AMIFXKS1XmaBJ0xcCYhmMS93+Vu5l4D94mWcY=",
-      "url": "imgs/todos departamentos.psd"
-    },
-    {
-      "hash": "sha256-b+i+EYg4/bos9DQD0EUIcjidfOHV1aR1Wk0Kcr9qvNk=",
-      "url": "imgs/usuario-de-perfil.psd"
     },
     {
       "hash": "sha256-DLPfgjWOLyW5QhlBur9qx0opXC9HrXRdGewWE5NsMeU=",
