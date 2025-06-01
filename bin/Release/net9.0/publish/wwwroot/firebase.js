@@ -271,8 +271,6 @@ window.firebaseService = {
         };
     },
 
-
-
     uploadImageFromInput: async function (element, path) {
         const file = element.files[0];
         if (!file) throw new Error("Nenhum arquivo selecionado");

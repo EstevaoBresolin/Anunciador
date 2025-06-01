@@ -24,13 +24,7 @@
         <div style="display: flex;justify-content: space-between;align-items: center;background: #000000 ;position: absolute;width: 100%; z-index: 2;">
             <MudIconButton OnClick="OpenMenu" Icon="@Icons.Material.Filled.Menu" Color="Color.Default" style="color: white !important;" />
             <MudLink Href="@navigation.BaseUri" style="font-size: 1rem; color: white !important;"> <img style="max-height: 35px; " src="imgs/concete-fé-logo-branco-escrita-horizontal.png"/> </MudLink>
-            @* @if (FirestoreService.IsAuthenticated)
-            {
-                <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.Logout" Color="Color.Default" OnClick="Logout" />
-            }
-            else{
-                <MudIconButton style="color: white !important;" Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Default" OnClick="Logar" />
-            } *@
+           
                 <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Color=Color.Inherit Style="color: white !important; padding-bottom: 0 !important;">
         
                     @if (FirestoreService.IsAuthenticated){
@@ -84,8 +78,8 @@
 
                             }
 
+                            <MudButton OnClick="AcessarPortalCliente" Class="menu-item-assinatura"><img style="width: 25px;" src="imgs/icone-7.png"/>Assinatura</MudButton>
                         }
-                            <MudLink Href="produtos" Class="menu-item-assinatura"><img style="width: 25px;" src="imgs/icone-7.png"/>Assinatura</MudLink>
                       
 
                         <div class="infos">
@@ -107,6 +101,27 @@
             @Body
         </article>
     </main>
+
+    <footer>
+        <MudPaper Class="mt-8 pa-6 rounded-xl" Elevation="4" Style="background-color: #f5f5f5;">
+            <MudStack Spacing="2">
+                <MudText Typo="Typo.body2" Align="Align.Center">
+                    Ao acessar nosso site, você concorda com os 
+                    <MudLink Href="/termosDeUso" Target="_blank" Class="text-orange-600 font-semibold"> Termos de Uso</MudLink>.
+                </MudText>
+
+                <MudText Typo="Typo.body2" Align="Align.Center">
+                    Desenvolvido por <span class="font-bold">Estevão Bresolin</span>
+                </MudText>
+
+                <MudText Typo="Typo.body2" Align="Align.Center">
+                    Contato para suporte: 
+                    <MudLink Href="estevaobresolin@gmail.com" Class="text-red-600 font-semibold"> estevaobresolin@gmail.com</MudLink>
+                </MudText>
+            </MudStack>
+        </MudPaper>
+
+    </footer>
 </div>
 
 @code {
@@ -155,9 +170,9 @@
     {
         User infos = new User();
 
-        infos = await FirestoreService.GetStatusAssinatura();
 
         try{
+            infos = await FirestoreService.GetStatusAssinatura();
             if(infos == null || infos?.Status != "active")
             {
                 navigation.NavigateTo("produtos");

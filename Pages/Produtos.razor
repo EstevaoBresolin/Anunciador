@@ -7,7 +7,7 @@
 @inject ISnackbar Snackbar
 
 <PageTitle>Assinaturas</PageTitle>
-<div style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: contain; width: 100vw; height: 95vh; position: absolute; z-index: 1; opacity: 0.1; margin-top: -2rem; margin-left: -2rem;">
+<div style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: contain; width: 99vw; height: 95vh; position: absolute; z-index: 1; opacity: 0.1; margin-top: -2rem; margin-left: -2rem;">
 
 </div>
 <MudContainer MaxWidth="MaxWidth.Large" Class="mt-6" Style="height: 95vh; margin-top: -1px;max-width: none; z-index: 2; position: relative; padding: 0;">
@@ -37,18 +37,22 @@
                                 <MudStack  Spacing="3" Class="mt-2 section1-products">
                                     @foreach (var preco in produto.Precos)
                                     {
-                                        <MudPaper Elevation="1" Class="p-3 d-flex justify-between align-center rounded-lg" Style="background-color: #f9f9f9; height: 170px;">
-                                            <MudStack Style="align-items: center; justify-content: space-between" Class="w-100">
-                                                <MudText>
-                                                    @* <MudIcon Icon="@Icons.Material.Filled.StarOutline" Class="mr-1" /> *@
-                                                    @preco.Description
-                                                </MudText>
-                                                <MudText Color="Color.Primary" Class="font-weight-bold">
-                                                    @FormatarPreco(preco.UnitAmount, preco.Currency)
-                                                </MudText>
-                                                <MudButton OnClick="() => CriarSessaoCheckoutAsync(preco.Id)" Color="Color.Primary" Variant="Variant.Filled" Size="Size.Small">
+                                        <MudPaper Elevation="1" Class="p-3 d-flex justify-between align-center rounded-lg" Style="background-color: #f9f9f9; height: 170px; width: 33%;">
+                                            <MudStack Style="align-items: center; justify-content: space-around" Class="w-100">
+                                                <div>
+                                                    <MudText>
+                                                        <b>Valor:</b>
+                                                    </MudText>
+                                                    <MudText Style="color:#2274a8; font-weight: bold;" Class="font-weight-bold">
+                                                        @FormatarPreco(preco.UnitAmount, preco.Currency)
+                                                    </MudText>
+                                                </div>
+                                                <MudButton OnClick="() => CriarSessaoCheckoutAsync(preco.Id)" Style="color:#2274a8; border-radius: 12px; padding: 0.5rem; border: 1px solid #2274a8; background-color: white;">
                                                     Assinar
                                                 </MudButton>
+                                                 <MudText>
+                                                    @preco.Description
+                                                </MudText>
                                             </MudStack>
                                         </MudPaper>
                                     }
@@ -166,7 +170,7 @@
 
 <style>
     .section1-products {
-        
+        justify-content: space-around;
         flex-direction: row !important;
          @@media(max-width: 700px) {
             flex-direction: column !important;

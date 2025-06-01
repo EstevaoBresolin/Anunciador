@@ -8,8 +8,14 @@
 @using AnunciadorV1.Models
 @using AnunciadorV1.Services
 <PageTitle>Cadastrar Anuncio</PageTitle>
-<MudContainer>
-    <MudCard Class="p-4">
+<div style="background: url('imgs/Pattern-colorido-semfundo.png'); background-size: contain; width: 99vw; height: 95vh; position: absolute; z-index: 1; opacity: 0.1; margin-top: -2rem; margin-left: -2rem;">
+
+</div>
+<MudContainer Style="height: 95vh; margin-top: -1px;max-width: none; z-index: 2; position: relative; padding: 0;">
+      <MudPaper Class="p-6 rounded-lg shadow-lg" Style="width: 100%; background-color: white;">
+        <MudText Typo="Typo.h5" Style="background: linear-gradient(90deg, #2274a8, #d16776, #ff5d04); text-align: center; color: white; width: fit-content; padding: 0.5rem; border-radius: 12px; margin: auto; font-size: 30px; font-weight: bold;" 
+        GutterBottom="true">Cadastrar Anuncio</MudText>
+        <MudCard Class="p-4">
         <MudCardHeader>
             <MudText Typo="Typo.h5">Cadastro de Anuncio</MudText>
         </MudCardHeader>
@@ -17,22 +23,22 @@
             <MudForm Model="@novoAnunciante" >
                 <MudGrid Spacing="3">
                     <MudItem xs="12" md="6">
-                        <MudTextField Label="Nome" @bind-Value="novoAnunciante.Nome" MaxLength="50" Required="true" RequiredError="O nome é obrigatório." />
+                        <MudTextField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Label="Nome" @bind-Value="novoAnunciante.Nome" MaxLength="50" Required="true" RequiredError="O nome é obrigatório." />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudTextField Label="Título" @bind-Value="novoAnunciante.Titulo" MaxLength="50" Required="true" RequiredError="O título é obrigatório." />
+                        <MudTextField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Label="Título" @bind-Value="novoAnunciante.Titulo" MaxLength="50" Required="true" RequiredError="O título é obrigatório." />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudTextField Label="Descrição" @bind-Value="novoAnunciante.Descricao" MaxLength="100" Required="true" RequiredError="A descrição é obrigatória." />
+                        <MudTextField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Label="Descrição" @bind-Value="novoAnunciante.Descricao" MaxLength="100" Required="true" RequiredError="A descrição é obrigatória." />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudTextField Label="Endereço" @bind-Value="novoAnunciante.Endereco" MaxLength="200" Required="true" RequiredError="O endereço é obrigatório." />
+                        <MudTextField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Label="Endereço" @bind-Value="novoAnunciante.Endereco" MaxLength="200" Required="true" RequiredError="O endereço é obrigatório." />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudNumericField Label="Número de Contato" @bind-Value="novoAnunciante.Numero" Required="true" RequiredError="O número de contato é obrigatório." />
+                        <MudNumericField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Label="Número de Contato" @bind-Value="novoAnunciante.Numero" Required="true" RequiredError="O número de contato é obrigatório." />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudTextField Label="Instagram" @bind-Value="novoAnunciante.Instagram" />
+                        <MudTextField Style="padding: 0.5rem; border-radius: 8px; background: #f4f4f2;" Label="Instagram" @bind-Value="novoAnunciante.Instagram" />
                     </MudItem>
                     <MudItem xs="12" md="6">
                         <MudSelect  @bind-Value="Categoria" Label="Categoria" AdornmentColor="Color.Inherit" Variant="Variant.Outlined">
@@ -52,10 +58,11 @@
                             <img src="@novoAnunciante.EnderecoFoto" alt="Pré-visualização da imagem" style="max-width: 300px; height: auto;" />
                         </MudItem>
                     }
-                    <MudItem xs="12">
-                        <MudButton OnClick="Cadastrar" Style="color: royalblue">Cadastrar</MudButton>
-                    </MudItem>
                 </MudGrid>
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                            <MudButton OnClick="Cadastrar" Style="background: #4bbe3a; border-radius: 12px; color: white">Salvar</MudButton>
+                            <MudButton OnClick="Cancelar" Style="background: #b51c1c; border-radius: 12px; color: white">Cancelar</MudButton>
+                </div>
             </MudForm>
 
             @if (!string.IsNullOrEmpty(mensagem))
@@ -64,6 +71,7 @@
             }
         </MudCardContent>
     </MudCard>
+    </MudPaper>
 </MudContainer>
 
 
@@ -92,6 +100,11 @@
         string nomeArquivo = $"anunciantes/{novoAnunciante.Nome}{Guid.NewGuid()}.jpg";
         novoAnunciante.EnderecoFoto = await FirestoreService.UploadImagemFromInput(inputFileRef, nomeArquivo);
         StateHasChanged(); // força renderização para mostrar a imagem
+    }
+
+    private async Task Cancelar(){
+        Navigation.NavigateTo("/");
+
     }
 
     private async Task Cadastrar()
